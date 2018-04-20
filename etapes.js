@@ -1,12 +1,14 @@
 /*jslint browser:true, esnext:true*/
 class Etapes {
 	static load() {
-		var copiables = document.querySelectorAll(".copiable");
-		copiables.forEach(Etapes.rendreCopiable);
+//		var copiables = document.querySelectorAll(".copiable");
+//		copiables.forEach(Etapes.rendreCopiable);
+		this.rendreCopiable();
 		this.rendrePliable();
 		this.ajouterIconesYt();
-		var body = document.body.querySelector("div.interface>div.body");
-		body.insertBefore(this.creerSommaire("li[id]", "h2"), body.firstChild);
+		this.ajouterSommaire();
+//		var body = document.body.querySelector("div.interface>div.body");
+//		body.insertBefore(this.creerSommaire("li[id]", "h2"), body.firstChild);
 	}
 	static ajouterIconesYt() {
 		var elements = document.querySelectorAll("li[data-video]");
@@ -38,60 +40,76 @@ class Etapes {
 			});
 		});
 	}
-	static rendreCopiable(element) {
-		var label = document.createElement("div");
-		label.classList.add("label");
-		label.innerHTML = element.innerHTML;
-		element.innerHTML = "";
-		var icon = element.appendChild(document.createElement("span"));
-		icon.classList.add("icon");
-		var entity = "";
-		entity += "📋";
-//		entity += "&#x1f4cb;";
-//		entity += "📌";
-//		entity += "&#x1f4cc;";
-//		entity += "📍";
-//		entity += "&#x1f4cd;";
-//		entity += "📎";
-//		entity += "&#x1f4ce;";
-		icon.innerHTML = entity;
-		icon.setAttribute("title", "Copier dans le presse-papier");
-		icon.addEventListener("click", Etapes.evt.copiable.click);
-		element.appendChild(label);
+	static rendreCopiable() {
+		var copiables = document.querySelectorAll(".copiable");
+		copiables.forEach(function (element) {
+			var label = document.createElement("div");
+			label.classList.add("label");
+			label.innerHTML = element.innerHTML;
+			element.innerHTML = "";
+			var icon = element.appendChild(document.createElement("span"));
+			icon.classList.add("icon");
+			var entity = "";
+			entity += "📋";
+	//		entity += "&#x1f4cb;";
+	//		entity += "📌";
+	//		entity += "&#x1f4cc;";
+	//		entity += "📍";
+	//		entity += "&#x1f4cd;";
+	//		entity += "📎";
+	//		entity += "&#x1f4ce;";
+			icon.innerHTML = entity;
+			icon.setAttribute("title", "Copier dans le presse-papier");
+			icon.addEventListener("click", Etapes.evt.copiable.click);
+			element.appendChild(label);
+		}, this);
 	}
-	static creerSommaire(selecteur, label) {
-		var elements = document.body.querySelectorAll(selecteur);
-		var resultat = document.createElement("nav");
+	static ajouterSommaire() {
+		var body = document.body.querySelector("div.interface>div.body");
+		body.insertBefore(this.creerSommaire("li[id]>h2"), body.firstChild);
+	}
+	static creerSommaire(selecteur) {
+		var elements, resultat, titre, sommaire;
+		resultat = document.createElement("nav");
 		resultat.setAttribute("id", "sommaire");
-		var titre = resultat.appendChild(document.createElement("h2"));
+		titre = resultat.appendChild(document.createElement("h2"));
 		titre.innerHTML = "Sommaire";
-		var sommaire = resultat.appendChild(document.createElement("ol"));
-
-		elements.forEach(function (e) {
-			var li = sommaire.appendChild(document.createElement("li"));
-			var a = li.appendChild(document.createElement("a"));
-			var id = e.getAttribute("id");
-			if (label) {
-				e = e.querySelector(label);
-			}
-			a.innerHTML = e.textContent;
-			a.setAttribute("href", "#" + id);
-			var up = e.appendChild(document.createElement("a"));
-			up.setAttribute("href", "#sommaire");
-			up.innerHTML = "⮵";
-		});
+		sommaire = resultat.appendChild(document.createElement("ol"));
+		elements = document.body.querySelectorAll(selecteur);
+		elements.forEach(function (element) {
+			sommaire.appendChild(this.creerElementSommaire(element));
+			element.appendChild(this.iconeUp());
+		}, this);
+		return resultat;
+	}
+	static creerElementSommaire(element) {
+		var resultat, a, id;
+		resultat = document.createElement("li");
+		id = element.closest("[id]").getAttribute("id");
+		a = resultat.appendChild(document.createElement("a"));
+		a.innerHTML = element.textContent;
+		a.setAttribute("href", "#" + id);
+		return resultat;
+	}
+	static iconeUp() {
+		var resultat;
+		resultat = document.createElement("a");
+		resultat.setAttribute("href", "#sommaire");
+		resultat.innerHTML = "⮵";
 		return resultat;
 	}
 	static copier(element) {
 		var copiable = element.parentNode;
-		console.log(copiable);
 		var texte = this.prendreTexte(copiable);
 		var input = document.body.appendChild(document.createElement("textarea"));
 		input.value = texte;
 		input.select();
 		document.execCommand("Copy");
 		input.parentNode.removeChild(input);
-		var tag = copiable.insertBefore(document.createElement("span"), copiable.firstChild);
+		copiable.insertBefore(this.tagCopier(), copiable.firstChild);
+	}
+	static tagCopier() {
+		var tag = document.createElement("span");
 		tag.classList.add("tag");
 		tag.innerHTML = "Copié";
 		tag.addEventListener("transitionend", function() {
