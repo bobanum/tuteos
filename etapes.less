@@ -18,15 +18,52 @@
 		order: 1000;
 	}
 }
+.centrer {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+}
 
 @media all {
 	html {
 		height: 100%;
 	}
+	div.interface > nav {
+		background-color: #666;
+		color: white;
+		font-size: smaller;
+
+		ul {
+			margin: 0;
+			padding: 0;
+			display:flex;
+			list-style-type: none;
+		}
+		li {
+			margin: .25em;
+		}
+		a {
+			.centrer;
+			color:inherit;
+			text-decoration: none;
+			height: 2em;
+			padding: 0 1em;
+			background-color: rgba(0,0,0,.2);
+			border-radius: 4px;
+			&#mnu_videos::before {
+				margin-right: .5ch;
+				content: "☐";
+			}
+		}
+	}
 	body {
 		margin: 0;
 		height: 100%;
 		font: @font-global;
+	}
+	body.videos a#mnu_videos::before {
+		content: "☑";
 	}
 	:target {
 		background-color: #eee;
@@ -61,8 +98,8 @@
 		width: 70ch;
 		min-height: 100%;
 		margin: 0 auto;
-		header,
-		footer {
+		& > header,
+		& > footer {
 			background-color: black;
 			color: white;
 			text-align: center;
@@ -106,6 +143,11 @@
 		& > ol > li {
 			padding: 1ch;
 		}
+		iframe {
+			display: block;
+			margin: 0 auto;
+			display:none;
+		}
 		ol {
 			padding-left: 2ch;
 		}
@@ -145,7 +187,8 @@
 		&:hover .icon {
 			opacity: 1;
 			transform: scale(1.5);
-			z-index: 100;
+			position: relative;
+			z-index: 10000;
 			text-shadow: 3px 5px 7px rgba(0, 0, 0, .4);
 		}
 	}
@@ -177,19 +220,18 @@
 		filter: grayscale(100%);
 		pointer-events: none;
 	}
+	.bloccode, .php, .blade {
+		em, samp, del {
+			opacity: .5;
+		}
+	}
+
 	div.bloccode {
 		display: flex;
 		align-items: flex-end;
 		flex-direction: row;
 		justify-content: space-between;
 		padding: 1ch;
-		em {
-			opacity: .5;
-		}
-		& del {
-			opacity: .5;
-			text-decoration: none;
-		}
 		.label > * {
 			white-space: pre;
 		}
@@ -298,6 +340,9 @@
 		background-color: #345;
 		color: white;
 	}
+	body.videos div.body iframe {
+		display:block;
+	}
 	div.interface {
 		.module;
 		background-color: white;
@@ -305,6 +350,14 @@
 	}
 	.youtube > span {
 		display: none;
+	}
+}
+@media screen and (max-width: 800px) {
+	div.interface {
+		width: 50ch;
+	}
+	div.bloccode .label > * {
+		white-space: normal !important;
 	}
 }
 

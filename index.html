@@ -12,276 +12,402 @@
 		<h1>Un site Web avec Laravel</h1>
 		<h2>Les étapes</h2>
 		</header>
+		<nav>
+			<ul>
+				<li><a href="#" id="mnu_videos" onclick="document.body.classList.toggle('videos');">Afficher les vidéos</a></li>
+				<li><a href="#installation">Cours 1</a></li>
+				<li><a href="#basededonnees">Cours 2</a></li>
+			</ul>
+		</nav>
 		<footer>Les vidéos sont disponibles sur <a href="https://www.youtube.com/channel/UCFWzWuHnqYOlBN2lJhBIGNg">la chaîne Youtube</a></footer>
-		<div class="body">
-			<ol>
-				<li id="installation" data-video="sZ8crC_QQKU">
-					<h2>Installer l'application <cite>Laravel</cite></h2>
-					<ol>
-						<li>Créer le dossier <span class="fichier">projetlaravel</span></li>
-						<li>Ouvrir le dossier dans le <cite class="app">Terminal</cite></li>
-						<li>Exécuter <span class="commande copiable">composer create-project laravel/laravel .</span></li>
-						<li>Exécuter ls et regarder le contenu du dossier dans le <cite class="app">Finder</cite>.</li>
-						<li>Exécuter <span class="commande copiable">php artisan serve</span></li>
-						<li>Ouvrir le site dans <cite class="app">Chrome</cite></li>
-						<li>Ouvrir le dossier dans <cite class="app">Brackets</cite></li>
-						<li>Réarranger les fenêtres en panneaux</li>
-						<li>Regarder le fichier <span class="fichier">public/robots</span> et le modifier en observant les changements dans le fureteur.</li>
-					</ol>
-				</li>
-				<li id="routes" data-video="N0pxSP6-ou4">
-					<h2>Les routes</h2>
-					<ol>
-						<li>Ouvrir le fichier <span class="fichier">routes/web.php</span></li>
-						<li>Modifier l'adresse et la valeur de retour et tester le résultat.</li>
-						<li>Dupliquer la route (garder la route originale avec l'adresse <span class="string">"/welcome"</span>)</li>
-						<li>Faire afficher <span class="string">"Dans la route"</span></li>
-						<li>Changer l'action pour le controller <span class="string">"UserController@index"</span></li>
-						<li>Tester la page et constater l'erreur.</li>
-					</ol>
-				</li>
-				<li id="modelcontroller" data-video="j2-moIHddWU">
-					<h2>Créer le model et les controllers</h2>
-					<ol>
-						<li>Regarder le contenu des dossiers <span class="fichier">/app</span> et <span class="fichier">/app/http/controllers</span> ainsi que le fichier <span class="fichier">/app/User.php</span></li>
-						<li>Rouvrir le dossier du projet dans le <cite>Terminal</cite> (une nouvelle fenêtre).</li>
-						<li>Exécuter <span class="commande copiable">php artisan list</span></li>
-						<li>Regarder les commandes possibles, dont <code>make:model</code> et <code>make:controller</code></li>
-						<li>Exécuter <span class="commande copiable">php artisan make:model Post -mrc</span></li>
-						<li>Regarder les nouveaux fichiers <span class="fichier">/app/Post.php</span> et <span class="fichier">/app/http/controllers/PostController.php</span></li>
-						<li>Exécuter <span class="commande copiable">php artisan make:controller UserController -r</span></li>
-						<li>Ouvrir le fichier <span class="fichier">PostController.php</span> et regarder les méthodes ajoutées par l'option <span class="string">r</span></li>
-						<li>Ajouter l'instruction <code class="php copiable">return "Dans le controller";</code> dans la méthode (ou action) <code>index()</code></li>
-						<li>Tester la page.</li>
-					</ol>
-				</li>
-				<li id="nouveauuser" data-video="7zmz8vZjLKM">
-					<h2>Créer un usager</h2>
-					<ol>
-						<li>Regarder le fichier <span class="fichier">User.php</span>. On n'a rien à faire ici pour l'instant.</li>
-						<li>Retourner à l'action <span class="controller">UserController@index</span>.</li>
-						<li>Ajouter l'instruction <code class="php copiable">$user = new User();</code> et constater l'erreur.</li>
-						<li>Ajouter temporairement le <cite>namespace</cite> : <code class="php copiable">$user = new <b>\App\</b>User();</code> et ça marche.</li>
-						<li>Ajouter l'instruction <code class="php copiable">use App\User;</code> ou <code class="php copiable">use App\User as User;</code> avant la définition de la classe.</li>
-						<li>Enlever le <cite>namespace</cite>.</li>
-						<li>Retourner la variable <var>$user</var> et tester la page. Affiche un tableau vide en JSON.</li>
-						<li>Ajouter l'instruction <code class="php copiable">$user-&gt;prenom = "Rita";</code></li>
-						<li>Ajouter l'instruction <code class="php copiable">$user-&gt;nom = "Raté";</code></li>
-						<li>Tester la page.</li>
-					</ol>
-				</li>
-				<li id="faker" data-video="yTLYZqzQMmI">
-					<h2>Ajouter un usager bidon avec le Faker</h2>
-					<ol>
-						<li>Ajouter l'instruction <code class="php copiable">$f = \Faker\Factory::create("fr_CA");</code> au début de la méthode.</li>
-						<li><p>Mettre des données bidon avec le Faker</p>
-							<div class="bloccode php copiable">
-								<div>$user-&gt;prenom = $f-&gt;firstName();</div>
-								<div>$user-&gt;nom = $f-&gt;lastName();</div>
-								<div>$user-&gt;email = $f-&gt;lastName();</div>
-								<div>$user-&gt;tel = $f-&gt;phoneNumber();</div>
-								<div>$user-&gt;adresse = $f-&gt;streetAddress();</div>
-								<div>$user-&gt;ville = $f-&gt;city();</div>
-								<div>$user-&gt;province = $f-&gt;state();</div>
-								<div>$user-&gt;codepostal = $f-&gt;postcode();</div>
-								<div>$user-&gt;citation = $f-&gt;paragraph();</div>
-							</div>
-						</li>
-						<li>Voir l'aide du <a href="https://github.com/fzaninotto/Faker" target="_blank">Faker</a></li>
-						<li><p>Placer le code dans le model <span class="fichier">User.php</span> en créant une fonction statique.</p>
-							<div class="bloccode php copiable">
-								<div>static public function fake() {</div>
-								<div>   $f = \Faker\Factory::create("fr_CA");</div>
-								<div>   $resultat = new self();</div>
-								<div>   $resultat-&gt;prenom = $f-&gt;firstName();</div>
-								<div>   $resultat-&gt;nom = $f-&gt;lastName();</div>
-								<div>   $resultat-&gt;email = $f-&gt;lastName();</div>
-								<div>   $resultat-&gt;tel = $f-&gt;phoneNumber();</div>
-								<div>   $resultat-&gt;adresse = $f-&gt;streetAddress();</div>
-								<div>   $resultat-&gt;ville = $f-&gt;city();</div>
-								<div>   $resultat-&gt;province = $f-&gt;state();</div>
-								<div>   $resultat-&gt;codepostal = $f-&gt;postcode();</div>
-								<div>   $resultat-&gt;citation = $f-&gt;paragraph();</div>
-								<div>   return $resultat;</div>
-								<div>}</div>
-							</div>
-						</li>
-						<li>Utiliser la méthode dans le controller. <span class="php copiable">$user = User::fake();</span></li>
-					</ol>
-				</li>
-				<li id="view" data-video="YGlbmKL-DiU">
-					<h2>Utilisation de la view</h2>
-					<ol>
-						<li>Dans le controller <span class="controller">UserController@index</span>, faire afficher la view <span class="view">users.index</span> : <span class="php copiable">return view("users.index");</span></li>
-						<li>Créer la view <span class="view">users.index</span> : c'est à dire créer le dossier <span class="fichier">/resources/views/users</span> et le fichier <span class="fichier">/resources/views/users/index.blade.php</span></li>
-						<li>Ajouter <span class="blade copiable">{{$user}}</span> et sauvegarder.</li>
-						<li>Tester et constater l'erreur.</li>
-						<li>Envoyer la variable <var>user</var> à la view : <span class="php copiable">return view("users.index", ['user'=&gt;$user]);</span></li>
-						<li>Tester et constater l'affichage au format JSON.</li>
-						<li><p>Dans la view, faire afficher chaque information individuellement.</p>
-							<div class="bloccode blade copiable">
-								<div>&lt;h1&gt;{{$user-&gt;prenom}} {{$user-&gt;nom}}&lt;/h1&gt;</div>
-								<div>&lt;div&gt;{{$user-&gt;email}}&lt;/div&gt;</div>
-								<div>&lt;div&gt;{{$user-&gt;tel}}&lt;/div&gt;</div>
-								<div>&lt;div&gt;{{$user-&gt;adresse}}&lt;/div&gt;</div>
-								<div>&lt;div&gt;{{$user-&gt;ville}} {{$user-&gt;province}}&lt;/div&gt;</div>
-								<div>&lt;div&gt;{{$user-&gt;codepostal}}&lt;/div&gt;</div>
-								<div>&lt;p&gt;{{$user-&gt;citation}}&lt;/p&gt;</div>
-							</div>
-						</li>
-					</ol>
-				</li>
-				<li id="template" data-video="a277KeS9nn0">
-					<h2>Ajout du template</h2>
-					<ol>
-						<li>Télécharger un template de <a target="_blank" href="http://templatemo.com">templatemo.com</a></li>
-						<li>Mettre le contenu du dossier dans le dossier <span class="fichier">public</span></li>
-						<li>Visiter la page <a href="http://localhost:8000/index.html">http://localhost:8000/index.html</a></li>
-						<li>Mettre les pages HTML dans le dossier <span class="fichier">public/nom_du_template</span> et les renommer <span class="fichier">nom_de_la_view.blade.php</span></li>
-						<li>Dans le controller, faire temporairement afficher la view <span class="view">nom_du_template.index</span>. <span class="php copiable">return view("nom_du_template.index");</span></li>
-						<li>Faire une normalisation partielle de l'interface en fonction du template choisi. Typiquement, créer des fichiers : <span class="fichier">header.blade.php</span>, <span class="fichier">footer.blade.php</span>, <span class="fichier">content.blade.php</span>, <span class="fichier">top.blade.php</span>, <span class="fichier">bottom.blade.php</span>, <span class="fichier">nav.blade.php</span>...</li>
-						<li>Ajouter les <code>@include</code> et tester.</li>
-					</ol>
-				</li>
-				<li id="pagemaitresse" data-video="wFBQBunvK4g">
-					<h2>La page maîtresse</h2>
-					<ol>
-						<li>Repérer la zone principale du contenu.</li>
-						<li>Ajouter au début <span class="blade copiable">@section("contenu")</span> et à la fin <span class="blade copiable">@show</span>.</li>
-						<li>Optionnelement, faire afficher <var>$user</var> pour voir s'afficher sa valeur.</li>
-						<li>Dans le controller, remettre la view <span class="view">"users.index"</span> (Ça ne changera plus)</li>
-						<li>Au début de la view <span class="view">"users.index"</span>, ajouter la commande <span class="blade copiable">@extends("contenu")</span></li>
-						<li>Envelopper le contenu existant de <span class="blade copiable">@section("contenu")</span> et <span class="blade copiable">@endsection</span></li>
-						<li>Ajouter une autre section dans la page maîtresse et dans la page pour afficher spécifiquement le nom.</li>
-					</ol>
-				</li>
-				<li id="component" data-video="hvtjfrZkY7c">
-					<h2>Le component</h2>
-					<ol>
-						<li>Créer la view <span class="view">nom_du_template.post</span> avec le html d'un post du template.</li>
-						<li>Rendre le post générique en ajoutant des variables.</li>
-						<li>Dans la boucle de la view <span class="view">users.index</span>, tester l'appel à cette view en lui envoyant des données pour les variables.</li>
-						<li>Envelopper le contenu de la section des commandes <span class="blade copiable">@component("nom_du_template.post")</span> et <span class="blade copiable">@endcomponent</span></li>
-						<li><p>Pour chacune des variables du component (donc, de la view) créer une slot</p>
-							<div class="bloccode blade copiable">
-								<div>@slot("nom_de_la_variable")</div>
-								<div>   &lt;h2&gt;{{$bidule}}&lt;/h2&gt;</div>
-								<div>@endslot</div>
-							</div>
-						</li>
-					</ol>
-				</li>
-				<li id="boucle" data-video="VBApEJY0U3E">
-					<h2>La boucle</h2>
-					<ol>
-						<li><p>Dans le controller, créer un tableau <var>$users</var> avec plusieurs usagers et l'envoyer à la view.</p>
-							<div class="bloccode php copiable">
-								<div>$users = [];</div>
-								<div>for ($i = 0; $i &lt; 10; $i += 1) {</div>
-								<div>   $users[] = User::fake();</div>
-								<div>}</div>
-								<div>return view("users.index", ['user<strong>s</strong>'=&gt;$user<strong>s</strong>]);</div>
-							</div>
-						</li>
-						<li><p>Dans la view, ajouter une boucle qui enveloppe le contenu de la section avec <span class="blade copiable">@foreach($users as $user)</span> et <span class="blade copiable">@endforeach</span></p></li>
-					</ol>
-				</li>
-				<li id="basededonnees" data-video="">
-					<h2>La base de données</h2>
-					<ol>
-						<li>Ouvrir le fichier <span class="fichier">/.env</span> afin de voir la configuration par défaut d'une connexion MySQL. Puis de refermer.</li>
-						<li>Ouvrir <span class="fichier">/config/database.php</span></li>
-						<li><p>Adapter les lignes suivantes :</p>
-							<div class="bloccode blade copiable">
-								<div>'default' =&gt; '<b>sqlite</b>',</div>
-								<div><del>// et</del></div>
-								<div><del>'driver' =&gt; 'sqlite',</del></div>
-								<div>'database' =&gt; <b>database_path('database.sqlite')</b>,</div>
-							</div>
-							<p>Ne pas oublier de changer le nom de la base de données.</p>
-							<p>Remarquer l'utilisation de <var>database_path</var>.</p>
-						</li>
-						<li>Créer la route qui réinitialisera la base de données : <span class="php copiable">Route::get('/reset', 'AppController@reset');</span></li>
-						<li>Créer le controller correspondant : <span class="commande copiable">php artisan make:controller AppController</span></li>
-						<li><p>Ouvrir le controller <span class="controller">AppController</span> et ajouter la méthode (non statique) <var>reset</var></p>
-							<div class="bloccode blade copiable">
-								<div>public function reset () {</div>
-								<div>   $db = \DB::connection()-&gt;getDatabaseName();</div>
-								<div>   file_put_contents($db, '');</div>
-								<div>   <em>//Artisan::call("migrate");</em></div>
-								<div>   <em>//Artisan::call("db::seed");</em></div>
-								<div>   return "La base de donnée a été réinitialisée";</div>
-								<div>}</div>
-							</div>
-						</li>
-						<li>Tester et constater la création d'un fichier vide <span class="fichier">/database/database.sqlite</span></li>
-						<li>Dans le terminal, lancer la migration <span class="commande copiable">php artisan migrate</span></li>
-						<li>Tester les commandes <span class="commande copiable">php artisan migrate:rollback</span> et <span class="commande copiable">php artisan migrate:reset</span>.</li>
-						<li>Décommenter ou ajouter la migration dans le controller et tester.</li>
-						<li>Ouvrir la base de données dans <cite class="app">SQLite Browser</cite> et analyser les tables.</li>
-					</ol>
-				</li>
-				<li id="migration" data-video="">
-					<h2>Les migrations</h2>
-					<ol>
-						<li>Ouvrir le fichier de migration des users qui se trouve dans le dossier <span class="fichier">/database/migrations/</span></li>
-						<li>Ajouter la création des champs supplémentaires du modèle : "prenom", "nom", "tel", "adresse", "ville", "province", "codepostal" et "citation"
-							<div class="bloccode blade copiable">
-            					<div><del>$table-&gt;increments('id');</del></div>
-            					<div><del>$table-&gt;string('name');</del></div>
-            					<div><del>$table-&gt;string('email')-&gt;unique();</del></div>
-            					<div><del>$table-&gt;string('password');</del></div>
-								<div>$table-&gt;string("prenom");</div>
-								<div>$table-&gt;string("nom");</div>
-								<div>$table-&gt;string("tel");</div>
-								<div>$table-&gt;string("adresse");</div>
-								<div>$table-&gt;string("ville");</div>
-								<div>$table-&gt;string("province");</div>
-								<div>$table-&gt;string("codepostal");</div>
-								<div>$table-&gt;text("citation");</div>
-            					<div><del>$table-&gt;rememberToken();</del></div>
-            					<div><del>$table-&gt;timestamps();</del></div>
-							</div>
-						</li>
-						<li>Voir le <a href="https://learninglaravel.net/cheatsheet/#schema" target="_blank">cheatsheet <img src="blank.svg" alt=""></a> pour le types de données.</li>
-						<li>Ajouter les champs de la migration des posts.
-							<div class="bloccode blade copiable">
-            					<div><del>$table-&gt;increments('id');</del></div>
-								<div>$table-&gt;integer("user_id");</div>
-								<div>$table-&gt;string("titre");</div>
-								<div>$table-&gt;text("contenu");</div>
-            					<div><del>$table-&gt;timestamps();</del></div>
-							</div>
-						</li>
-						<li>Ajouter la contrainte pour la clé étrangère.
-							<div class="bloccode blade copiable">
-								<div><del>$table-&gt;integer("user_id");</del></div>
-								<div>$table-&gt;foreign("user_id")-&gt;on("<dfn data-definition="Le nom de la table liée">users</dfn>")-&gt;references("<dfn data-definition="La clé primaire de la table liée.">id</dfn>");</div>
-							</div>
-						</li>
-						<li>Tester : Réinstallation la base de données.</li>
-					</ol>
-				</li>
-				<li id="seeder" data-video="">
-					<h2>Le seeder</h2>
-					<ol>
-						<li>À venir</li>
-					</ol>
-				</li>
-				<li id="affichage_index" data-video="">
-					<h2>L'affichage des données</h2>
-					<ol>
-						<li>À venir</li>
-					</ol>
-				</li>
-				<li id="affichage_show" data-video="">
-					<h2>L'affichage d'un enregistrement</h2>
-					<ol>
-						<li>À venir</li>
-					</ol>
-				</li>
-			</ol>
-		</div>
+<div class="body">
+<ol>
+<li id="installation" data-video="sZ8crC_QQKU">
+	<h2>Installer l'application <cite>Laravel</cite></h2>
+	<ol>
+		<li>Créer le dossier <span class="fichier">projetlaravel</span></li>
+		<li>Ouvrir le dossier dans le <cite class="app">Terminal</cite></li>
+		<li>Exécuter <span class="commande copiable">composer create-project laravel/laravel .</span></li>
+		<li>Exécuter ls et regarder le contenu du dossier dans le <cite class="app">Finder</cite>.</li>
+		<li>Exécuter <span class="commande copiable">php artisan serve</span></li>
+		<li>Ouvrir le site dans <cite class="app">Chrome</cite></li>
+		<li>Ouvrir le dossier dans <cite class="app">Brackets</cite></li>
+		<li>Réarranger les fenêtres en panneaux</li>
+		<li>Regarder le fichier <span class="fichier">public/robots</span> et le modifier en observant les changements dans le fureteur.</li>
+	</ol>
+</li>
+<li id="routes" data-video="N0pxSP6-ou4">
+	<h2>Les routes</h2>
+	<ol>
+		<li>Ouvrir le fichier <span class="fichier">routes/web.php</span></li>
+		<li>Modifier l'adresse et la valeur de retour et tester le résultat.</li>
+		<li>Dupliquer la route (garder la route originale avec l'adresse <span class="string">"/welcome"</span>)</li>
+		<li>Faire afficher <span class="string">"Dans la route"</span></li>
+		<li>Changer l'action pour le controller <span class="string">"UserController@index"</span></li>
+		<li>Tester la page et constater l'erreur.</li>
+	</ol>
+</li>
+<li id="modelcontroller" data-video="j2-moIHddWU">
+	<h2>Créer le model et les controllers</h2>
+	<ol>
+		<li>Regarder le contenu des dossiers <span class="fichier">/app</span> et <span class="fichier">/app/http/controllers</span> ainsi que le fichier <span class="fichier">/app/User.php</span></li>
+		<li>Rouvrir le dossier du projet dans le <cite>Terminal</cite> (une nouvelle fenêtre).</li>
+		<li>Exécuter <span class="commande copiable">php artisan list</span></li>
+		<li>Regarder les commandes possibles, dont <code>make:model</code> et <code>make:controller</code></li>
+		<li>Exécuter <span class="commande copiable">php artisan make:model Post -mrc</span></li>
+		<li>Regarder les nouveaux fichiers <span class="fichier">/app/Post.php</span> et <span class="fichier">/app/http/controllers/PostController.php</span></li>
+		<li>Exécuter <span class="commande copiable">php artisan make:controller UserController -r</span></li>
+		<li>Ouvrir le fichier <span class="fichier">PostController.php</span> et regarder les méthodes ajoutées par l'option <span class="string">r</span></li>
+		<li>Ajouter l'instruction <code class="php copiable">return "Dans le controller";</code> dans la méthode (ou action) <code>index()</code></li>
+		<li>Tester la page.</li>
+	</ol>
+</li>
+<li id="nouveauuser" data-video="7zmz8vZjLKM">
+	<h2>Créer un usager</h2>
+	<ol>
+		<li>Regarder le fichier <span class="fichier">User.php</span>. On n'a rien à faire ici pour l'instant.</li>
+		<li>Retourner à l'action <span class="controller">UserController@index</span>.</li>
+		<li>Ajouter l'instruction <code class="php copiable">$user = new User();</code> et constater l'erreur.</li>
+		<li>Ajouter temporairement le <cite>namespace</cite> : <code class="php copiable">$user = new <b>\App\</b>User();</code> et ça marche.</li>
+		<li>Ajouter l'instruction <code class="php copiable">use App\User;</code> ou <code class="php copiable">use App\User as User;</code> avant la définition de la classe.</li>
+		<li>Enlever le <cite>namespace</cite>.</li>
+		<li>Retourner la variable <var>$user</var> et tester la page. Affiche un tableau vide en JSON.</li>
+		<li>Ajouter l'instruction <code class="php copiable">$user-&gt;prenom = "Rita";</code></li>
+		<li>Ajouter l'instruction <code class="php copiable">$user-&gt;nom = "Raté";</code></li>
+		<li>Tester la page.</li>
+	</ol>
+</li>
+<li id="faker" data-video="yTLYZqzQMmI">
+	<h2>Ajouter un usager bidon avec le Faker</h2>
+	<ol>
+		<li>Ajouter l'instruction <code class="php copiable">$f = \Faker\Factory::create("fr_CA");</code> au début de la méthode.</li>
+		<li><p>Mettre des données bidon avec le Faker</p>
+			<div class="bloccode php copiable">
+				<div>$user-&gt;prenom = $f-&gt;firstName();</div>
+				<div>$user-&gt;nom = $f-&gt;lastName();</div>
+				<div>$user-&gt;email = $f-&gt;lastName();</div>
+				<div>$user-&gt;tel = $f-&gt;phoneNumber();</div>
+				<div>$user-&gt;adresse = $f-&gt;streetAddress();</div>
+				<div>$user-&gt;ville = $f-&gt;city();</div>
+				<div>$user-&gt;province = $f-&gt;state();</div>
+				<div>$user-&gt;codepostal = $f-&gt;postcode();</div>
+				<div>$user-&gt;citation = $f-&gt;paragraph();</div>
+			</div>
+		</li>
+		<li>Voir l'aide du <a href="https://github.com/fzaninotto/Faker" target="_blank">Faker</a></li>
+		<li><p>Placer le code dans le model <span class="fichier">User.php</span> en créant une fonction statique.</p>
+			<div class="bloccode php copiable">
+				<div>static public function fake() {</div>
+				<div>   $f = \Faker\Factory::create("fr_CA");</div>
+				<div>   $resultat = new self();</div>
+				<div>   $resultat-&gt;prenom = $f-&gt;firstName();</div>
+				<div>   $resultat-&gt;nom = $f-&gt;lastName();</div>
+				<div>   $resultat-&gt;email = str_slug($resultat-&gt;prenom.$resultat-&gt;nom, '')</div>
+				<div>      .'@'.$f-&gt;domain();</div>
+				<div>   $resultat-&gt;tel = $f-&gt;phoneNumber();</div>
+				<div>   $resultat-&gt;adresse = $f-&gt;streetAddress();</div>
+				<div>   $resultat-&gt;ville = $f-&gt;city();</div>
+				<div>   $resultat-&gt;province = $f-&gt;state();</div>
+				<div>   $resultat-&gt;codepostal = $f-&gt;postcode();</div>
+				<div>   $resultat-&gt;citation = $f-&gt;paragraph();</div>
+				<div>   return $resultat;</div>
+				<div>}</div>
+			</div>
+		</li>
+		<li>Utiliser la méthode dans le controller. <span class="php copiable">$user = User::fake();</span></li>
+	</ol>
+</li>
+<li id="view" data-video="YGlbmKL-DiU">
+	<h2>Utilisation de la view</h2>
+	<ol>
+		<li>Dans le controller <span class="controller">UserController@index</span>, faire afficher la view <span class="view">users.index</span> : <span class="php copiable">return view("users.index");</span></li>
+		<li>Créer la view <span class="view">users.index</span> : c'est à dire créer le dossier <span class="fichier">/resources/views/users</span> et le fichier <span class="fichier">/resources/views/users/index.blade.php</span></li>
+		<li>Ajouter <span class="blade copiable">{{$user}}</span> et sauvegarder.</li>
+		<li>Tester et constater l'erreur.</li>
+		<li>Envoyer la variable <var>user</var> à la view : <span class="php copiable">return view("users.index", ['user'=&gt;$user]);</span></li>
+		<li>Tester et constater l'affichage au format JSON.</li>
+		<li><p>Dans la view, faire afficher chaque information individuellement.</p>
+			<div class="bloccode blade copiable">
+				<div>&lt;h1&gt;{{$user-&gt;prenom}} {{$user-&gt;nom}}&lt;/h1&gt;</div>
+				<div>&lt;div&gt;{{$user-&gt;email}}&lt;/div&gt;</div>
+				<div>&lt;div&gt;{{$user-&gt;tel}}&lt;/div&gt;</div>
+				<div>&lt;div&gt;{{$user-&gt;adresse}}&lt;/div&gt;</div>
+				<div>&lt;div&gt;{{$user-&gt;ville}} {{$user-&gt;province}}&lt;/div&gt;</div>
+				<div>&lt;div&gt;{{$user-&gt;codepostal}}&lt;/div&gt;</div>
+				<div>&lt;p&gt;{{$user-&gt;citation}}&lt;/p&gt;</div>
+			</div>
+		</li>
+	</ol>
+</li>
+<li id="template" data-video="a277KeS9nn0">
+	<h2>Ajout du template</h2>
+	<ol>
+		<li>Télécharger un template de <a target="_blank" href="http://templatemo.com">templatemo.com</a></li>
+		<li>Mettre le contenu du dossier dans le dossier <span class="fichier">public</span></li>
+		<li>Visiter la page <a href="http://localhost:8000/index.html">http://localhost:8000/index.html</a></li>
+		<li>Mettre les pages HTML dans le dossier <span class="fichier">public/interface</span> et les renommer <span class="fichier">nom_de_la_view.blade.php</span></li>
+		<li>Dans le controller, faire temporairement afficher la view <span class="view">interface.index</span>. <span class="php copiable">return view("interface.index");</span></li>
+		<li>Faire une normalisation partielle de l'interface en fonction du template choisi. Typiquement, créer des fichiers : <span class="fichier">header.blade.php</span>, <span class="fichier">footer.blade.php</span>, <span class="fichier">content.blade.php</span>, <span class="fichier">top.blade.php</span>, <span class="fichier">bottom.blade.php</span>, <span class="fichier">nav.blade.php</span>...</li>
+		<li>Ajouter les <code>@include</code> et tester.</li>
+	</ol>
+</li>
+<li id="pagemaitresse" data-video="wFBQBunvK4g">
+	<h2>La page maîtresse</h2>
+	<ol>
+		<li>Repérer la zone principale du contenu.</li>
+		<li>Ajouter au début <span class="blade copiable">@section("contenu")</span> et à la fin <span class="blade copiable">@show</span>.</li>
+		<li>Optionnelement, faire afficher <var>$user</var> pour voir s'afficher sa valeur.</li>
+		<li>Dans le controller, remettre la view <span class="view">"users.index"</span> (Ça ne changera plus)</li>
+		<li>Au début de la view <span class="view">"users.index"</span>, ajouter la commande <span class="blade copiable">@extends("contenu")</span></li>
+		<li>Envelopper le contenu existant de <span class="blade copiable">@section("contenu")</span> et <span class="blade copiable">@endsection</span></li>
+		<li>Ajouter une autre section dans la page maîtresse et dans la page pour afficher spécifiquement le nom.</li>
+	</ol>
+</li>
+<li id="component" data-video="hvtjfrZkY7c">
+	<h2>Le component</h2>
+	<ol>
+		<li>Créer la view <span class="view">interface.post</span> avec le html d'un post du template.</li>
+		<li>Rendre le post générique en ajoutant des variables.</li>
+		<li>Dans la boucle de la view <span class="view">users.index</span>, tester l'appel à cette view en lui envoyant des données pour les variables.</li>
+		<li>Envelopper le contenu de la section des commandes <span class="blade copiable">@component("interface.post")</span> et <span class="blade copiable">@endcomponent</span></li>
+		<li><p>Pour chacune des variables du component (donc, de la view) créer une slot</p>
+			<div class="bloccode blade copiable">
+				<div>@slot("nom_de_la_variable")</div>
+				<div>   &lt;h2&gt;{{$bidule}}&lt;/h2&gt;</div>
+				<div>@endslot</div>
+			</div>
+		</li>
+	</ol>
+</li>
+<li id="boucle" data-video="VBApEJY0U3E">
+	<h2>La boucle</h2>
+	<ol>
+		<li><p>Dans le controller, créer un tableau <var>$users</var> avec plusieurs usagers et l'envoyer à la view.</p>
+			<div class="bloccode php copiable">
+				<div>$users = [];</div>
+				<div>for ($i = 0; $i &lt; 10; $i += 1) {</div>
+				<div>   $users[] = User::fake();</div>
+				<div>}</div>
+				<div>return view("users.index", ['user<strong>s</strong>'=&gt;$user<strong>s</strong>]);</div>
+			</div>
+		</li>
+		<li><p>Dans la view, ajouter une boucle qui enveloppe le contenu de la section avec <span class="blade copiable">@foreach($users as $user)</span> et <span class="blade copiable">@endforeach</span></p></li>
+		<li>Voir le <a href="https://learninglaravel.net/cheatsheet/#blade" target="_blank">cheatsheet sur <var>Blade</var></a> pour les autres commandes possibles.</li>
+	</ol>
+</li>
+<li id="basededonnees" data-video="">
+	<h2>La base de données</h2>
+	<ol>
+		<li>Ouvrir le fichier <span class="fichier">/.env</span> afin de voir la configuration par défaut d'une connexion MySQL. Puis de refermer.</li>
+		<li>Ouvrir <span class="fichier">/config/database.php</span></li>
+		<li><p>Adapter les lignes suivantes :</p>
+			<div class="bloccode blade copiable">
+				<div>'default' =&gt; '<b>sqlite</b>',</div>
+				<div><samp>// et</samp></div>
+				<div><samp>'driver' =&gt; 'sqlite',</samp></div>
+				<div>'database' =&gt; <b>database_path('database.sqlite')</b>,</div>
+			</div>
+			<p>Ne pas oublier de changer le nom de la base de données.</p>
+			<p>Remarquer l'utilisation de <var>database_path</var>.</p>
+		</li>
+		<li>Créer la route qui réinitialisera la base de données : <span class="php copiable">Route::get('/reset', 'AppController@reset');</span></li>
+		<li>Créer le controller correspondant : <span class="commande copiable">php artisan make:controller AppController</span></li>
+		<li><p>Ouvrir le controller <span class="controller">AppController</span> et ajouter la méthode (non statique) <var>reset</var></p>
+			<div class="bloccode blade copiable">
+				<div>public function reset () {</div>
+				<div>   $db = \DB::connection()-&gt;getDatabaseName();</div>
+				<div>   file_put_contents($db, '');</div>
+				<div>   <em>//Artisan::call("migrate");</em></div>
+				<div>   <em>//Artisan::call("db::seed");</em></div>
+				<div>   return "La base de donnée a été réinitialisée";</div>
+				<div>}</div>
+			</div>
+		</li>
+		<li>Tester et constater la création d'un fichier vide <span class="fichier">/database/database.sqlite</span></li>
+		<li>Dans le terminal, lancer la migration <span class="commande copiable">php artisan migrate</span></li>
+		<li>Tester les commandes <span class="commande copiable">php artisan migrate:rollback</span> et <span class="commande copiable">php artisan migrate:reset</span>.</li>
+		<li>Décommenter ou ajouter la migration dans le controller et tester.</li>
+		<li>Ouvrir la base de données dans <cite class="app">SQLite Browser</cite> et analyser les tables.</li>
+	</ol>
+</li>
+<li id="migration" data-video="">
+	<h2>Les migrations</h2>
+	<ol>
+		<li>Ouvrir le fichier de migration des users qui se trouve dans le dossier <span class="fichier">/database/migrations/</span></li>
+		<li>Ajouter la création des champs supplémentaires du modèle : "prenom", "nom", "tel", "adresse", "ville", "province", "codepostal" et "citation"
+			<div class="bloccode php copiable">
+				<div><samp>$table-&gt;increments('id');</samp></div>
+				<div><samp>$table-&gt;string('name');</samp></div>
+				<div><samp>$table-&gt;string('email')-&gt;unique();</samp></div>
+				<div><samp>$table-&gt;string('password');</samp></div>
+				<div>$table-&gt;string("prenom");</div>
+				<div>$table-&gt;string("nom");</div>
+				<div>$table-&gt;string("tel");</div>
+				<div>$table-&gt;string("adresse");</div>
+				<div>$table-&gt;string("ville");</div>
+				<div>$table-&gt;string("province");</div>
+				<div>$table-&gt;string("codepostal");</div>
+				<div>$table-&gt;text("citation");</div>
+				<div><samp>$table-&gt;rememberToken();</samp></div>
+				<div><samp>$table-&gt;timestamps();</samp></div>
+			</div>
+		</li>
+		<li>Voir le <a href="https://learninglaravel.net/cheatsheet/#schema" target="_blank">cheatsheet sur les <var>Schema</var></a> pour le types de données.</li>
+		<li>Ajouter les champs de la migration des posts.
+			<div class="bloccode php copiable">
+				<div><samp>$table-&gt;increments('id');</samp></div>
+				<div>$table-&gt;integer("user_id");</div>
+				<div>$table-&gt;string("titre");</div>
+				<div>$table-&gt;text("contenu");</div>
+				<div><samp>$table-&gt;timestamps();</samp></div>
+			</div>
+		</li>
+		<li>Ajouter la contrainte pour la clé étrangère.
+			<div class="bloccode php copiable">
+				<div><samp>$table-&gt;integer("user_id");</samp></div>
+				<div>$table-&gt;foreign("user_id")-&gt;on("<dfn data-definition="Le nom de la table liée">users</dfn>")-&gt;references("<dfn data-definition="La clé primaire de la table liée.">id</dfn>");</div>
+			</div>
+		</li>
+		<li>Tester : réinstallation la base de données.</li>
+	</ol>
+</li>
+<li id="seeder" data-video="">
+	<h2>Le seeder</h2>
+	<ol>
+		<li>Décommenter ou ajouter le seeder dans le controller et tester.</li>
+		<li>Ouvrir le fichier <span class="fichier">/database/seeders/DatabaseSeeder.php</span></li>
+		<li>Dans la méthode <var>run</var> créer un user bidon et le sauvegarder.
+			<div class="bloccode php copiable">
+				<div>$user = User::fake();</div>
+				<div>$user-&gt;save();</div>
+			</div>
+		</li>
+		<li>En haut du fichier, ajouter l'instruction <var>use</var> pour les modèles <var>User</var> et <var>Post</var>.
+			<div class="bloccode php copiable">
+				<div>use App/User;</div>
+				<div>use App/Post;</div>
+			</div>
+		</li>
+		<li>Tester et constater l'erreur d'intégrité.</li>
+		<li>Ouvrir le fichier du model <var>User</var>.</li>
+		<li>Ajouter les valeurs pour les données <var>name</var> et <var>password</var>.
+			<div class="bloccode php copiable">
+				<div><samp>$resultat-&gt;nom = $f-&gt;lastName();</samp></div>
+				<div>$resultat-&gt;name = str_slug($resultat-&gt;prenom.$resultat-&gt;nom, '');</div>
+				<div>$resultat-&gt;password = str_slug($resultat-&gt;prenom.$resultat-&gt;nom, '');</div>
+				<div><samp>$resultat-&gt;email = $resultat-&gt;name.'@'.$f-&gt;domain();</samp></div>
+			</div>
+		</li>
+		<li>Copier la méthode <var>fake</var> dans le model <var>Post</var> et l'adapter avec les données <var>titre</var> et <var>contenu</var>.</li>
+		<li>Ajouter le paramètre <var>$user_id</var> et la donnée correspondante de l'objet.
+			<div class="bloccode php copiable">
+				<div>static public function fake($user_id) {</div>
+				<div>   $f = \Faker\Factory::create("fr_CA");</div>
+				<div>   $resultat = new self();</div>
+				<div>   $resultat-&gt;user_id = $user_id;</div>
+				<div>   $resultat-&gt;titre = $f-&gt;text();</div>
+				<div>   $resultat-&gt;contenu = $f-&gt;paragraph();</div>
+				<div>   return $resultat;</div>
+				<div>}</div>
+			</div>
+		</li>
+		<li>Dans le seeder, ajouter une boucle pour créer plusieurs users.</li>
+		<li>Dans la boucle, ajouter une autre boucle qui crée plusieurs posts associés au user.
+			<div class="bloccode php copiable">
+				<div>for ($i = 0; $i &lt; 10; $i += 1) {</div>
+				<div>   $user = User::fake()</div>
+				<div>   $user-&gt;save()</div>
+				<div>   for ($j = 0; $j &lt; 10; $j += 1) {</div>
+				<div>      $post = Post::fake($user-&gt;id)</div>
+				<div>      $post-&gt;save()</div>
+				<div>   }</div>
+				<div>}</div>
+			</div>
+		</li>
+		<li>Ajuster la boucle des posts pour avoir un nombre d'itérations aléatoire.
+			<div class="bloccode php copiable">
+				<div><b>$nb = rand(3, 10);</b></div>
+				<div><em>for ($j = 0; $j &lt; </em><b>$nb</b><em>; $j += 1) {</em></div>
+			</div>
+		</li>
+		<li>Tester et regarder le résultat dans <cite class="app">SQLite Browser</cite>.</li>
+	</ol>
+</li>
+<li id="affichage_index" data-video="">
+	<h2>L'affichage des données</h2>
+	<ol>
+		<li>Dans l'action <span class="controller">Usercontroller@index</span>, remplacer la boucle par l'appel au model.
+			<div class="bloccode php copiable">
+				<div><del>$users = [];</del></div>
+				<div><del>for ($i = 0; $i &lt; 10; $i += 1) {</del></div>
+				<div>   <del>$users[] = User::fake();</del></div>
+				<div><del>}</del></div>
+				<div>$users = User::all();</div>
+			</div>
+		</li>
+		<li>Tester. Dire WOW!</li>
+		<li>Faire trier la requête : <span class="php copiable">$users = User::orderBy('nom')-&gt;get();</span></li>
+		<li>Voir le <a href="https://learninglaravel.net/cheatsheet/#eloquent" target="_blank">cheatsheet sur les <var>Model</var></a> pour les commandes possibles.</li>
+	</ol>
+</li>
+<li id="param_adresse" data-video="">
+	<h2>Le paramètre d'adresse</h2>
+	<ol>
+		<li>Tester l'adresse <span class="fichier">http://localhost:8000/users/1</span></li>
+		<li>Ajouter la route équivalente actionnant l'action <span class="controller">UserController@show</span></li>
+		<li>Remplacer le <span class="string">1</span> par le paramètre d'adresse <span class="string">{id}</span></li>
+		<li>Dans l'action <span class="controller">Usercontroller@show</span>, récupérer le user dont le id est <span class="string">1</span> : <span class="php copiable">$user = User::find(1);</span></li>
+		<li>Faire retourner la valeur du paramèter <var>$id</var> à l'affichage : <span class="php copiable">return $id;</span></li>
+		<li>Remplacer le <span class="string">1</span> pas le paramètre de la méthode <span class="string">$id</span></li>
+		<li>Tester et constater l'affichage du <span class="string">1</span> puis changer la valeur. On peut même mettre un mot et il s'affichera.</li>
+		<li>Remettre l'adresse originale.</li>
+	</ol>
+</li>
+<li id="affichage_show" data-video="">
+	<h2>L'affichage d'un user</h2>
+	<ol>
+		<li>Dans l'action <span class="controller">Usercontroller@show</span>, récupérer le user dont le id correspound au paramètre <var>$id</var> : <span class="php copiable">$user = User::find($id);</span></li>
+		<li>Faire retourner le <var>$user</var> à  l'affichage : <span class="php copiable">return $user;</span></li>
+		<li>Tester et constater l'affichage du JSON du user. Tester l'adresse avec d'autres entiers.</li>
+		<li>On pourrait laisser ainsi, mais on ajoute une autre fonctionnalité Laravel...</li>
+		<li>Dans la route, changer le <span class="string">id</span> pour <span class="string">user</span>.</li>
+		<li>Dans le controller, changer la déclaration du paramètre pour <span class="php"><samp>public function show(</samp><b>User $user</b><samp>) {</samp></span></li>
+		<li>Mettre en commentaire (ou supprimer) l'instruction avec <var>find</var>.</li>
+		<li>Tester... Ça fonctionne!</li>
+	</ol>
+</li>
+<li id="view_show" data-video="">
+	<h2>La view show</h2>
+	<ol>
+		<li>Dans l'action <span class="controller">Usercontroller@show</span>, faire retourner le <var>$user</var> à l'affichage en utilisant la view <span class="view">users.show</span> : <span class="php copiable">return view('users.show', ['user', $user]);</span>.</li>
+		<li>Créer la view <span class="view">users.show</span> et y mettre le contenu de la view <span class="view">users.index</span>.</li>
+		<li>Supprimer la boucle.</li>
+		<li>Tester et constater la disparition de l'interface...</li>
+	</ol>
+</li>
+<li id="url_view" data-video="">
+	<h2>Les adresses dans les <cite>view</cite></h2>
+	<ol>
+		<li>Ouvrir la view de la page maîtresse (<span class="view">interface.index</span>).<span class="view">users.show</span> et remplacer l'URL vers la feuille de style par la commande <span class="blade">asset</span> : <span class="blade copiable">{{asset('style.css')}}</span>.</li>
+		<li>Tester. L'interface devrait être partiellement revenue.</li>
+		<li>Répéter pour toutes les adresses qui mènent vers un fichier du dossier <span class="fichier">public</span> : <span class="fichier">.css</span>, <span class="fichier">.js</span>, les images...</li>
+		<li>Ouvrir la view <span class="view">interface.menu</span>.</li>
+		<li>Repérer le lien qui pointe vers la page d'accueil et remplacer <span class="string">index.html</span> par <span class="string">/</span></li>
+		<li>Changer le texte du prochain lien pour <em class="string">Liste des usagers</em> et son href pour <span class="blade copiable">{{action("UserController@index")}}</span>.</li>
+		<li>Tester et regarder les adresses résultantes des 2 liens.</li>
+		<li>Dupliquer la route <span class="string">/</span> et faire pointer la deuxième vers <span class="string">/users</span>. Regarder les adresses résultantes.</li>
+		<li>Dans la view <span class="view">interface.index</span> ajouter une lien au titre avec le href <span class="blade">{{action("UserController@show")}}</span>. Tester et constater l'adresse l'erreur.</li>
+		<li>Tester les adresses suivantes et regarder les adresses résultantes
+			<div class="blade copiable">{{action("UserController@show", ['id'=&gt;$user-&gt;id])}}</div>
+			<div class="blade copiable">{{action("UserController@show", ['id'=&gt;$user-&gt;id, age=&gt;99])}}</div>
+			<div class="blade copiable">{{action("UserController@show", [$user-&gt;id])}}</div>
+			<div class="blade copiable">{{action("UserController@show", [$user])}}</div>
+			<div class="blade copiable">{{action("UserController@show", $user)}}</div>
+		</li>
+	</ol>
+</li>
+</ol>
+</div>
 	</div>
 </body>
 </html>

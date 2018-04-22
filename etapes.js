@@ -3,17 +3,29 @@ class Etapes {
 	static load() {
 //		var copiables = document.querySelectorAll(".copiable");
 //		copiables.forEach(Etapes.rendreCopiable);
+		this.ajouterSommaire();
 		this.rendreCopiable();
 		this.rendrePliable();
 		this.ajouterIconesYt();
-		this.ajouterSommaire();
+		this.ajouterIframesYt();
 //		var body = document.body.querySelector("div.interface>div.body");
 //		body.insertBefore(this.creerSommaire("li[id]", "h2"), body.firstChild);
 	}
 	static ajouterIconesYt() {
 		var elements = document.querySelectorAll("li[data-video]");
 		elements.forEach(function (e) {
-			e.insertBefore(this.iconeYt(e.getAttribute("data-video")), e.firstChild);
+			var icone = this.iconeYt(e.getAttribute("data-video"));
+			e.querySelector("h2").appendChild(icone);
+		}, this);
+
+	}
+	static ajouterIframesYt() {
+		var elements = document.querySelectorAll("li[data-video]");
+		elements.forEach(function (e) {
+			var idVideo = e.getAttribute("data-video");
+			if (idVideo) {
+				e.insertBefore(this.iframeYt(idVideo), e.querySelector("h2").nextSibling);
+			}
 		}, this);
 
 	}
@@ -28,8 +40,20 @@ class Etapes {
 		img.setAttribute('alt', "Youtube");
 		img.setAttribute('title', "Visionner la vidéo dans Youtube");
 		var span = resultat.appendChild(document.createElement("span"));
-
 		span.innerHTML = href;
+		return resultat;
+	}
+	static iframeYt(id) {
+		var resultat = document.createElement("iframe");
+		resultat.classList.add("youtube");
+		var src = "https://www.youtube.com/embed/" + id;
+		resultat.setAttribute("src", src);
+		resultat.setAttribute("width", 560);
+		resultat.setAttribute("height", 315);
+		resultat.setAttribute("target", "_blank");
+		resultat.setAttribute("frameborder", "0");
+		resultat.setAttribute("allow", "autoplay; encrypted-media");
+		resultat.setAttribute("allowfullscreen", "allowfullscreen");
 		return resultat;
 	}
 	static rendrePliable() {
@@ -123,8 +147,8 @@ class Etapes {
 	}
 	static prendreTexte(copiable) {
 		copiable = copiable.querySelector(".label").cloneNode(true);
-		var dels = Array.from(copiable.querySelectorAll("del"));
-		dels.forEach(function(d) {
+		var samps = Array.from(copiable.querySelectorAll("samp, del"));
+		samps.forEach(function(d) {
 			d.parentNode.removeChild(d);
 		});
 		var resultat = copiable.textContent;

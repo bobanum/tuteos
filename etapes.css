@@ -13,14 +13,53 @@
 .module footer {
   order: 1000;
 }
+.centrer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
 @media all {
   html {
     height: 100%;
+  }
+  div.interface > nav {
+    background-color: #666;
+    color: white;
+    font-size: smaller;
+  }
+  div.interface > nav ul {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    list-style-type: none;
+  }
+  div.interface > nav li {
+    margin: .25em;
+  }
+  div.interface > nav a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: inherit;
+    text-decoration: none;
+    height: 2em;
+    padding: 0 1em;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+  }
+  div.interface > nav a#mnu_videos::before {
+    margin-right: .5ch;
+    content: "☐";
   }
   body {
     margin: 0;
     height: 100%;
     font: normal normal normal 16px/1 "Josefin Sans";
+  }
+  body.videos a#mnu_videos::before {
+    content: "☑";
   }
   :target {
     background-color: #eee;
@@ -55,8 +94,8 @@
     min-height: 100%;
     margin: 0 auto;
   }
-  div.interface header,
-  div.interface footer {
+  div.interface > header,
+  div.interface > footer {
     background-color: black;
     color: white;
     text-align: center;
@@ -118,6 +157,11 @@
   div.body > ol > li {
     padding: 1ch;
   }
+  div.body iframe {
+    display: block;
+    margin: 0 auto;
+    display: none;
+  }
   div.body ol {
     padding-left: 2ch;
   }
@@ -156,7 +200,8 @@
   .copiable:hover .icon {
     opacity: 1;
     transform: scale(1.5);
-    z-index: 100;
+    position: relative;
+    z-index: 10000;
     text-shadow: 3px 5px 7px rgba(0, 0, 0, 0.4);
   }
   h2 {
@@ -198,7 +243,8 @@
   .commande:hover .icon {
     opacity: 1;
     transform: scale(1.5);
-    z-index: 100;
+    position: relative;
+    z-index: 10000;
     text-shadow: 3px 5px 7px rgba(0, 0, 0, 0.4);
   }
   a[href^="https://youtu.be/"] {
@@ -210,19 +256,23 @@
     filter: grayscale(100%);
     pointer-events: none;
   }
+  .bloccode em,
+  .php em,
+  .blade em,
+  .bloccode samp,
+  .php samp,
+  .blade samp,
+  .bloccode del,
+  .php del,
+  .blade del {
+    opacity: .5;
+  }
   div.bloccode {
     display: flex;
     align-items: flex-end;
     flex-direction: row;
     justify-content: space-between;
     padding: 1ch;
-  }
-  div.bloccode em {
-    opacity: .5;
-  }
-  div.bloccode del {
-    opacity: .5;
-    text-decoration: none;
   }
   div.bloccode .label > * {
     white-space: pre;
@@ -267,7 +317,8 @@
   .php:hover .icon {
     opacity: 1;
     transform: scale(1.5);
-    z-index: 100;
+    position: relative;
+    z-index: 10000;
     text-shadow: 3px 5px 7px rgba(0, 0, 0, 0.4);
   }
   .blade {
@@ -299,7 +350,8 @@
   .blade:hover .icon {
     opacity: 1;
     transform: scale(1.5);
-    z-index: 100;
+    position: relative;
+    z-index: 10000;
     text-shadow: 3px 5px 7px rgba(0, 0, 0, 0.4);
   }
   .tag {
@@ -366,6 +418,9 @@
     background-color: #345;
     color: white;
   }
+  body.videos div.body iframe {
+    display: block;
+  }
   div.interface {
     display: flex;
     flex-direction: column;
@@ -382,6 +437,14 @@
   }
   .youtube > span {
     display: none;
+  }
+}
+@media screen and (max-width: 800px) {
+  div.interface {
+    width: 50ch;
+  }
+  div.bloccode .label > * {
+    white-space: normal !important;
   }
 }
 @media print {
