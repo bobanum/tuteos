@@ -5,9 +5,9 @@ class Etapes {
 //		copiables.forEach(Etapes.rendreCopiable);
 		this.ajouterSommaire();
 		this.rendreCopiable();
-		this.rendrePliable();
+//		this.rendrePliable();
 		this.ajouterIconesYt();
-		this.ajouterIframesYt();
+//		this.ajouterIframesYt();
 //		var body = document.body.querySelector("div.interface>div.body");
 //		body.insertBefore(this.creerSommaire("li[id]", "h2"), body.firstChild);
 	}

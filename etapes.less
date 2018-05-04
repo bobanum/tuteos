@@ -18,6 +18,7 @@
 		order: 1000;
 	}
 }
+
 .centrer {
 	display: flex;
 	justify-content: center;
@@ -37,7 +38,7 @@
 		ul {
 			margin: 0;
 			padding: 0;
-			display:flex;
+			display: flex;
 			list-style-type: none;
 		}
 		li {
@@ -45,11 +46,11 @@
 		}
 		a {
 			.centrer;
-			color:inherit;
+			color: inherit;
 			text-decoration: none;
 			height: 2em;
 			padding: 0 1em;
-			background-color: rgba(0,0,0,.2);
+			background-color: rgba(0, 0, 0, .2);
 			border-radius: 4px;
 			&#mnu_videos::before {
 				margin-right: .5ch;
@@ -62,7 +63,7 @@
 		height: 100%;
 		font: @font-global;
 	}
-	body.videos a#mnu_videos::before {
+	body.videos div.interface nav a#mnu_videos::before {
 		content: "☑";
 	}
 	:target {
@@ -74,7 +75,7 @@
 	div.body nav {
 		padding: 1ch;
 		ol {
-			//		font-size: smaller;
+			font-size: smaller;
 			column-count: 2;
 			padding: 0;
 			li {
@@ -146,7 +147,7 @@
 		iframe {
 			display: block;
 			margin: 0 auto;
-			display:none;
+			display: none;
 		}
 		ol {
 			padding-left: 2ch;
@@ -220,8 +221,12 @@
 		filter: grayscale(100%);
 		pointer-events: none;
 	}
-	.bloccode, .php, .blade {
-		em, samp, del {
+	.bloccode,
+	.php,
+	.blade {
+		em,
+		samp,
+		del {
 			opacity: .5;
 		}
 	}
@@ -341,7 +346,7 @@
 		color: white;
 	}
 	body.videos div.body iframe {
-		display:block;
+		display: block;
 	}
 	div.interface {
 		.module;
@@ -352,6 +357,7 @@
 		display: none;
 	}
 }
+
 @media screen and (max-width: 800px) {
 	div.interface {
 		width: 50ch;
@@ -372,7 +378,13 @@
 	.youtube > img {
 		display: none;
 	}
-	.bloccode, .commande, .string, .php, .view, .blade, .controller {
+	.bloccode,
+	.commande,
+	.string,
+	.php,
+	.view,
+	.blade,
+	.controller {
 		background-color: transparent;
 		color: black;
 		border-color: hsl(0, 0%, 90%);
@@ -384,10 +396,10 @@
 		display: none;
 	}
 	div.body ol ol li {
-		border:none !important;
-		margin-top:0;
+		border: none !important;
+		margin-top: 0;
 		margin-bottom: 0;
-		padding-top:0;
+		padding-top: 0;
 		padding-bottom: 0;
 	}
 	div.body .bloccode dfn {

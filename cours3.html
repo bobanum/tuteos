@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="UTF-8"/>
+	<link rel="stylesheet" href="etapes.css"/>
+	<script src="etapes.js"></script>
+	<title>Étapes</title>
+</head>
+<body>
+	<div class="interface">
+		<header>
+		<h1>Un site Web avec Laravel</h1>
+		<h2>Les étapes (temporaire)</h2>
+		</header>
+		<nav>
+			<ul>
+<!--				<li><a href="#" id="mnu_videos" onclick="document.body.classList.toggle('videos');">Afficher les vidéos</a></li>-->
+				<li><a href="index.html#installation">Laravel 1</a></li>
+				<li><a href="index.html#basededonnees">Laravel 2</a></li>
+				<li><a href="index.html#posts_index">Minitest</a></li>
+
+			</ul>
+		</nav>
+		<footer>Les vidéos sont disponibles sur <a href="https://www.youtube.com/channel/UCFWzWuHnqYOlBN2lJhBIGNg">la chaîne Youtube</a></footer>
+<div class="body">
+<ol>
+<li value="27" id="installer_form" data-video="7EEGVGmQlew">
+	<h2>Installation du plugin</h2>
+	<ol>
+		<li>Faire la recherche <span class="string">Form Laravel</span> dans Google.</li>
+		<li>Suivre le lien vers <cite>Laravel Collective</cite> (le 2e).</li>
+		<li>Suivre les instructions <b>de la version 5.4</b> sauf la première étape.</li>
+		<li>Ouvrir le fichier <span class="fichier">/composer.json</span></li>
+		<li>Ajouter dans la section <code>'require'</code> la ligne suivante (avec la virgule) :
+			<div class="bloccode php copiable">
+				<div><samp>"laravel/tinker": "~1.0"</samp>,</div>
+				<div>"laravelcollective/html":"^5.4.0"</div>
+			</div>
+		</li>
+		<li>Dans le terminal faire <code class="commande copiable">composer update</code>.</li>
+	</ol>
+</li>
+<li id="lien_ajouter" data-video="ScE25faGK8w">
+	<h2>Ajouter le lien et la route</h2>
+	<ol>
+		<li>Ajouter le lien vers l'action create</li>
+		<li>Ajouter la route correspondante</li>
+		<li>Tester et constater l'erreur</li>
+	</ol>
+</li>
+<li id="contraintes_route" data-video="YpUCU8B9vCQ">
+	<h2>Ajouter la contrainte de route</h2>
+	<ol>
+		<li>Tester en inversant les routes.</li>
+		<li>À la fin de la route show ajouter <code class="php copiable">-&gt;where('user', '[0-9]+')</code></li>
+	</ol>
+</li>
+<li id="view_form" data-video="BRYrug1Aclg">
+	<h2>Le formulaire vide</h2>
+	<ol>
+		<li>Dans le controller, ajouter l'appel à la view create.</li>
+		<li>envoyer un user vide</li>
+		<li>ajouter une valeur par defaut à province</li>
+		<li>creer la view create</li>
+		<li>ajouter le titre l'appel à la view form</li>
+		<li>constater le non-besoin d'envoyer la variable user</li>
+		<li>créer la view form</li>
+		<li>y ajouter open et close</li>
+		<li>Regarder le code html du formulaire vide.</li>
+	</ol>
+</li>
+<li id="premierschamps" data-video="TdYvcJZovCI">
+	<h2>Les premiers champs</h2>
+	<ol>
+		<li>Dans la view form, créer le tableau avec le champ nom et le champ province.</li>
+	</ol>
+</li>
+<li id="autresschamps" data-video="StEiwcFgcgg">
+	<h2>Les autres champs</h2>
+	<ol>
+		<li>Ajouter les autres champs.</li>
+		<li>Utiliser le faker dans le controller pour les tests.</li>
+		<li>Ajouter le bouton submit.</li>
+	</ol>
+</li>
+<li id="reception" data-video="mpJGpVCKZRU">
+	<h2>La réception des données</h2>
+	<ol>
+		<li>Dans l'action <span class="controller">UserController@store</span>...</li>
+	</ol>
+</li>
+<li id="fillsave" data-video="xdWYNS6du-Y">
+	<h2>La sauvegarde du user</h2>
+	<ol>
+		<li>Dans l'action <span class="controller">UserController@store</span>...</li>
+	</ol>
+</li>
+<li id="redirection" data-video="zHQ4YKiyeWU">
+	<h2>La redirection</h2>
+	<ol>
+		<li>Dans l'action <span class="controller">UserController@store</span>...</li>
+	</ol>
+</li>
+</ol>
+</div>
+	</div>
+</body>
+</html>

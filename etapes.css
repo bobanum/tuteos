@@ -58,7 +58,7 @@
     height: 100%;
     font: normal normal normal 16px/1 "Josefin Sans";
   }
-  body.videos a#mnu_videos::before {
+  body.videos div.interface nav a#mnu_videos::before {
     content: "☑";
   }
   :target {
@@ -71,6 +71,7 @@
     padding: 1ch;
   }
   div.body nav ol {
+    font-size: smaller;
     column-count: 2;
     padding: 0;
   }
