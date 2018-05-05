@@ -1,15 +1,106 @@
 /*jslint browser:true, esnext:true*/
+//function doSomething() {
+//  return new Promise((resolve, reject) => {
+//    console.log("It is done.");
+//    // Succeed half of the time.
+//    if (Math.random() > .5) {
+//      resolve("SUCCESS")
+//    } else {
+//      reject("FAILURE")
+//    }
+//  })
+//}
+//
+//const promise = doSomething();
+//promise.then(successCallback, failureCallback);
+//
+//function successCallback(result) {
+//  console.log("It succeeded with " + result);
+//}
+//
+//function failureCallback(error) {
+//  console.log("It failed with " + error);
+//}
+
 class Etapes {
 	static load() {
-//		var copiables = document.querySelectorAll(".copiable");
-//		copiables.forEach(Etapes.rendreCopiable);
-		this.ajouterSommaire();
-		this.rendreCopiable();
-//		this.rendrePliable();
-		this.ajouterIconesYt();
-//		this.ajouterIframesYt();
+//		this.traiterReferences();
+		var promesse = this.traiterReferences();
+		promesse.then(function() {
+			Etapes.ajouterSommaire();
+			Etapes.rendreCopiable();
+			Etapes.rendrePliable();
+			Etapes.ajouterIconesYt();
+			Etapes.ajouterIframesYt();
+		});
 //		var body = document.body.querySelector("div.interface>div.body");
 //		body.insertBefore(this.creerSommaire("li[id]", "h2"), body.firstChild);
+	}
+	static traiterReferences() {
+		var refs = Array.from(document.querySelectorAll("li.ref"));
+		var pRefs = refs.map(function (ref) {
+			return new Promise(function (resolve){
+				var url = ref.querySelector("a").getAttribute("href");
+				var xhr = new XMLHttpRequest();
+				xhr.open("get", url);
+				xhr.responseType = "document";
+				xhr.obj = this;
+				xhr.addEventListener("load", function() {
+					this.obj.loadRef(ref, this.response);
+//					var elements = Array.from(this.response.querySelectorAll("div.body>ol>li"));
+//					elements.forEach(function (e) {
+//						ref.parentNode.insertBefore(e, ref);
+//					});
+					ref.parentNode.removeChild(ref);
+					resolve(true);
+				});
+				xhr.send();
+
+			});
+		});
+		return Promise.all(pRefs);
+	}
+	static traiterElements(elements, callback) {
+		if (typeof elements === "string") {
+			elements = document.querySelectorAll(elements);
+		}
+		elements = Array.from(elements);
+		var pRefs = elements.map(function (element) {
+			return new Promise(function (resolve){
+				var url = element.querySelector("a").getAttribute("href");
+				var xhr = new XMLHttpRequest();
+				xhr.open("get", url);
+				xhr.responseType = "document";
+				xhr.obj = this;
+				xhr.addEventListener("load", function() {
+					this.obj.loadRef(element, this.response);
+//					var elements = Array.from(this.response.querySelectorAll("div.body>ol>li"));
+//					elements.forEach(function (e) {
+//						ref.parentNode.insertBefore(e, ref);
+//					});
+					element.parentNode.removeChild(element);
+					resolve(true);
+				});
+				xhr.send();
+
+			});
+		});
+		return Promise.all(pRefs);
+	}
+	static xhr_loadRef() {
+		var elements = Array.from(this.response.querySelectorAll("div.body>ol>li"));
+		elements.forEach(function (e) {
+			this.ref.parentNode.insertBefore(e, this.ref);
+		});
+		this.resolve(true);
+	}
+	static loadRef(ref, doc) {
+		var elements = Array.from(doc.querySelectorAll("div.body>ol>li"));
+		elements.forEach(function (e) {
+			ref.parentNode.insertBefore(e, ref);
+		});
+		ref.parentNode.removeChild(ref);
+		return ref;
 	}
 	static ajouterIconesYt() {
 		var elements = document.querySelectorAll("li[data-video]");

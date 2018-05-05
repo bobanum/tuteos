@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="UTF-8"/>
+	<link rel="stylesheet" href="etapes.css"/>
+	<script src="etapes.js"></script>
+	<title>Étapes</title>
+</head>
+<body>
+	<div class="interface">
+		<header>
+		<h1>Un site Web avec Laravel</h1>
+		<h2>Les étapes</h2>
+		</header>
+		<nav>
+			<ul>
+<!--				<li><a href="#" id="mnu_videos" onclick="document.body.classList.toggle('videos');">Afficher les vidéos</a></li>-->
+				<li><a href="#installation">Laravel 1</a></li>
+				<li><a href="#basededonnees">Laravel 2</a></li>
+			</ul>
+		</nav>
+		<footer>Les vidéos sont disponibles sur <a href="https://www.youtube.com/channel/UCFWzWuHnqYOlBN2lJhBIGNg">la chaîne Youtube</a></footer>
+<div class="body">
+<ol start="23">
+<li id="posts_index" data-video="iYUwe99a8Xc">
+	<h2>Afficher tous les posts</h2>
+	<ol>
+		<li>Modifier le menu (view <span class="view">interface.menu</span>) pour ajouter <span class="string">Liste des articles</span> qui pointe vers l'action <span class="controller">PostController@index</span>.</li>
+		<li>Ajouter la route qui pointe vers l'adresse <span class="string">/posts</span> et qui utilise l'action <span class="controller">index</span> du controller <span class="controller">PostController</span>.</li>
+		<li>Dans l'action du controller, récupérer tous les posts dans la variable <var>$posts</var>.</li>
+		<li>Appeler la view <span class="view">posts.index</span> en lui envoyant les posts.</li>
+		<li>Faire afficher une simple liste avec les titres des posts avec un lien.
+			<div class="bloccode php copiable">
+				<div>&lt;ul&gt;</div>
+				<div>@foreach($posts as $post)</div>
+				<div>   &lt;li&gt;</div>
+				<div>      &lt;a href="{{action('PostController@show', $post)}}"&gt;</div>
+				<div>         {{$post-&gt;titre}}</div>
+				<div>      &lt;/a&gt;</div>
+				<div>      par &lt;a href="{{action('UserController@show', $post-&gt;<dfn data-definition="Un model lié.">user</dfn>)}}"&gt;</div>
+				<div>         {{$post-&gt;user-&gt;<dfn data-definition="Une donnée virtuelle">nomComplet</dfn>}}</div>
+				<div>      &lt;/a&gt;</div>
+				<div>   &lt;/li&gt;</div>
+				<div>@endforeach</div>
+				<div>&lt;/ul&gt;</div>
+			</div>
+		</li>
+		<li>Ne pas tester (ou bien tester et constater l'erreur). On doit lier les models.</li>
+	</ol>
+</li>
+<li id="liaisons" data-video="Y1QvEYhdFhg">
+	<h2>Lier les models</h2>
+	<ol>
+        <li>Ouvrir les models <var class="model">User</var> et <var class="model">Post</var>.</li>
+		<li>Dans <var>Post</var>, ajouter la relation <var>belongsTo</var> pour le user :
+			<div class="bloccode php copiable">
+				<div>public function user() {</div>
+				<div>   return $this-&gt;belongsTo('<dfn data-definition="Le model qui représente le user (auteur) du post.">App\User</dfn>');</div>
+				<div>}</div>
+			</div>
+		</li>
+		<li>Dans <var class="model">User</var>, ajouter la relation <var>hasHany</var> pour les posts :
+			<div class="bloccode php copiable">
+				<div>public function posts() {</div>
+				<div>   return $this-&gt;hasMany('<dfn data-definition="Le model qui représente les posts de l&apos;auteur.">App\Post</dfn>');</div>
+				<div>}</div>
+			</div>
+			<p>Faire  attention au pluriel du mot <var>post<b>s</b></var>.</p>
+		</li>
+		<li>Encore dans le model <var class="model">User</var> ajouter la donnée virtuelle (calculée) <var>nomAdmin</var> qui génère <span class="string">Raté, Rita</span> :
+			<div class="bloccode php copiable">
+				<div>public function get<dfn data-definition="Le nom de la donnée avec une majuscule initiale.">NomAdmin</dfn>Attribute() {</div>
+				<div>   return $this-&gt;nom . ", " . $this-&gt;prenom;</div>
+				<div>}</div>
+			</div>
+		</li>
+		<li>Ajouter également la donnée virtuelle (calculée) <var>nomComplet</var> qui génère <span class="string">Rita Raté</span>.</li>
+		<li>On peut également ajouter une donnée virtuelle qui retourne le nombre d'articles de cet auteur :
+			<div class="bloccode php copiable">
+				<div>public function get<var>NbPosts</var>Attribute() {</div>
+				<div>   return $this-&gt;posts-&gt;count();</div>
+				<div>}</div>
+			</div>
+		</li>
+	</ol>
+</li>
+<li id="posts_show" data-video="0H35n6dZ4tk">
+	<h2>Afficher un seul post</h2>
+	<ol>
+		<li>Ajouter l'interface à la view index.</li>
+		<li>Ajouter la route qui pointe vers l'adresse <span class="string">/posts/{post}</span> et qui renvoie à l'action <span class="controller">show</span> du controller <span class="controller">PostController</span>.</li>
+		<li>Adapter l'action du controller afin de recevoir un <var>$post</var> et non un <var>$id</var> (voir <span class="controller">UserController</span>).</li>
+		<li>Appeler la view <span class="view">posts.show</span> en lui envoyant le post.</li>
+		<li>Créer la view <span class="view">posts.show</span>.</li>
+		<li>Faire appel au component <span class="view">interface.post</span>.</li>
+		<li>Fournir les informations pour les slots <string>titre</string> et <string>contenu</string></li>
+		<li>Déplacer la balise <span class="string">div.meta</span> de la view <span class="view">interface.post</span> vers <span class="view">post.show</span></li>
+		<li>Adapter le lien vers l'auteur :
+			<div class="bloccode blade copiable">
+				<div>&lt;a href="{{action('UserController@show', $post-&gt;user)}}"&gt;</div>
+				<div>   {{$post-&gt;user-&gt;nomComplet}}</div>
+				<div>&lt;/a&gt;</div>
+			</div>
+		</li>
+		<li>Faire afficher la date de modification du post.</li>
+	</ol>
+</li>
+<li id="posts_user" data-video="w9p9FSZKo8A">
+	<h2>Les posts d'un user</h2>
+	<ol>
+		<li>Suivre la vidéo</li>
+	</ol>
+</li>
+</ol>
+</div>
+	</div>
+</body>
+</html>
