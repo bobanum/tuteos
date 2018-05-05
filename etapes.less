@@ -9,6 +9,7 @@
 	flex-direction: column;
 	justify-content: space-between;
 	header {
+		order: -1000;
 		* {
 			margin: 0;
 			padding: 0;
@@ -34,6 +35,7 @@
 		background-color: #666;
 		color: white;
 		font-size: smaller;
+		order: -1000;
 
 		ul {
 			margin: 0;
@@ -46,6 +48,9 @@
 			background-color: rgba(0, 0, 0, .2);
 			border-radius: 4px;
 			display: flex;
+			&.courant {
+				background-color: #345;
+			}
 		}
 		a {
 			.centrer;

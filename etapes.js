@@ -1,40 +1,95 @@
 /*jslint browser:true, esnext:true*/
-//function doSomething() {
-//  return new Promise((resolve, reject) => {
-//    console.log("It is done.");
-//    // Succeed half of the time.
-//    if (Math.random() > .5) {
-//      resolve("SUCCESS")
-//    } else {
-//      reject("FAILURE")
-//    }
-//  })
-//}
-//
-//const promise = doSomething();
-//promise.then(successCallback, failureCallback);
-//
-//function successCallback(result) {
-//  console.log("It succeeded with " + result);
-//}
-//
-//function failureCallback(error) {
-//  console.log("It failed with " + error);
-//}
-
 class Etapes {
 	static load() {
-//		this.traiterReferences();
+		this.ajouterMenu();
 		var promesse = this.traiterReferences();
 		promesse.then(function() {
 			Etapes.ajouterSommaire();
 			Etapes.rendreCopiable();
-			Etapes.rendrePliable();
+			//Etapes.rendrePliable();
 			Etapes.ajouterIconesYt();
-			Etapes.ajouterIframesYt();
+			//Etapes.ajouterIframesYt();
 		});
-//		var body = document.body.querySelector("div.interface>div.body");
-//		body.insertBefore(this.creerSommaire("li[id]", "h2"), body.firstChild);
+	}
+	static ajouterMenu() {
+		var resultat;
+		resultat = document.createElement("ul");
+		resultat.appendChild(this.elementMenuHome());
+//		resultat.appendChild(this.elementMenuFrames());
+		var elements = [
+			{
+				etiquette: "Laravel 1",
+				url: "cours1.html",
+				playlist: "https://www.youtube.com/watch?v=sZ8crC_QQKU&list=PLR5YZQKvy9U2-I1e6m0pNPLQS07p-X0xg"
+			},
+			{
+				etiquette: "Laravel 2",
+				url: "cours2.html",
+				playlist: "https://www.youtube.com/watch?v=ZpOq9oimnpM&list=PLR5YZQKvy9U1hb1uK_tIc_zEhV8PyEFLp"
+			},
+			{
+				etiquette: "Laravel 2.5 (minitest)",
+				url: "cours2.5.html",
+				playlist: "https://www.youtube.com/watch?v=iYUwe99a8Xc&list=PLR5YZQKvy9U2u-AjvxN4sznkBlHxRXjXE"
+			},
+			{
+				etiquette: "Laravel 3",
+				url: "cours3.html",
+				playlist: "https://www.youtube.com/watch?v=7EEGVGmQlew&list=PLR5YZQKvy9U3AHVDbsk1clZwAhMyzS090"
+			}
+		];
+		elements.forEach(e => resultat.appendChild(this.elementMenu(e.etiquette, e.url, e.playlist)));
+		var nav = document.querySelector("div.interface>nav");
+		nav = nav || document.querySelector("div.interface").appendChild(document.createElement("nav"));
+		nav.appendChild(resultat);
+		return resultat;
+	}
+	static elementMenu(etiquette, url, playlist) {
+		var resultat, a, img;
+		resultat = document.createElement("li");
+		a = resultat.appendChild(document.createElement("a"));
+		a.setAttribute("href", url);
+		a.innerHTML = etiquette;
+		if (location.pathname.endsWith(url)) {
+			resultat.classList.add("courant");
+		}
+		if (playlist) {
+			a = resultat.appendChild(document.createElement("a"));
+			a.classList.add("playlist");
+			a.setAttribute("href", playlist);
+			a.setAttribute("title", "Vers la playlist");
+			a.setAttribute("target", "_blank");
+			img = a.appendChild(document.createElement("img"));
+			img.setAttribute("alt", "Playlist Youtube");
+			img.setAttribute("src", "logoplaylist.svg");
+		}
+		return resultat;
+	}
+	static elementMenuFrames() {
+		var resultat, a;
+		resultat = document.createElement("li");
+		a = resultat.appendChild(document.createElement("a"));
+		a.setAttribute("href", "#");
+		a.setAttribute("id", "mnu_videos");
+		a.addEventListener("click", function () {
+			document.body.classList.toggle('videos');
+		});
+		a.innerHTML = "Afficher les vidéos";
+		return resultat;
+	}
+	static elementMenuHome() {
+		var resultat, a, img;
+		resultat = document.createElement("li");
+		console.log(location);
+		if (location.pathname.endsWith("index.html") || location.pathname.endsWith("/")) {
+			resultat.classList.add("courant");
+		}
+		a = resultat.appendChild(document.createElement("a"));
+		a.setAttribute("href", "index.html");
+		img = a.appendChild(document.createElement("img"));
+		img.setAttribute("alt", "Accueil");
+		img.setAttribute("src", "btn_home.svg");
+		return resultat;
 	}
 	static traiterReferences() {
 		var refs = Array.from(document.querySelectorAll("li.ref"));

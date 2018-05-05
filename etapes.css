@@ -6,6 +6,9 @@
   flex-direction: column;
   justify-content: space-between;
 }
+.module header {
+  order: -1000;
+}
 .module header * {
   margin: 0;
   padding: 0;
@@ -27,6 +30,7 @@
     background-color: #666;
     color: white;
     font-size: smaller;
+    order: -1000;
   }
   div.interface > nav ul {
     margin: 0;
@@ -39,6 +43,9 @@
     background-color: rgba(0, 0, 0, 0.2);
     border-radius: 4px;
     display: flex;
+  }
+  div.interface > nav li.courant {
+    background-color: #345;
   }
   div.interface > nav a {
     display: flex;
@@ -444,6 +451,9 @@
     justify-content: space-between;
     background-color: white;
     color: black;
+  }
+  div.interface header {
+    order: -1000;
   }
   div.interface header * {
     margin: 0;
