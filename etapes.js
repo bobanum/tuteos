@@ -46,11 +46,10 @@ class Etapes {
 				xhr.responseType = "document";
 				xhr.obj = this;
 				xhr.addEventListener("load", function() {
-					this.obj.loadRef(ref, this.response);
-//					var elements = Array.from(this.response.querySelectorAll("div.body>ol>li"));
-//					elements.forEach(function (e) {
-//						ref.parentNode.insertBefore(e, ref);
-//					});
+					var elements = Array.from(this.response.querySelectorAll("div.body>ol>li"));
+					elements.forEach(function (e) {
+						ref.parentNode.insertBefore(e, ref);
+					});
 					ref.parentNode.removeChild(ref);
 					resolve(true);
 				});
@@ -59,48 +58,6 @@ class Etapes {
 			});
 		});
 		return Promise.all(pRefs);
-	}
-	static traiterElements(elements, callback) {
-		if (typeof elements === "string") {
-			elements = document.querySelectorAll(elements);
-		}
-		elements = Array.from(elements);
-		var pRefs = elements.map(function (element) {
-			return new Promise(function (resolve){
-				var url = element.querySelector("a").getAttribute("href");
-				var xhr = new XMLHttpRequest();
-				xhr.open("get", url);
-				xhr.responseType = "document";
-				xhr.obj = this;
-				xhr.addEventListener("load", function() {
-					this.obj.loadRef(element, this.response);
-//					var elements = Array.from(this.response.querySelectorAll("div.body>ol>li"));
-//					elements.forEach(function (e) {
-//						ref.parentNode.insertBefore(e, ref);
-//					});
-					element.parentNode.removeChild(element);
-					resolve(true);
-				});
-				xhr.send();
-
-			});
-		});
-		return Promise.all(pRefs);
-	}
-	static xhr_loadRef() {
-		var elements = Array.from(this.response.querySelectorAll("div.body>ol>li"));
-		elements.forEach(function (e) {
-			this.ref.parentNode.insertBefore(e, this.ref);
-		});
-		this.resolve(true);
-	}
-	static loadRef(ref, doc) {
-		var elements = Array.from(doc.querySelectorAll("div.body>ol>li"));
-		elements.forEach(function (e) {
-			ref.parentNode.insertBefore(e, ref);
-		});
-		ref.parentNode.removeChild(ref);
-		return ref;
 	}
 	static ajouterIconesYt() {
 		var elements = document.querySelectorAll("li[data-video]");
