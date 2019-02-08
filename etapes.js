@@ -1,47 +1,46 @@
 /*jslint browser:true, esnext:true*/
 class Etapes {
 	static load() {
-		this.ajouterMenu();
+		this.loadJson("menu.json").then(data => {
+			this.ajouterMenu(data);
+		});
 		var promesse = this.traiterReferences();
 		promesse.then(function() {
 			Etapes.ajouterSommaire();
 			Etapes.rendreCopiable();
 			//Etapes.rendrePliable();
 			Etapes.ajouterIconesYt();
-			//Etapes.ajouterIframesYt();
+//			Etapes.ajouterIframesYt();
 		});
 	}
-	static ajouterMenu() {
+	static loadJson(fic) {
+		return new Promise(resolve => {
+			var xhr = new XMLHttpRequest();
+			xhr.open("get", fic);
+			xhr.responseType = "json";
+			xhr.addEventListener("load", (e) => {
+				resolve(e.currentTarget.response);
+			});
+			xhr.send(null);
+		});
+	}
+	static ajouterMenu(elements) {
+		var menu = this.creerMenu(elements);
+		var nav = document.querySelector("div.interface>nav");
+		nav = nav || document.querySelector("div.interface").appendChild(document.createElement("nav"));
+		nav.appendChild(menu);
+		return nav;
+	}
+	static creerMenu(elements) {
 		var resultat;
 		resultat = document.createElement("ul");
 		resultat.appendChild(this.elementMenuHome());
-//		resultat.appendChild(this.elementMenuFrames());
-		var elements = [
-			{
-				etiquette: "Laravel 1",
-				url: "cours1.html",
-				playlist: "https://www.youtube.com/watch?v=sZ8crC_QQKU&list=PLR5YZQKvy9U2-I1e6m0pNPLQS07p-X0xg"
-			},
-			{
-				etiquette: "Laravel 2",
-				url: "cours2.html",
-				playlist: "https://www.youtube.com/watch?v=ZpOq9oimnpM&list=PLR5YZQKvy9U1hb1uK_tIc_zEhV8PyEFLp"
-			},
-			{
-				etiquette: "Laravel 2.5 (minitest)",
-				url: "cours2.5.html",
-				playlist: "https://www.youtube.com/watch?v=iYUwe99a8Xc&list=PLR5YZQKvy9U2u-AjvxN4sznkBlHxRXjXE"
-			},
-			{
-				etiquette: "Laravel 3",
-				url: "cours3.html",
-				playlist: "https://www.youtube.com/watch?v=7EEGVGmQlew&list=PLR5YZQKvy9U3AHVDbsk1clZwAhMyzS090"
+		resultat.appendChild(this.elementMenuComplet());
+		elements.forEach(e => {
+			if (e.off !== true) {
+				resultat.appendChild(this.elementMenu(e.etiquette, e.url, e.playlist));
 			}
-		];
-		elements.forEach(e => resultat.appendChild(this.elementMenu(e.etiquette, e.url, e.playlist)));
-		var nav = document.querySelector("div.interface>nav");
-		nav = nav || document.querySelector("div.interface").appendChild(document.createElement("nav"));
-		nav.appendChild(resultat);
+		});
 		return resultat;
 	}
 	static elementMenu(etiquette, url, playlist) {
@@ -61,7 +60,9 @@ class Etapes {
 			a.setAttribute("target", "_blank");
 			img = a.appendChild(document.createElement("img"));
 			img.setAttribute("alt", "Playlist Youtube");
-			img.setAttribute("src", "logoplaylist.svg");
+			img.setAttribute("width", "27");
+			img.setAttribute("height", "19");
+			img.setAttribute("src", this.app_url("images/logoplaylist.svg"));
 		}
 		return resultat;
 	}
@@ -80,15 +81,33 @@ class Etapes {
 	static elementMenuHome() {
 		var resultat, a, img;
 		resultat = document.createElement("li");
-		console.log(location);
-		if (location.pathname.endsWith("index.html") || location.pathname.endsWith("/")) {
+		resultat.setAttribute("title", "Accueil");
+		if (location.href === this.app_url("index.html")) {
 			resultat.classList.add("courant");
 		}
 		a = resultat.appendChild(document.createElement("a"));
-		a.setAttribute("href", "index.html");
+		a.setAttribute("href", this.app_url("index.html"));
 		img = a.appendChild(document.createElement("img"));
 		img.setAttribute("alt", "Accueil");
-		img.setAttribute("src", "btn_home.svg");
+		img.setAttribute("width", "16");
+		img.setAttribute("height", "16");
+		img.setAttribute("src", this.app_url("images/btn_home.svg"));
+		return resultat;
+	}
+	static elementMenuComplet() {
+		var resultat, a, img;
+		resultat = document.createElement("li");
+		resultat.setAttribute("title", "Tout afficher");
+		if (location.href === this.page_url("index.html")) {
+			resultat.classList.add("courant");
+		}
+		a = resultat.appendChild(document.createElement("a"));
+		a.setAttribute("href", this.page_url("index.html"));
+		img = a.appendChild(document.createElement("img"));
+		img.setAttribute("alt", "Tout afficher");
+		img.setAttribute("width", "16");
+		img.setAttribute("height", "16");
+		img.setAttribute("src", this.app_url("images/btn_complet.svg"));
 		return resultat;
 	}
 	static traiterReferences() {
@@ -139,7 +158,9 @@ class Etapes {
 		resultat.setAttribute("href", href);
 		resultat.setAttribute("target", "_blank");
 		var img = resultat.appendChild(document.createElement("img"));
-		img.setAttribute('src', "logoyt.svg");
+		img.setAttribute('src', this.app_url("images/logoyt.svg"));
+		img.setAttribute("width", 27);
+		img.setAttribute("height", 19);
 		img.setAttribute('alt', "Youtube");
 		img.setAttribute('title', "Visionner la vidéo dans Youtube");
 		var span = resultat.appendChild(document.createElement("span"));
@@ -174,22 +195,28 @@ class Etapes {
 			label.classList.add("label");
 			label.innerHTML = element.innerHTML;
 			element.innerHTML = "";
-			var icon = element.appendChild(document.createElement("span"));
-			icon.classList.add("icon");
-			var entity = "";
-			entity += "📋";
-	//		entity += "&#x1f4cb;";
-	//		entity += "📌";
-	//		entity += "&#x1f4cc;";
-	//		entity += "📍";
-	//		entity += "&#x1f4cd;";
-	//		entity += "📎";
-	//		entity += "&#x1f4ce;";
-			icon.innerHTML = entity;
-			icon.setAttribute("title", "Copier dans le presse-papier");
-			icon.addEventListener("click", Etapes.evt.copiable.click);
+
+			element.appendChild(this.html_iconeEntite('📋', 'Copier dans le presse-papier', Etapes.evt.copiable.click));
+//			element.appendChild(this.html_iconeSvg('copy', 'Copier dans le presse-papier', Etapes.evt.copiable.click));
 			element.appendChild(label);
 		}, this);
+	}
+	static html_iconeEntite(entite, alt, evt) {
+		var resultat = document.createElement("span");
+		resultat.classList.add("icon");
+		//var entites = {"&#x1f4cb;":"📋", "&#x1f4cc;": "📌", "&#x1f4cd;": "📍", "&#x1f4ce;": "📎"};
+		resultat.innerHTML = entite;
+		resultat.setAttribute("title", alt);
+		resultat.addEventListener("click", evt);
+		return resultat;
+	}
+	static html_iconeSvg(nom, alt, evt) {
+		var resultat = document.createElement("img");
+		resultat.classList.add("icon");
+		resultat.setAttribute("src", this.app_url("images/icone_" + nom + ".svg"));
+		resultat.setAttribute("title", alt);
+		resultat.addEventListener("click", evt);
+		return resultat;
 	}
 	static ajouterSommaire() {
 		var body = document.body.querySelector("div.interface>div.body");
@@ -233,7 +260,7 @@ class Etapes {
 		input.select();
 		document.execCommand("Copy");
 		input.parentNode.removeChild(input);
-		copiable.insertBefore(this.tagCopier(), copiable.firstChild);
+		copiable.firstChild.appendChild(this.tagCopier());
 	}
 	static tagCopier() {
 		var tag = document.createElement("span");
@@ -242,11 +269,10 @@ class Etapes {
 		tag.addEventListener("transitionend", function() {
 			this.parentNode.removeChild(this);
 		});
-		tag.style.opacity = 1;
 		window.setTimeout(function () {
-			tag.style.transitionDuration = "3s";
-			tag.style.opacity = 0;
+			tag.classList.add('out');
 		},10);
+		return tag;
 	}
 	static prendreTexte(copiable) {
 		copiable = copiable.querySelector(".label").cloneNode(true);
@@ -254,17 +280,60 @@ class Etapes {
 		samps.forEach(function(d) {
 			d.parentNode.removeChild(d);
 		});
-		var resultat = copiable.textContent;
-		resultat = resultat.trim();
-		resultat = resultat.replace(/(?:\r\n|\n\r|\r|\n)\s*/g, "\r\n");
+		var elements = Array.from(copiable.childNodes);
+		elements = elements.filter(element => {
+			return (!(element instanceof Text && /^[ \r\n\t]*$/.test(element.data)));
+		}).map(element => {
+			var txt = element.data || element.textContent;
+			return txt;
+		});
+		var resultat = elements.join("\r\n");
 		return resultat;
 	}
+	static page_url(fic) {
+		if (!fic) {
+			return this._url_page;
+		} else {
+			return this._url_page + "/" + fic;
+		}
+	}
+	static app_url(fic) {
+		if (!fic) {
+			return this._url_app;
+		} else {
+			return this._url_app + "/" + fic;
+		}
+	}
+	static setPaths() {
+		var path_app = document.currentScript.getAttribute("src");
+		var path_page = location.href;
+		var dossier_page = path_page.split("/").slice(0, -1);
+		var dossier_app = path_app.split("/").slice(0, -1);
+		this._url_page = dossier_page.join("/");
+		if (/^[a-z]+:\/\//.test(path_app)) {
+			this._url_app = dossier_app.join("/");
+		} else if (dossier_app.length === 0) {
+			this._url_app = dossier_page.join("/");
+		} else {
+			while (dossier_app.length) {
+				let segment = dossier_app.shift();
+				if (segment === ".") {
+					continue;
+				} else if (segment === "..") {
+					dossier_page.pop();
+				} else {
+					dossier_page.push(segment);
+				}
+			}
+			this._url_app = dossier_page.join("/");
+		}
+	}
 	static init() {
-		var self = this;
+		this.setPaths();
 		this.evt = {
 			copiable: {
-				click: function () {
-					self.copier(this);
+				click: (e) => {
+					this.copier(e.currentTarget);
 				}
 			}
 		};

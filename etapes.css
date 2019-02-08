@@ -87,6 +87,58 @@
   :target {
     background-color: #eee;
   }
+  /*Juste pour le visuel des icones*/
+  span.icon {
+    line-height: 1;
+    cursor: pointer;
+    opacity: .5;
+    transition-property: transform;
+    transition-duration: .3s;
+    transform: scale(1);
+    z-index: 10000;
+  }
+  :hover > span.icon {
+    opacity: 1;
+    transform: scale(1.5);
+  }
+  span.copiable > span.icon {
+    float: left;
+    margin-right: .5ch;
+    line-height: 1em;
+    transform-origin: right center;
+  }
+  span.icon .tag {
+    position: absolute;
+    z-index: 1000;
+    left: -1em;
+    right: -1em;
+    transition-delay: 250ms;
+    transition-timing-function: ease-in;
+    transition-duration: 200ms;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    bottom: 0;
+  }
+  span.icon .tag.out {
+    transform: scale(0.2);
+  }
+  span.icon .zzztag {
+    background-color: red;
+    border: 1px solid white;
+    border-radius: 100%;
+    color: white;
+    font-weight: bold;
+    box-shadow: 1px 1px black;
+    font-size: .5em;
+  }
+  span.icon .tag {
+    background-color: rgba(0, 0, 0, 0.5);
+    font-family: arial;
+    font-weight: bold;
+    font-size: .5em;
+  }
   div.body {
     padding: 1em;
   }
@@ -103,15 +155,15 @@
     padding: 0;
     margin-left: 2ch;
   }
-  :hover > a[href="#sommaire"] {
-    opacity: 1;
-  }
   a[href="#sommaire"] {
     color: #000000;
     opacity: .2;
     text-decoration: none;
     font-size: 1rem;
     transition: .3s;
+  }
+  :hover > a[href="#sommaire"] {
+    opacity: 1;
   }
   div.interface {
     width: 70ch;
@@ -131,7 +183,8 @@
     background-color: #f2f2f2;
     border: 1px solid #e6e6e6;
     white-space: nowrap;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
   }
   .view {
     font: normal normal normal .85em/1.2 "Anonymous Pro";
@@ -139,7 +192,8 @@
     background-color: #f2f2f2;
     border: 1px solid #e6e6e6;
     white-space: nowrap;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
     background-color: #ffe5fe;
     border-color: #ffccfd;
     color: #660063;
@@ -150,7 +204,8 @@
     background-color: #f2f2f2;
     border: 1px solid #e6e6e6;
     white-space: nowrap;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
     background-color: #e5ffe5;
     border-color: #ccffcc;
     color: #009900;
@@ -161,7 +216,8 @@
     background-color: #f2f2f2;
     border: 1px solid #e6e6e6;
     white-space: nowrap;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
   }
   .string {
     font: normal normal normal .85em/1.2 "Anonymous Pro";
@@ -169,7 +225,8 @@
     background-color: #f2f2f2;
     border: 1px solid #e6e6e6;
     white-space: nowrap;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
     background-color: #ffffff;
     color: #eb8500;
     border-color: #ffe9cc;
@@ -206,27 +263,10 @@
   }
   .copiable {
     position: relative;
+    padding-right: 0;
   }
   .copiable .label {
-    display: inline-block;
-  }
-  .copiable .icon {
-    line-height: 1;
-    cursor: pointer;
-    opacity: 1;
-    margin-right: .5ch;
-    display: inline-block;
-    transition: .3s;
-    transform: scale(1);
-    transform-origin: center;
-    text-shadow: 0px 0px 0px #000000;
-  }
-  .copiable:hover .icon {
-    opacity: 1;
-    transform: scale(1.5);
-    position: relative;
-    z-index: 10000;
-    text-shadow: 3px 5px 7px rgba(0, 0, 0, 0.4);
+    overflow: hidden;
   }
   h2 {
     margin: 0;
@@ -244,32 +284,16 @@
     background-color: #f2f2f2;
     border: 1px solid #e6e6e6;
     white-space: nowrap;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
     position: relative;
+    padding-right: 0;
     background-color: #3232c3;
     border-color: #000000;
     color: #ffffff;
   }
   .commande .label {
-    display: inline-block;
-  }
-  .commande .icon {
-    line-height: 1;
-    cursor: pointer;
-    opacity: 1;
-    margin-right: .5ch;
-    display: inline-block;
-    transition: .3s;
-    transform: scale(1);
-    transform-origin: center;
-    text-shadow: 0px 0px 0px #000000;
-  }
-  .commande:hover .icon {
-    opacity: 1;
-    transform: scale(1.5);
-    position: relative;
-    z-index: 10000;
-    text-shadow: 3px 5px 7px rgba(0, 0, 0, 0.4);
+    overflow: hidden;
   }
   a[href^="https://youtu.be/"] {
     float: right;
@@ -289,7 +313,27 @@
   .bloccode del,
   .php del,
   .blade del {
-    opacity: .5;
+    color: rgba(255, 255, 255, 0.5);
+  }
+  .bloccode em b,
+  .php em b,
+  .blade em b,
+  .bloccode samp b,
+  .php samp b,
+  .blade samp b,
+  .bloccode del b,
+  .php del b,
+  .blade del b,
+  .bloccode em em,
+  .php em em,
+  .blade em em,
+  .bloccode samp em,
+  .php samp em,
+  .blade samp em,
+  .bloccode del em,
+  .php del em,
+  .blade del em {
+    color: white;
   }
   div.bloccode {
     display: flex;
@@ -297,17 +341,19 @@
     flex-direction: row;
     justify-content: space-between;
     padding: 1ch;
+    padding-right: 0ch;
   }
   div.bloccode .label > * {
     white-space: pre;
   }
   div.bloccode .icon {
-    margin: 0;
-    order: 1000;
+    position: absolute;
+    right: .3ch;
+    bottom: .5ch;
+    transform-origin: right bottom;
   }
-  div.bloccode .tag {
-    right: 0;
-    left: auto;
+  div.bloccode + div.bloccode {
+    margin-top: .25em;
   }
   a {
     color: inherit;
@@ -318,32 +364,11 @@
     background-color: #f2f2f2;
     border: 1px solid #e6e6e6;
     white-space: nowrap;
-    display: inline-block;
-    position: relative;
+    display: inline-flex;
+    align-items: center;
     background-color: #1f7ead;
     border-color: #000000;
     color: #ffffff;
-  }
-  .php .label {
-    display: inline-block;
-  }
-  .php .icon {
-    line-height: 1;
-    cursor: pointer;
-    opacity: 1;
-    margin-right: .5ch;
-    display: inline-block;
-    transition: .3s;
-    transform: scale(1);
-    transform-origin: center;
-    text-shadow: 0px 0px 0px #000000;
-  }
-  .php:hover .icon {
-    opacity: 1;
-    transform: scale(1.5);
-    position: relative;
-    z-index: 10000;
-    text-shadow: 3px 5px 7px rgba(0, 0, 0, 0.4);
   }
   .blade {
     font: normal normal normal .85em/1.2 "Anonymous Pro";
@@ -351,48 +376,11 @@
     background-color: #f2f2f2;
     border: 1px solid #e6e6e6;
     white-space: nowrap;
-    display: inline-block;
-    position: relative;
+    display: inline-flex;
+    align-items: center;
     background-color: #ad1f66;
     border-color: #000000;
     color: #ffffff;
-  }
-  .blade .label {
-    display: inline-block;
-  }
-  .blade .icon {
-    line-height: 1;
-    cursor: pointer;
-    opacity: 1;
-    margin-right: .5ch;
-    display: inline-block;
-    transition: .3s;
-    transform: scale(1);
-    transform-origin: center;
-    text-shadow: 0px 0px 0px #000000;
-  }
-  .blade:hover .icon {
-    opacity: 1;
-    transform: scale(1.5);
-    position: relative;
-    z-index: 10000;
-    text-shadow: 3px 5px 7px rgba(0, 0, 0, 0.4);
-  }
-  .tag {
-    position: absolute;
-    z-index: 1000;
-    background-color: red;
-    border: 1px solid white;
-    border-radius: 100%;
-    color: white;
-    font-weight: bold;
-    padding: .2ch 1ch;
-    transform: rotate(10deg);
-    left: 0;
-    box-shadow: 1px 1px black;
-    font-size: .8em;
-    transition-delay: .5s;
-    text-align: right;
   }
   .bloccode:hover [data-definition]:hover:before {
     opacity: 1;
@@ -436,6 +424,9 @@
     font-size: smaller;
     color: rgba(0, 0, 0, 0.5);
   }
+  .youtube > span {
+    font-size: 1rem;
+  }
 }
 @media screen {
   body {
@@ -466,6 +457,13 @@
     display: none;
   }
 }
+[download]::after {
+  contenu: "";
+  background-image: url(images/icone_download.svg);
+  background-size: contain;
+  width: 1em;
+  height: 1em;
+}
 @media screen and (max-width: 800px) {
   div.interface {
     width: 50ch;
@@ -480,6 +478,9 @@
     margin: .5in;
   }
   div.interface > footer {
+    display: none;
+  }
+  nav {
     display: none;
   }
   .youtube > img {
