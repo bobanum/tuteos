@@ -284,7 +284,11 @@ class Tuteos {
 		var copiable = element.parentNode;
 		var texte = this.prendreTexte(copiable);
 		var input = document.body.appendChild(document.createElement("textarea"));
-		input.value = texte;
+        if (copiable.classList.contains("bloccode")) {
+		  input.value = texte + "\r\n";
+        } else {
+		  input.value = texte;
+        }
 		input.select();
 		document.execCommand("Copy");
 		input.parentNode.removeChild(input);
