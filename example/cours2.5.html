@@ -8,7 +8,7 @@
 </head>
 
 <body>
-    <div class="interface">
+    <div id="app">
         <header>
             <h1>Un site Web avec Laravel</h1>
             <h2>Les étapes</h2>
@@ -25,7 +25,7 @@
                         <li>Dans l'action du controller, récupérer tous les posts dans la variable <var>$posts</var>.</li>
                         <li>Appeler la view <span class="view">posts.index</span> en lui envoyant les posts.</li>
                         <li>Faire afficher une simple liste avec les titres des posts avec un lien.
-                            <div class="bloccode php copiable">
+                            <div class="codeblock php copiable">
                                 <div>&lt;ul&gt;</div>
                                 <div>@foreach($posts as $post)</div>
                                 <div> &lt;li&gt;</div>
@@ -48,14 +48,14 @@
                     <ol>
                         <li>Ouvrir les models <var class="model">User</var> et <var class="model">Post</var>.</li>
                         <li>Dans <var>Post</var>, ajouter la relation <var>belongsTo</var> pour le user :
-                            <div class="bloccode php copiable">
+                            <div class="codeblock php copiable">
                                 <div>public function user() {</div>
                                 <div> return $this-&gt;belongsTo('<dfn data-definition="Le model qui représente le user (auteur) du post.">App\User</dfn>');</div>
                                 <div>}</div>
                             </div>
                         </li>
                         <li>Dans <var class="model">User</var>, ajouter la relation <var>hasHany</var> pour les posts :
-                            <div class="bloccode php copiable">
+                            <div class="codeblock php copiable">
                                 <div>public function posts() {</div>
                                 <div> return $this-&gt;hasMany('<dfn data-definition="Le model qui représente les posts de l&apos;auteur.">App\Post</dfn>');</div>
                                 <div>}</div>
@@ -63,7 +63,7 @@
                             <p>Faire attention au pluriel du mot <var>post<b>s</b></var>.</p>
                         </li>
                         <li>Encore dans le model <var class="model">User</var> ajouter la donnée virtuelle (calculée) <var>nomAdmin</var> qui génère <span class="string">Raté, Rita</span> :
-                            <div class="bloccode php copiable">
+                            <div class="codeblock php copiable">
                                 <div>public function get<dfn data-definition="Le nom de la donnée avec une majuscule initiale.">NomAdmin</dfn>Attribute() {</div>
                                 <div> return $this-&gt;nom . ", " . $this-&gt;prenom;</div>
                                 <div>}</div>
@@ -71,7 +71,7 @@
                         </li>
                         <li>Ajouter également la donnée virtuelle (calculée) <var>nomComplet</var> qui génère <span class="string">Rita Raté</span>.</li>
                         <li>On peut également ajouter une donnée virtuelle qui retourne le nombre d'articles de cet auteur :
-                            <div class="bloccode php copiable">
+                            <div class="codeblock php copiable">
                                 <div>public function get<var>NbPosts</var>Attribute() {</div>
                                 <div> return $this-&gt;posts-&gt;count();</div>
                                 <div>}</div>
@@ -92,7 +92,7 @@
                         </li>
                         <li>Déplacer la balise <span class="string">div.meta</span> de la view <span class="view">interface.post</span> vers <span class="view">post.show</span></li>
                         <li>Adapter le lien vers l'auteur :
-                            <div class="bloccode blade copiable">
+                            <div class="codeblock blade copiable">
                                 <div>&lt;a href="{{action('UserController@show', $post-&gt;user)}}"&gt;</div>
                                 <div> {{$post-&gt;user-&gt;nomComplet}}</div>
                                 <div>&lt;/a&gt;</div>

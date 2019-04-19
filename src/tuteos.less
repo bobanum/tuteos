@@ -21,7 +21,7 @@
 	}
 }
 
-.centrer {
+.center {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -32,7 +32,7 @@
 	html {
 		height: 100%;
 	}
-	div.interface > nav {
+	#app > nav {
 		background-color: #666;
 		color: white;
 		font-size: smaller;
@@ -58,7 +58,7 @@
 			}
 		}
 		a {
-			.centrer;
+			.center;
 			color: inherit;
 			text-decoration: none;
 			height: 2em;
@@ -96,13 +96,13 @@
 		height: 100%;
 		font: @font-global;
 	}
-	body.videos div.interface nav a#mnu_videos::before {
+	body.videos #app nav a#mnu_videos::before {
 		content: "☑";
 	}
 	:target {
 		background-color: #eee;
 	}
-	/*Juste pour le visuel des icones*/
+	/*Just for icons look*/
 	span.icon {
 		line-height: 1;
 		cursor: pointer;
@@ -173,7 +173,7 @@
 			}
 		}
 	}
-	a[href="#sommaire"] {
+	a[href="#summary"] {
 		color: rgba(0, 0, 0, 1);
 		opacity: .2;
 		text-decoration: none;
@@ -183,7 +183,7 @@
 			opacity: 1;
 		}
 	}
-	div.interface {
+	#app {
 		width: 70ch;
 		min-height: 100%;
 		margin: 0 auto;
@@ -195,7 +195,7 @@
 			padding: 1em;
 		}
 	}
-	.boite {
+	.box {
 		font: @font-code;
 		padding: 0 0.5ch;
 		background-color: hsl(0, 0%, 95%);
@@ -205,22 +205,22 @@
 		align-items: center;
 	}
 	.view {
-		.boite;
+		.box;
 		background-color: hsl(302, 100%, 95%);
 		border-color: hsl(302, 100%, 90%);
 		color: hsl(302, 100%, 20%);
 	}
 	.controller {
-		.boite;
+		.box;
 		background-color: hsl(120, 100%, 95%);
 		border-color: hsl(120, 100%, 90%);
 		color: hsl(120, 100%, 30%);
 	}
-	.fichier {
-		.boite;
+	.file {
+		.box;
 	}
 	.string {
-		.boite;
+		.box;
 		background-color: hsl(34, 100%, 100%);
 		color: hsl(34, 100%, 46%);
 		border-color: hsl(34, 100%, 90%);
@@ -268,15 +268,15 @@
 		margin: 0; //	cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 48 48' width='24' height='24'><g id='cote'><path d='m4 18h40v4h-40z'/><path d='m20 0-2 8h-6l12 12 12-12h-6l-2-8z'/></g><use xlink:href='#cote' transform='matrix(1,0,0,-1,0,46)'/></svg>"), auto;
 		//	cursor: url("curseur2.svg"), auto;
 	}
-	.plie {
+	.folded {
 		opacity: .3;
 		border-bottom: 2px dotted rgba(0, 0, 0, .3);
 		& ~ * {
 			display: none;
 		}
 	}
-	.commande {
-		.boite;
+	.command {
+		.box;
 		.copiable;
 		background-color: hsl(240, 59%, 48%);
 		border-color: hsl(240, 0%, 0%);
@@ -292,7 +292,7 @@
 		filter: grayscale(100%);
 		pointer-events: none;
 	}
-	.bloccode,
+	.codeblock,
 	.php,
 	.blade {
 		em,
@@ -306,7 +306,7 @@
 		}
 	}
 
-	div.bloccode {
+	div.codeblock {
 		display: flex;
 		align-items: flex-end;
 		flex-direction: row;
@@ -322,27 +322,27 @@
 			bottom: .5ch;
 			transform-origin: right bottom;
 		}
-		& + div.bloccode {
+		& + div.codeblock {
 			margin-top: .25em;
 		}
 	}
 	a {
 		color: inherit;
 	}
-	.bloccode.php.copiable {}
+	.codeblock.php.copiable {}
 	.php {
-		.boite;
+		.box;
 		background-color: hsl(200, 70%, 40%);
 		border-color: hsl(200, 0%, 0%);
 		color: hsl(200, 100%, 100%);
 	}
 	.blade {
-		.boite;
+		.box;
 		background-color: hsl(330, 70%, 40%);
 		border-color: hsl(330, 0%, 0%);
 		color: hsl(330, 100%, 100%);
 	}
-	.bloccode:hover {
+	.codeblock:hover {
 		[data-definition] {
 			&:before {
 				//			opacity: 1;
@@ -361,7 +361,7 @@
 			}
 		}
 	}
-	.bloccode {}
+	.codeblock {}
 	[data-definition] {
 		text-decoration: underline wavy;
 		position: relative;
@@ -411,7 +411,7 @@
 	body.videos div.body iframe {
 		display: block;
 	}
-	div.interface {
+	#app {
 		.module;
 		background-color: white;
 		color: black;
@@ -432,10 +432,10 @@
 
 
 @media screen and (max-width: 800px) {
-	div.interface {
+	#app {
 		width: 50ch;
 	}
-	div.bloccode .label > * {
+	div.codeblock .label > * {
 		white-space: normal !important;
 	}
 }
@@ -445,7 +445,7 @@
 		size: 8.5in 11in;
 		margin: .5in;
 	}
-	div.interface > footer {
+	#app > footer {
 		display: none;
 	}
 	nav {
@@ -454,8 +454,8 @@
 	.youtube > img {
 		display: none;
 	}
-	.bloccode,
-	.commande,
+	.codeblock,
+	.command,
 	.string,
 	.php,
 	.view,
@@ -465,7 +465,7 @@
 		color: black;
 		border-color: hsl(0, 0%, 90%);
 	}
-	div.bloccode {
+	div.codeblock {
 		padding-left: 3ch;
 	}
 	.copiable .icon {
@@ -478,7 +478,7 @@
 		padding-top: 0;
 		padding-bottom: 0;
 	}
-	div.body .bloccode dfn {
+	div.body .codeblock dfn {
 		text-decoration: none;
 		font-style: normal;
 	}

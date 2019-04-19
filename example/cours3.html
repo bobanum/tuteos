@@ -8,7 +8,7 @@
 </head>
 
 <body>
-    <div class="interface">
+    <div id="app">
         <header>
             <h1>Un site Web avec Laravel</h1>
             <h2>Les étapes (temporaire)</h2>
@@ -23,21 +23,21 @@
                         <li>Faire la recherche <span class="string">Form Laravel</span> dans Google.</li>
                         <li>Suivre le lien vers <cite>Laravel Collective</cite> (le 2e).</li>
                         <li>Suivre les instructions <b>de la version 5.4</b> sauf la première étape.</li>
-                        <li>Ouvrir le fichier <span class="fichier">/composer.json</span></li>
+                        <li>Ouvrir le fichier <span class="file">/composer.json</span></li>
                         <li>Ajouter dans la section <code>'require'</code> la ligne suivante (avec la virgule) :
-                            <div class="bloccode php copiable">
+                            <div class="codeblock php copiable">
                                 <div><samp>"laravel/tinker": "~1.0"</samp>,</div>
                                 <div>"laravelcollective/html":"^5.4.0"</div>
                             </div>
                         </li>
-                        <li>Dans le terminal faire <code class="commande copiable">composer update</code>.</li>
-                        <li>Ouvrir le fichier <span class="fichier">/config/app.php</span> et l'adapter comme suit :
-                            <div class="bloccode php copiable">
+                        <li>Dans le terminal faire <code class="command copiable">composer update</code>.</li>
+                        <li>Ouvrir le fichier <span class="file">/config/app.php</span> et l'adapter comme suit :
+                            <div class="codeblock php copiable">
                                 <div><samp>App\Providers\RouteServiceProvider::class,</samp></div>
                                 <div>Collective\Html\HtmlServiceProvider::class,</div>
                             </div>
 
-                            <div class="bloccode php copiable">
+                            <div class="codeblock php copiable">
                                 <div><samp>'View' =&gt; Illuminate\Support\Facades\View::class,</samp></div>
                                 <div>'Form' =&gt; Collective\Html\FormFacade::class,</div>
                                 <div>'Html' =&gt; Collective\Html\HtmlFacade::class,</div>
@@ -51,7 +51,7 @@
                     <ol>
                         <li>Dans la <cite>view</cite> <span class="view">interface.menu</span>, modifier un des liens pour mener vers l'action <span class="controller">UserController@create</span> : <code class="blade copiable" style="white-space: normal">&lt;a href="{{action('UserController@create')}}"&gt;Ajouter un usager&lt;/a&gt;</code></li>
                         <li>Créer la route correspondante.
-                            <div class="bloccode php copiable">
+                            <div class="codeblock php copiable">
                                 <div><samp>Route::get('/users/{user}', "UserController@show");</samp></div>
                                 <div>Route::get('/users/create',&nbsp;"UserController@create");</div>
                             </div>
@@ -64,12 +64,12 @@
                     <ol>
                         <li>Tester en inversant les routes <cite>show</cite> et <cite>create</cite>.</li>
                         <li>À la fin de la route <cite>show</cite> ajouter la contrainte de route.
-                            <div class="bloccode php copiable">
+                            <div class="codeblock php copiable">
                                 <div><samp>Route::get('/users/{user}', "UserController@show")</samp></div>
                                 <div> -&gt;where('user', '[0-9]+')<samp>;</samp></div>
                             </div>
                         </li>
-                        <li>Tester différentes adresses : <span class="fichier">/users/1</span>, <span class="fichier">/users/create</span> et <span class="fichier">/users/patate</span>.</li>
+                        <li>Tester différentes adresses : <span class="file">/users/1</span>, <span class="file">/users/create</span> et <span class="file">/users/patate</span>.</li>
                     </ol>
                 </li>
                 <li id="view_form" data-video="BRYrug1Aclg">
@@ -78,7 +78,7 @@
                         <li>Dans le controller, ajouter l'appel à la <cite>view</cite> <span class="view">users.create</span>.</li>
                         <li>Créer un user vide et créer l'envoyer avec la view.</li>
                         <li>Ajouter une valeur à la propriété <var>province</var>.
-                            <div class="bloccode php copiable">
+                            <div class="codeblock php copiable">
                                 <div><samp>public function create()</samp></div>
                                 <div><samp>{</samp></div>
                                 <div> $user = new User();</div>
@@ -99,7 +99,7 @@
                     <h2>Les premiers champs</h2>
                     <ol>
                         <li>Dans la <cite>view</cite> form, créer le tableau vide avec une rangée, un <code>&lt;th&gt;</code> pour le label et un <code>&lt;td&gt;</code> pour champ de formulaire.
-                            <div class="bloccode php copiable">
+                            <div class="codeblock php copiable">
                                 <div>&lt;table border="1"&gt;</div>
                                 <div> &lt;tbody&gt;</div>
                                 <div> &lt;tr&gt;</div>
@@ -124,7 +124,7 @@
                     <h2>Les autres champs</h2>
                     <ol>
                         <li>Ajouter les autres champs.
-                            <div class="bloccode blade copiable">
+                            <div class="codeblock blade copiable">
                                 <div>&lt;tr&gt;</div>
                                 <div> &lt;th&gt;{{Form::label('nom', 'Nom')}}&lt;/th&gt;</div>
                                 <div> &lt;td&gt;{{Form::text('nom')}}&lt;/td&gt;</div>
@@ -185,7 +185,7 @@
                         <li>Dans l'action <span class="controller">UserController@store</span>, constater la variable <var class="php">$request</var>. Faire retourner cette variable.</li>
                         <li>Faire <code class="php copiable">return $request-&gt;get('nom');</code></li>
                         <li>Créer un nouveau <code>user</code>, y mettre le nom et le retourner.
-                            <div class="bloccode php copiable">
+                            <div class="codeblock php copiable">
                                 <div>$user = new User();</div>
                                 <div> $user-&gt;nom = $request-&gt;get('nom');</div>
                                 <div>return $user;</div>
@@ -199,8 +199,8 @@
                 <li id="fillsave" data-video="xdWYNS6du-Y">
                     <h2>La sauvegarde du user</h2>
                     <ol>
-                        <li>Dans le <cite>model</cite> <code class="fichier">User.php</code>, ajouter les noms des champs dans la propriété <code>fillable</code>.
-                            <div class="bloccode php copiable">
+                        <li>Dans le <cite>model</cite> <code class="file">User.php</code>, ajouter les noms des champs dans la propriété <code>fillable</code>.
+                            <div class="codeblock php copiable">
                                 <div><samp>protected $fillable = [</samp></div>
                                 <div> 'nom',</div>
                                 <div> 'prenom',</div>
@@ -234,7 +234,7 @@
                         <li>Utiliser l'étape terminée pour voir les changements apportés.</li>
                         <li>Tester la modification et la suppression dans le fureteur.</li>
                         <li>Regarder la <cite>view</cite> <span class="view">users.show</span>. Deux liens ont été ajoutés.
-                            <div class="bloccode blade copiable">
+                            <div class="codeblock blade copiable">
                                 <div>&lt;p&gt;</div>
                                 <div> &lt;a href="{{action('UserController@edit', $user)}}"&gt;</div>
                                 <div> Modifier</div>
@@ -250,7 +250,7 @@
                             </div>
                         </li>
                         <li>Analyser les 3 routes ajoutées.
-                            <div class="bloccode php copiable">
+                            <div class="codeblock php copiable">
                                 <div>Route::get('/users/{user}/edit', "UserController@edit")</div>
                                 <div> -&gt;where('user', '[0-9]+');</div>
                                 <div>Route::post('/users/{user}/edit', "UserController@update")</div>
@@ -260,13 +260,13 @@
                             </div>
                         </li>
                         <li>Examiner les 3 méthodes correspondantes du controller <span class="controller">UserController</span>.
-                            <div class="bloccode php copiable">
+                            <div class="codeblock php copiable">
                                 <div><samp>public function edit(<b>User $user</b>)</samp></div>
                                 <div><samp>{</samp></div>
                                 <div>return view("users.edit", ['user'=&gt;$user]);</div>
                                 <div><samp>}</samp></div>
                             </div>
-                            <div class="bloccode php copiable">
+                            <div class="codeblock php copiable">
                                 <div><samp>public function update(Request $request, <b>User $user</b>)</samp></div>
                                 <div><samp>{</samp></div>
                                 <div> $donnees = $request-&gt;except(['password']);</div>
@@ -279,7 +279,7 @@
                                 <div> -&gt;action('UserController@show', $user);</div>
                                 <div><samp>}</samp></div>
                             </div>
-                            <div class="bloccode php copiable">
+                            <div class="codeblock php copiable">
                                 <div><samp>public function destroy(<b>User $user</b>)</samp></div>
                                 <div><samp>{</samp></div>
                                 <div> // Temporaire : si on n'a pas fait les liaisons entre les tables</div>
@@ -295,7 +295,7 @@
                             </div>
                         </li>
                         <li>Constater la modification de la <cite>view</cite> <span class="view">users.create</span> et la création de la <cite>view</cite> <span class="view">users.edit</span>, dont voici le contenu :
-                            <div class="bloccode blade copiable">
+                            <div class="codeblock blade copiable">
                                 <div>@extends('interface.index')</div>
                                 <div>@section('contenu')</div>
                                 <div> &lt;h2&gt;Modifier un usager&lt;/h2&gt;</div>

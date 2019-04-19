@@ -17,7 +17,7 @@
 .module footer {
   order: 1000;
 }
-.centrer {
+.center {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -27,32 +27,32 @@
   html {
     height: 100%;
   }
-  div.interface > nav {
+  #app > nav {
     background-color: #666;
     color: white;
     font-size: smaller;
     order: -1000;
   }
-  div.interface > nav ul {
+  #app > nav ul {
     margin: 0;
     padding: 0;
     display: flex;
     list-style-type: none;
     flex-wrap: wrap;
   }
-  div.interface > nav li {
+  #app > nav li {
     margin: .25em;
     background-color: rgba(0, 0, 0, 0.2);
     border-radius: 4px;
     display: flex;
   }
-  div.interface > nav li:hover {
+  #app > nav li:hover {
     background-color: rgba(0, 0, 0, 0.5);
   }
-  div.interface > nav li.courant {
+  #app > nav li.courant {
     background-color: #345;
   }
-  div.interface > nav a {
+  #app > nav a {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -62,29 +62,29 @@
     height: 2em;
     padding: 0 .25em;
   }
-  div.interface > nav a.with-icon {
+  #app > nav a.with-icon {
     text-indent: -10000px;
   }
-  div.interface > nav a.with-icon img {
+  #app > nav a.with-icon img {
     height: 1.3em;
   }
-  div.interface > nav a#mnu_videos::before {
+  #app > nav a#mnu_videos::before {
     margin-right: .5ch;
     content: "☐";
   }
-  div.interface > nav a:first-child {
+  #app > nav a:first-child {
     padding-left: 1em;
   }
-  div.interface > nav a:last-child {
+  #app > nav a:last-child {
     padding-right: 1em;
   }
-  div.interface > nav .playlist {
+  #app > nav .playlist {
     opacity: .5;
   }
-  div.interface > nav .playlist:hover {
+  #app > nav .playlist:hover {
     opacity: 1;
   }
-  div.interface > nav .playlist img {
+  #app > nav .playlist img {
     height: 1em;
   }
   body {
@@ -92,13 +92,13 @@
     height: 100%;
     font: normal normal normal 16px/1 "Josefin Sans";
   }
-  body.videos div.interface nav a#mnu_videos::before {
+  body.videos #app nav a#mnu_videos::before {
     content: "☑";
   }
   :target {
     background-color: #eee;
   }
-  /*Juste pour le visuel des icones*/
+  /*Just for icons look*/
   span.icon {
     line-height: 1;
     cursor: pointer;
@@ -166,29 +166,29 @@
     padding: 0;
     margin-left: 2ch;
   }
-  a[href="#sommaire"] {
+  a[href="#summary"] {
     color: #000000;
     opacity: .2;
     text-decoration: none;
     font-size: 1rem;
     transition: .3s;
   }
-  :hover > a[href="#sommaire"] {
+  :hover > a[href="#summary"] {
     opacity: 1;
   }
-  div.interface {
+  #app {
     width: 70ch;
     min-height: 100%;
     margin: 0 auto;
   }
-  div.interface > header,
-  div.interface > footer {
+  #app > header,
+  #app > footer {
     background-color: black;
     color: white;
     text-align: center;
     padding: 1em;
   }
-  .boite {
+  .box {
     font: normal normal normal .85em/1.2 "Anonymous Pro";
     padding: 0 0.5ch;
     background-color: #f2f2f2;
@@ -221,7 +221,7 @@
     border-color: #ccffcc;
     color: #009900;
   }
-  .fichier {
+  .file {
     font: normal normal normal .85em/1.2 "Anonymous Pro";
     padding: 0 0.5ch;
     background-color: #f2f2f2;
@@ -281,14 +281,14 @@
   h2 {
     margin: 0;
   }
-  .plie {
+  .folded {
     opacity: .3;
     border-bottom: 2px dotted rgba(0, 0, 0, 0.3);
   }
-  .plie ~ * {
+  .folded ~ * {
     display: none;
   }
-  .commande {
+  .command {
     font: normal normal normal .85em/1.2 "Anonymous Pro";
     padding: 0 0.5ch;
     background-color: #f2f2f2;
@@ -301,7 +301,7 @@
     border-color: #000000;
     color: #ffffff;
   }
-  .commande .label {
+  .command .label {
     overflow: hidden;
   }
   a[href^="https://youtu.be/"] {
@@ -313,38 +313,38 @@
     filter: grayscale(100%);
     pointer-events: none;
   }
-  .bloccode em,
+  .codeblock em,
   .php em,
   .blade em,
-  .bloccode samp,
+  .codeblock samp,
   .php samp,
   .blade samp,
-  .bloccode del,
+  .codeblock del,
   .php del,
   .blade del {
     color: rgba(255, 255, 255, 0.5);
   }
-  .bloccode em b,
+  .codeblock em b,
   .php em b,
   .blade em b,
-  .bloccode samp b,
+  .codeblock samp b,
   .php samp b,
   .blade samp b,
-  .bloccode del b,
+  .codeblock del b,
   .php del b,
   .blade del b,
-  .bloccode em em,
+  .codeblock em em,
   .php em em,
   .blade em em,
-  .bloccode samp em,
+  .codeblock samp em,
   .php samp em,
   .blade samp em,
-  .bloccode del em,
+  .codeblock del em,
   .php del em,
   .blade del em {
     color: white;
   }
-  div.bloccode {
+  div.codeblock {
     display: flex;
     align-items: flex-end;
     flex-direction: row;
@@ -352,16 +352,16 @@
     padding: 1ch;
     padding-right: 0ch;
   }
-  div.bloccode .label > * {
+  div.codeblock .label > * {
     white-space: pre;
   }
-  div.bloccode .icon {
+  div.codeblock .icon {
     position: absolute;
     right: .3ch;
     bottom: .5ch;
     transform-origin: right bottom;
   }
-  div.bloccode + div.bloccode {
+  div.codeblock + div.codeblock {
     margin-top: .25em;
   }
   a {
@@ -391,7 +391,7 @@
     border-color: #000000;
     color: #ffffff;
   }
-  .bloccode:hover [data-definition]:hover:before {
+  .codeblock:hover [data-definition]:hover:before {
     opacity: 1;
     visibility: visible;
     transform: scale(1);
@@ -445,21 +445,21 @@
   body.videos div.body iframe {
     display: block;
   }
-  div.interface {
+  #app {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     background-color: white;
     color: black;
   }
-  div.interface header {
+  #app header {
     order: -1000;
   }
-  div.interface header * {
+  #app header * {
     margin: 0;
     padding: 0;
   }
-  div.interface footer {
+  #app footer {
     order: 1000;
   }
   .youtube > span {
@@ -474,10 +474,10 @@
   height: 1em;
 }
 @media screen and (max-width: 800px) {
-  div.interface {
+  #app {
     width: 50ch;
   }
-  div.bloccode .label > * {
+  div.codeblock .label > * {
     white-space: normal !important;
   }
 }
@@ -486,7 +486,7 @@
     size: 8.5in 11in;
     margin: .5in;
   }
-  div.interface > footer {
+  #app > footer {
     display: none;
   }
   nav {
@@ -495,8 +495,8 @@
   .youtube > img {
     display: none;
   }
-  .bloccode,
-  .commande,
+  .codeblock,
+  .command,
   .string,
   .php,
   .view,
@@ -506,7 +506,7 @@
     color: black;
     border-color: #e6e6e6;
   }
-  div.bloccode {
+  div.codeblock {
     padding-left: 3ch;
   }
   .copiable .icon {
@@ -519,7 +519,7 @@
     padding-top: 0;
     padding-bottom: 0;
   }
-  div.body .bloccode dfn {
+  div.body .codeblock dfn {
     text-decoration: none;
     font-style: normal;
   }

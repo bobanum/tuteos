@@ -8,7 +8,7 @@
 </head>
 
 <body>
-    <div class="interface">
+    <div id="app">
         <header>
             <h1>Un site Web avec Laravel</h1>
             <h2>Les étapes</h2>
@@ -20,11 +20,11 @@
                 <li id="basededonnees" data-video="ZpOq9oimnpM">
                     <h2>La base de données</h2>
                     <ol>
-                        <li>Ouvrir le fichier <span class="fichier">/.env</span> afin de voir la configuration par défaut d'une connexion MySQL. Puis de refermer.</li>
-                        <li>Ouvrir <span class="fichier">/config/database.php</span></li>
+                        <li>Ouvrir le fichier <span class="file">/.env</span> afin de voir la configuration par défaut d'une connexion MySQL. Puis de refermer.</li>
+                        <li>Ouvrir <span class="file">/config/database.php</span></li>
                         <li>
                             <p>Adapter les lignes suivantes :</p>
-                            <div class="bloccode blade copiable">
+                            <div class="codeblock blade copiable">
                                 <div>'default' =&gt; '<b>sqlite</b>',</div>
                                 <div><samp>// et</samp></div>
                                 <div><samp>'driver' =&gt; 'sqlite',</samp></div>
@@ -34,10 +34,10 @@
                             <p>Remarquer l'utilisation de <var>database_path</var>.</p>
                         </li>
                         <li>Créer la route qui réinitialisera la base de données : <span class="php copiable">Route::get('/reset', 'AppController@reset');</span></li>
-                        <li>Créer le controller correspondant : <span class="commande copiable">php artisan make:controller AppController</span></li>
+                        <li>Créer le controller correspondant : <span class="command copiable">php artisan make:controller AppController</span></li>
                         <li>
                             <p>Ouvrir le controller <span class="controller">AppController</span> et ajouter la méthode (non statique) <var>reset</var></p>
-                            <div class="bloccode blade copiable">
+                            <div class="codeblock blade copiable">
                                 <div>public function reset () {</div>
                                 <div> $db = \DB::connection()-&gt;getDatabaseName();</div>
                                 <div> file_put_contents($db, '');</div>
@@ -47,15 +47,15 @@
                                 <div>}</div>
                             </div>
                         </li>
-                        <li>Tester et constater la création d'un fichier vide <span class="fichier">/database/database.sqlite</span></li>
+                        <li>Tester et constater la création d'un fichier vide <span class="file">/database/database.sqlite</span></li>
                         <li>Ouvrir la base de données dans <cite class="app">SQLite Browser</cite>.</li>
                     </ol>
                 </li>
                 <li id="migration" data-video="7lfMkRcDd7k">
                     <h2>Les migrations</h2>
                     <ol>
-                        <li>Dans le terminal, lancer la migration <span class="commande copiable">php artisan migrate</span></li>
-                        <li>Tester les commandes <span class="commande copiable">php artisan migrate:rollback</span> et <span class="commande copiable">php artisan migrate:reset</span>.</li>
+                        <li>Dans le terminal, lancer la migration <span class="command copiable">php artisan migrate</span></li>
+                        <li>Tester les commandes <span class="command copiable">php artisan migrate:rollback</span> et <span class="command copiable">php artisan migrate:reset</span>.</li>
                         <li>Analyser l'effet de ces commandes sur les tables dans <cite class="app">SQLite Browser</cite>.</li>
                         <li>Décommenter ou ajouter la migration dans le controller et tester.</li>
                     </ol>
@@ -63,13 +63,13 @@
                 <li id="migration_users" data-video="iToZxcxDoVo">
                     <h2>La migration des users</h2>
                     <ol>
-                        <li>Dans le terminal, lancer la migration <span class="commande copiable">php artisan migrate</span></li>
-                        <li>Tester les commandes <span class="commande copiable">php artisan migrate:rollback</span> et <span class="commande copiable">php artisan migrate:reset</span>.</li>
+                        <li>Dans le terminal, lancer la migration <span class="command copiable">php artisan migrate</span></li>
+                        <li>Tester les commandes <span class="command copiable">php artisan migrate:rollback</span> et <span class="command copiable">php artisan migrate:reset</span>.</li>
                         <li>Analyser l'effet de ces commandes sur les tables dans <cite class="app">SQLite Browser</cite>.</li>
                         <li>Décommenter ou ajouter la migration dans le controller et tester.</li>
-                        <li>Ouvrir le fichier de migration des users qui se trouve dans le dossier <span class="fichier">/database/migrations/</span></li>
+                        <li>Ouvrir le fichier de migration des users qui se trouve dans le dossier <span class="file">/database/migrations/</span></li>
                         <li>Ajouter la création des champs supplémentaires du modèle : "prenom", "nom", "tel", "adresse", "ville", "province", "codepostal" et "citation"
-                            <div class="bloccode php copiable">
+                            <div class="codeblock php copiable">
                                 <div><samp>$table-&gt;increments('id');</samp></div>
                                 <div><samp>$table-&gt;string('name');</samp></div>
                                 <div><samp>$table-&gt;string('email')-&gt;unique();</samp></div>
@@ -88,7 +88,7 @@
                         </li>
                         <li>Voir le <a href="https://learninglaravel.net/cheatsheet/#schema" target="_blank">cheatsheet sur les <var>Schema</var></a> pour le types de données.</li>
                         <li>Ajouter les champs de la migration des posts.
-                            <div class="bloccode php copiable">
+                            <div class="codeblock php copiable">
                                 <div><samp>$table-&gt;increments('id');</samp></div>
                                 <div>$table-&gt;integer("user_id");</div>
                                 <div>$table-&gt;string("titre");</div>
@@ -97,7 +97,7 @@
                             </div>
                         </li>
                         <li>Ajouter la contrainte pour la clé étrangère.
-                            <div class="bloccode php copiable">
+                            <div class="codeblock php copiable">
                                 <div><samp>$table-&gt;integer("user_id");</samp></div>
                                 <div>$table-&gt;foreign("user_id")-&gt;on("<dfn data-definition="Le nom de la table liée">users</dfn>")-&gt;references("<dfn data-definition="La clé primaire de la table liée.">id</dfn>");</div>
                             </div>
@@ -108,13 +108,13 @@
                 <li id="migration_posts" data-video="mixyOb_Zuqc">
                     <h2>La migration des posts</h2>
                     <ol>
-                        <li>Dans le terminal, lancer la migration <span class="commande copiable">php artisan migrate</span></li>
-                        <li>Tester les commandes <span class="commande copiable">php artisan migrate:rollback</span> et <span class="commande copiable">php artisan migrate:reset</span>.</li>
+                        <li>Dans le terminal, lancer la migration <span class="command copiable">php artisan migrate</span></li>
+                        <li>Tester les commandes <span class="command copiable">php artisan migrate:rollback</span> et <span class="command copiable">php artisan migrate:reset</span>.</li>
                         <li>Analyser l'effet de ces commandes sur les tables dans <cite class="app">SQLite Browser</cite>.</li>
                         <li>Décommenter ou ajouter la migration dans le controller et tester.</li>
-                        <li>Ouvrir le fichier de migration des users qui se trouve dans le dossier <span class="fichier">/database/migrations/</span></li>
+                        <li>Ouvrir le fichier de migration des users qui se trouve dans le dossier <span class="file">/database/migrations/</span></li>
                         <li>Ajouter la création des champs supplémentaires du modèle : "prenom", "nom", "tel", "adresse", "ville", "province", "codepostal" et "citation"
-                            <div class="bloccode php copiable">
+                            <div class="codeblock php copiable">
                                 <div><samp>$table-&gt;increments('id');</samp></div>
                                 <div><samp>$table-&gt;string('name');</samp></div>
                                 <div><samp>$table-&gt;string('email')-&gt;unique();</samp></div>
@@ -133,7 +133,7 @@
                         </li>
                         <li>Voir le <a href="https://learninglaravel.net/cheatsheet/#schema" target="_blank">cheatsheet sur les <var>Schema</var></a> pour le types de données.</li>
                         <li>Ajouter les champs de la migration des posts.
-                            <div class="bloccode php copiable">
+                            <div class="codeblock php copiable">
                                 <div><samp>$table-&gt;increments('id');</samp></div>
                                 <div>$table-&gt;integer("user_id");</div>
                                 <div>$table-&gt;string("titre");</div>
@@ -142,7 +142,7 @@
                             </div>
                         </li>
                         <li>Ajouter la contrainte pour la clé étrangère.
-                            <div class="bloccode php copiable">
+                            <div class="codeblock php copiable">
                                 <div><samp>$table-&gt;integer("user_id");</samp></div>
                                 <div>$table-&gt;foreign("user_id")-&gt;on("<dfn data-definition="Le nom de la table liée">users</dfn>")-&gt;references("<dfn data-definition="La clé primaire de la table liée.">id</dfn>");</div>
                             </div>
@@ -154,15 +154,15 @@
                     <h2>Le seeder</h2>
                     <ol>
                         <li>Décommenter ou ajouter le seeder dans le controller et tester.</li>
-                        <li>Ouvrir le fichier <span class="fichier">/database/seeders/DatabaseSeeder.php</span></li>
+                        <li>Ouvrir le fichier <span class="file">/database/seeders/DatabaseSeeder.php</span></li>
                         <li>Dans la méthode <var>run</var> créer un user bidon et le sauvegarder.
-                            <div class="bloccode php copiable">
+                            <div class="codeblock php copiable">
                                 <div>$user = User::fake();</div>
                                 <div>$user-&gt;save();</div>
                             </div>
                         </li>
                         <li>En haut du fichier, ajouter l'instruction <var>use</var> pour les modèles <var>User</var> et <var>Post</var>.
-                            <div class="bloccode php copiable">
+                            <div class="codeblock php copiable">
                                 <div>use App/User;</div>
                                 <div>use App/Post;</div>
                             </div>
@@ -170,7 +170,7 @@
                         <li>Tester et constater l'erreur d'intégrité.</li>
                         <li>Ouvrir le fichier du model <var>User</var>.</li>
                         <li>Ajouter les valeurs pour les données <var>name</var> et <var>password</var>.
-                            <div class="bloccode php copiable">
+                            <div class="codeblock php copiable">
                                 <div><samp>$resultat-&gt;nom = $f-&gt;lastName();</samp></div>
                                 <div>$resultat-&gt;name = str_slug($resultat-&gt;prenom.$resultat-&gt;nom, '');</div>
                                 <div>$resultat-&gt;password = str_slug($resultat-&gt;prenom.$resultat-&gt;nom, '');</div>
@@ -186,7 +186,7 @@
                     <ol>
                         <li>Copier la méthode <var>fake</var> dans le model <var>Post</var> et l'adapter avec les données <var>titre</var> et <var>contenu</var>.</li>
                         <li>Ajouter le paramètre <var>$user_id</var> et la donnée correspondante de l'objet.
-                            <div class="bloccode php copiable">
+                            <div class="codeblock php copiable">
                                 <div>static public function fake($user_id) {</div>
                                 <div> $f = \Faker\Factory::create("fr_CA");</div>
                                 <div> $resultat = new self();</div>
@@ -198,7 +198,7 @@
                             </div>
                         </li>
                         <li>Dans la boucle des users, ajouter une autre boucle qui crée plusieurs posts associés au user.
-                            <div class="bloccode php copiable">
+                            <div class="codeblock php copiable">
                                 <div>for ($i = 0; $i &lt; 10; $i += 1) {</div>
                                 <div> $user = User::fake()</div>
                                 <div> $user-&gt;save()</div>
@@ -210,7 +210,7 @@
                             </div>
                         </li>
                         <li>Ajuster la boucle des posts pour avoir un nombre d'itérations aléatoire.
-                            <div class="bloccode php copiable">
+                            <div class="codeblock php copiable">
                                 <div><b>$nb = rand(0, 10);</b></div>
                                 <div><em>for ($j = 0; $j &lt; </em><b>$nb</b><em>; $j += 1) {</em></div>
                             </div>
@@ -222,7 +222,7 @@
                     <h2>L'affichage des données</h2>
                     <ol>
                         <li>Dans l'action <span class="controller">Usercontroller@index</span>, remplacer la boucle par l'appel au model.
-                            <div class="bloccode php copiable">
+                            <div class="codeblock php copiable">
                                 <div><del>$users = [];</del></div>
                                 <div><del>for ($i = 0; $i &lt; 10; $i += 1) {</del></div>
                                 <div> <del>$users[] = User::fake();</del></div>
@@ -238,7 +238,7 @@
                 <li id="param_adresse" data-video="Qv-VClt6sGk">
                     <h2>Le paramètre d'adresse</h2>
                     <ol>
-                        <li>Tester l'adresse <span class="fichier">http://localhost:8000/users/1</span></li>
+                        <li>Tester l'adresse <span class="file">http://localhost:8000/users/1</span></li>
                         <li>Ajouter la route équivalente actionnant l'action <span class="controller">UserController@show</span></li>
                         <li>Remplacer le <span class="string">1</span> par le paramètre d'adresse <span class="string">{id}</span></li>
                         <li>Dans l'action <span class="controller">Usercontroller@show</span>, récupérer le user dont le id est <span class="string">1</span> : <span class="php copiable">$user = User::find(1);</span></li>
@@ -270,7 +270,7 @@
                     <ol>
                         <li>Ouvrir la view de la page maîtresse (<span class="view">interface.index</span>).<span class="view">users.show</span> et remplacer l'URL vers la feuille de style par la commande <span class="blade">asset</span> : <span class="blade copiable">{{asset('style.css')}}</span>.</li>
                         <li>Tester. L'interface devrait être partiellement revenue.</li>
-                        <li>Répéter pour toutes les adresses qui mènent vers un fichier du dossier <span class="fichier">public</span> : <span class="fichier">.css</span>, <span class="fichier">.js</span>, les images...</li>
+                        <li>Répéter pour toutes les adresses qui mènent vers un fichier du dossier <span class="file">public</span> : <span class="file">.css</span>, <span class="file">.js</span>, les images...</li>
                         <li>Voir le <a href="https://learninglaravel.net/cheatsheet/#urls" target="_blank">cheatsheet sur les <var>URL</var></a> pour les autres commandes possibles.</li>
                     </ol>
                 </li>

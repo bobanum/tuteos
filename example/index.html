@@ -3,12 +3,15 @@
 
 <head>
     <meta charset="UTF-8" />
-    <script src="../src/tuteos.js" type="module"></script>
+	<script type="module">
+        import Tuteos from "../src/tuteos.js";
+        Tuteos.load().then(() => console.pin("Finished!"));
+    </script>
     <title>Étapes</title>
 </head>
 
 <body>
-    <div class="interface">
+    <div id="app">
         <header>
             <h1>Un site Web avec Laravel</h1>
             <h2>Les étapes</h2>

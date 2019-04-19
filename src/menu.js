@@ -1,6 +1,6 @@
 /*jslint browser:true, esnext:true*/
-
 import Tuteos from "./tuteos.js";
+
 /**
  * @todo Complete click actions and submenus
  */
@@ -38,7 +38,6 @@ export default class Menu {
     set url(url) {
         this._url = url;
     }
-    static load() {}
     itemsList() {
         if (!this._items || this._items.length === 0) {
             return document.createTextNode("");
@@ -50,7 +49,7 @@ export default class Menu {
         });
         return result;
     }
-    iconHtml(label, action, attrs = {}) {
+    html_icon(label, action, attrs = {}) {
         var result = document.createElement("img");
         result.setAttribute("alt", label);
         result.setAttribute("title", label);
@@ -88,7 +87,7 @@ export default class Menu {
         }
         label.innerHTML = this.label;
         if (this.icon) {
-            label.appendChild(this.iconHtml(this.label, this.icon));
+            label.appendChild(this.html_icon(this.label, this.icon));
             label.classList.add("with-icon");
         }
         if (this._click) {
@@ -115,7 +114,7 @@ export default class Menu {
             result.classList.add("courant");
         }
         if (this.icon) {
-            result.appendChild(this.iconHtml(this.label, this.icon));
+            result.appendChild(this.html_icon(this.label, this.icon));
             result.classList.add("with-icon");
         }
         result.appendChild(this.playlistHtml("Playlist Youtube"));
@@ -131,7 +130,7 @@ export default class Menu {
         result.setAttribute("href", this.playlist);
         result.setAttribute("title", label);
         result.setAttribute("target", "_blank");
-        result.appendChild(this.iconHtml(label, "logoplaylist.svg"));
+        result.appendChild(this.html_icon(label, "logoplaylist.svg"));
         return result;
     }
     static menuItemFrames() {
@@ -155,7 +154,7 @@ export default class Menu {
         }
         a = resultat.appendChild(document.createElement("a"));
         a.setAttribute("href", this.app_url("index.html"));
-        a.appendChild(this.iconHtml("Accueil", "btn_home.svg"));
+        a.appendChild(this.html_icon("Accueil", "btn_home.svg"));
         return resultat;
     }*/
     /*static menuItemComplet() {
