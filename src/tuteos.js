@@ -1,5 +1,7 @@
 /*jslint browser:true, esnext:true*/
-class Tuteos {
+import Menu from './menu.js';
+
+export default class Tuteos {
 	static load() {
 		this.loadJson("config.json").then(data => {
             for (let prop in data) {
@@ -12,15 +14,15 @@ class Tuteos {
 			Tuteos.rendreCopiable();
 			//Tuteos.rendrePliable();
 			Tuteos.ajouterIconesYt();
-//			Tuteos.ajouterIframesYt();
+            // Tuteos.ajouterIframesYt();
 		});
 	}
     static get menu() {
         return this._menu;
     }
     static set menu(menu) {
-        this._menu = menu;
-        this.ajouterMenu(this._menu);
+        this._menu = new Menu("Main", menu);
+        this.ajouterMenu();
     }
 	static loadJson(fic) {
 		return new Promise(resolve => {
@@ -33,110 +35,12 @@ class Tuteos {
 			xhr.send(null);
 		});
 	}
-	static ajouterMenu(elements) {
-		var menu = this.creerMenu(elements);
+	static ajouterMenu() {
+		var menu = this._menu.itemsList();
 		var nav = document.querySelector("div.interface>nav");
 		nav = nav || document.querySelector("div.interface").appendChild(document.createElement("nav"));
 		nav.appendChild(menu);
 		return nav;
-	}
-	static creerMenu(elements) {
-		var resultat;
-		resultat = document.createElement("ul");
-//		resultat.appendChild(this.elementMenuHome());
-//		resultat.appendChild(this.elementMenuComplet());
-		elements.forEach(e => {
-			if (e.off !== true) {
-				resultat.appendChild(this.elementMenu(e));
-			}
-		});
-		return resultat;
-	}
-    static icone(etiquette, src, attrs = {}) {
-		var resultat = document.createElement("img");
-		resultat.setAttribute("alt", etiquette);
-		resultat.setAttribute("width", "16");
-		resultat.setAttribute("height", "16");
-        if (/^[a-z0-9]+:\/\//i.test(src)) {
-		  resultat.setAttribute("src", src);
-        } else if (src.substr(0, 2) === "./") {
-		  resultat.setAttribute("src", this.page_url(src));
-        } else {
-		  resultat.setAttribute("src", this.app_url("images/" + src));
-        }
-        for (let a in attrs) {
-            resultat.setAttribute(a, attrs[a]);
-        }
-        return resultat;
-    }
-	static elementMenu(element) {
-		var resultat, a;
-        if (element.off) {
-            return document.createComment();
-        }
-		resultat = document.createElement("li");
-		a = resultat.appendChild(document.createElement("a"));
-		a.setAttribute("href", element.url);
-        if (element.blank) {
-            a.setAttribute("target", "_blank");
-        }
-		a.innerHTML = element.etiquette;
-		if (location.pathname.endsWith(element.url) || (location.pathname.endsWith("/") && element.url === "index.html")) {
-			resultat.classList.add("courant");
-		}
-        if (element.icone) {
-            a.appendChild(this.icone(element.etiquette, element.icone));
-            a.classList.add("avec-icone");
-        }
-		if (element.playlist) {
-			a = resultat.appendChild(document.createElement("a"));
-			a.classList.add("playlist");
-			a.setAttribute("href", element.playlist);
-			a.setAttribute("title", "Vers la playlist");
-			a.setAttribute("target", "_blank");
-			a.appendChild(this.icone("Playlist Youtube", "logoplaylist.svg", {width: 27, height: 19}));
-		}
-		return resultat;
-	}
-	static elementMenuFrames() {
-		var resultat, a;
-		resultat = document.createElement("li");
-		a = resultat.appendChild(document.createElement("a"));
-		a.setAttribute("href", "#");
-		a.setAttribute("id", "mnu_videos");
-		a.addEventListener("click", function () {
-			document.body.classList.toggle('videos');
-		});
-		a.innerHTML = "Afficher les vidéos";
-		return resultat;
-	}
-	static elementMenuHome() {
-		var resultat, a;
-		resultat = document.createElement("li");
-		resultat.setAttribute("title", "Accueil");
-		if (location.href === this.app_url("index.html")) {
-			resultat.classList.add("courant");
-		}
-		a = resultat.appendChild(document.createElement("a"));
-		a.setAttribute("href", this.app_url("index.html"));
-		a.appendChild(this.icone("Accueil", "btn_home.svg"));
-		return resultat;
-	}
-	static elementMenuComplet() {
-		var resultat, a, img;
-		resultat = document.createElement("li");
-		resultat.setAttribute("title", "Tout afficher");
-		if (location.href === this.page_url("index.html")) {
-			resultat.classList.add("courant");
-		}
-		a = resultat.appendChild(document.createElement("a"));
-		a.setAttribute("href", this.page_url("index.html"));
-		img = a.appendChild(document.createElement("img"));
-		img.setAttribute("alt", "Tout afficher");
-		img.setAttribute("width", "16");
-		img.setAttribute("height", "16");
-		img.setAttribute("src", this.app_url("images/btn_complet.svg"));
-		return resultat;
 	}
 	static traiterReferences() {
 		var refs = Array.from(document.querySelectorAll("li.ref"));
@@ -187,8 +91,8 @@ class Tuteos {
 		resultat.setAttribute("target", "_blank");
 		var img = resultat.appendChild(document.createElement("img"));
 		img.setAttribute('src', this.app_url("images/logoyt.svg"));
-		img.setAttribute("width", 27);
-		img.setAttribute("height", 19);
+//		img.style.width = "1em;
+//		img.style.height = "1em;
 		img.setAttribute('alt', "Youtube");
 		img.setAttribute('title', "Visionner la vidéo dans Youtube");
 		var span = resultat.appendChild(document.createElement("span"));
@@ -336,29 +240,15 @@ class Tuteos {
 			return this._url_app + "/" + fic;
 		}
 	}
+	static dirname(path) {
+		return path.split("/").slice(0, -1).join("/");
+    }
+    /**
+	 * [[Description]]
+	 */
 	static setPaths() {
-		var path_app = document.currentScript.getAttribute("src");
-		var path_page = location.href;
-		var dossier_page = path_page.split("/").slice(0, -1);
-		var dossier_app = path_app.split("/").slice(0, -1);
-		this._url_page = dossier_page.join("/");
-		if (/^[a-z]+:\/\//.test(path_app)) {
-			this._url_app = dossier_app.join("/");
-		} else if (dossier_app.length === 0) {
-			this._url_app = dossier_page.join("/");
-		} else {
-			while (dossier_app.length) {
-				let segment = dossier_app.shift();
-				if (segment === ".") {
-					continue;
-				} else if (segment === "..") {
-					dossier_page.pop();
-				} else {
-					dossier_page.push(segment);
-				}
-			}
-			this._url_app = dossier_page.join("/");
-		}
+		this._url_app = this.dirname(import.meta.url);
+		this._url_page = this.dirname(location.href);
 	}
     static ajouterStyle() {
         var style = document.head.appendChild(document.createElement("link"));
@@ -366,7 +256,7 @@ class Tuteos {
         style.setAttribute('href', this.app_url("tuteos.css"));
     }
 	static init() {
-		this.setPaths();
+        this.setPaths();
         this.ajouterStyle();
 		this.evt = {
 			copiable: {

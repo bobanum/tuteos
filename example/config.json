@@ -2,42 +2,42 @@
     "home": "http://tim.cstj.qc.ca/cours/web3",
     "menu": [
         {
-            "etiquette": "Complet",
+            "label": "Complet",
             "url": "index.html",
-            "icone": "btn_complet.svg"
+            "icon": "btn_complet.svg"
         },
         {
-            "etiquette": "Laravel 1",
+            "label": "Laravel 1",
             "url": "cours1.html",
             "playlist": "https://www.youtube.com/watch?v=sZ8crC_QQKU&list=PLR5YZQKvy9U2-I1e6m0pNPLQS07p-X0xg"
         },
         {
-            "etiquette": "Laravel 2",
+            "label": "Laravel 2",
             "url": "cours2.html",
             "playlist": "https://www.youtube.com/watch?v=ZpOq9oimnpM&list=PLR5YZQKvy9U1hb1uK_tIc_zEhV8PyEFLp"
         },
         {
             "off": false,
-            "etiquette": "Laravel 2.5 (minitest)",
+            "label": "Laravel 2.5 (minitest)",
             "url": "cours2.5.html",
             "playlist": "https://www.youtube.com/watch?v=iYUwe99a8Xc&list=PLR5YZQKvy9U2u-AjvxN4sznkBlHxRXjXE"
         },
         {
-            "etiquette": "Laravel 3",
+            "label": "Laravel 3",
             "url": "cours3.html",
             "playlist": "https://www.youtube.com/watch?v=7EEGVGmQlew&list=PLR5YZQKvy9U3AHVDbsk1clZwAhMyzS090"
         },
         {
-            "etiquette": "Web3",
+            "label": "Web3",
             "url": "http://prof-tim.cstj.qc.ca/cours/web3",
             "blank": true,
-            "icone": "./logo_web3.svg"
+            "icon": "./logo_web3.svg"
         },
         {
-            "etiquette": "Github",
+            "label": "Github",
             "url": "https://github.com/web3cstj",
             "blank": true,
-            "icone": "logo_github.svg"
+            "icon": "logo_github.svg"
         }
     ]
 }

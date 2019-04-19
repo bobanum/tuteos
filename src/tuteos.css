@@ -46,6 +46,9 @@
     border-radius: 4px;
     display: flex;
   }
+  div.interface > nav li:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
   div.interface > nav li.courant {
     background-color: #345;
   }
@@ -59,8 +62,11 @@
     height: 2em;
     padding: 0 .25em;
   }
-  div.interface > nav a.avec-icone {
+  div.interface > nav a.with-icon {
     text-indent: -10000px;
+  }
+  div.interface > nav a.with-icon img {
+    height: 1.3em;
   }
   div.interface > nav a#mnu_videos::before {
     margin-right: .5ch;
@@ -79,7 +85,7 @@
     opacity: 1;
   }
   div.interface > nav .playlist img {
-    height: 12px;
+    height: 1em;
   }
   body {
     margin: 0;
@@ -268,7 +274,6 @@
   }
   .copiable {
     position: relative;
-    padding-right: 0;
   }
   .copiable .label {
     overflow: hidden;
@@ -292,7 +297,6 @@
     display: inline-flex;
     align-items: center;
     position: relative;
-    padding-right: 0;
     background-color: #3232c3;
     border-color: #000000;
     color: #ffffff;

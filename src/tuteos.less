@@ -50,6 +50,9 @@
 			background-color: rgba(0, 0, 0, .2);
 			border-radius: 4px;
 			display: flex;
+            &:hover {
+			    background-color: rgba(0, 0, 0, .5);
+            }
 			&.courant {
 				background-color: #345;
 			}
@@ -60,8 +63,11 @@
 			text-decoration: none;
 			height: 2em;
 			padding: 0 .25em;
-            &.avec-icone {
+            &.with-icon {
                 text-indent: -10000px;
+                img {
+                    height: 1.3em;
+                }
             }
 			&#mnu_videos::before {
 				margin-right: .5ch;
@@ -81,7 +87,7 @@
 
 			}
 			img {
-				height: 12px;
+				height: 1em;
 			}
 		}
 	}
@@ -253,7 +259,7 @@
 	}
 	.copiable {
 		position: relative; //	display: inline-block;
-		padding-right: 0;
+		//padding-right: 0;
 		.label {
 			overflow: hidden;
 		}
