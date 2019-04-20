@@ -1,0 +1,71 @@
+#app > nav {
+    background-color: #666;
+    color: white;
+    font-size: smaller;
+    order: -1000;
+
+    ul {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        list-style-type: none;
+        flex-wrap: wrap;
+    }
+    li {
+        margin: .25em;
+        background-color: rgba(0, 0, 0, .2);
+        border-radius: 4px;
+        display: flex;
+        & > div {
+            display: flex;
+            align-items: center;
+        }
+        &:hover {
+            background-color: rgba(0, 0, 0, .5);
+        }
+        &.courant {
+            background-color: #345;
+        }
+    }
+    a {
+        display: flex;
+        flex: 1 0 auto;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        color: inherit;
+        text-decoration: none;
+        height: 2em;
+        padding: 0 .25em;
+        white-space: nowrap;
+        &.with-icon {
+            text-indent: -10000px;
+            img {
+                height: 1.3em;
+            }
+        }
+        &#mnu_videos::before {
+            margin-right: .5ch;
+            content: "☐";
+        }
+        &:first-child {
+            padding-left: 1em;
+        }
+        &:last-child {
+            padding-right: 1em;
+        }
+    }
+    .playlist {
+        opacity: .5;
+        &:hover {
+            opacity: 1;
+
+        }
+        img {
+            height: 1em;
+        }
+    }
+    body.videos & a#mnu_videos::before {
+        content: "☑";
+    }
+}

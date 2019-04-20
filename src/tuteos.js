@@ -42,8 +42,10 @@ export default class Tuteos {
         return this._menu;
     }
     static set menu(menu) {
-        this._menu = new Menu("Main", menu);
-        this.addMenu();
+        this._menu = new Menu("", menu);
+        this.dom_menu = this._menu.html_nav("main");
+		document.getElementById("app").appendChild(this.dom_menu);
+//        this.addMenu();
     }
 	/**
 	 * Returns a Promise resolved when given file is loaded
@@ -149,7 +151,7 @@ export default class Tuteos {
 		result.setAttribute("href", href);
 		result.setAttribute("target", "_blank");
 		img = result.appendChild(document.createElement("img"));
-		img.setAttribute('src', this.app_url("images/logoyt.svg"));
+		img.setAttribute('src', this.app_url("images/logo_youtube.svg"));
 		img.setAttribute('alt', this._('youtube'));
 		img.setAttribute('title', this._("watch_video_on_youtube"));
 		span = result.appendChild(document.createElement("span"));
@@ -390,9 +392,13 @@ export default class Tuteos {
      * @todo Add stylesheets from config file
      */
     static addStyle() {
-        var style = document.head.appendChild(document.createElement("link"));
+        var style;
+        style = document.head.appendChild(document.createElement("link"));
         style.setAttribute('rel', 'stylesheet');
         style.setAttribute('href', this.app_url("tuteos.css"));
+        style = document.head.appendChild(document.createElement("link"));
+        style.setAttribute('rel', 'stylesheet');
+        style.setAttribute('href', this.app_url("menu.css"));
     }
     /**
      * Sets strings for localization.

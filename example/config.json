@@ -1,5 +1,6 @@
 {
     "home": "http://tim.cstj.qc.ca/cours/web3",
+    "stylesheets": ["style.css"],
     "menu": [
         {
             "label": "Complet",
@@ -26,6 +27,12 @@
             "label": "Laravel 3",
             "url": "cours3.html",
             "playlist": "https://www.youtube.com/watch?v=7EEGVGmQlew&list=PLR5YZQKvy9U3AHVDbsk1clZwAhMyzS090"
+        },
+        {
+            "label": "Chaîne Youtube",
+            "url": "https://www.youtube.com/channel/UCFWzWuHnqYOlBN2lJhBIGNg",
+            "blank": true,
+            "icon": "logo_youtube_white.svg"
         },
         {
             "label": "Web3",

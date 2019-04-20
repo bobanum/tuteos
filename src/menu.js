@@ -38,14 +38,70 @@ export default class Menu {
     set url(url) {
         this._url = url;
     }
-    itemsList() {
+    /**
+     * Returns a div element containing all the menu or submenu.
+     * @returns {HTMLElement} a div.menu
+     */
+    html() {
+        var result, label;
+        if (this.off) {
+            return document.createTextNode("");
+        }
+        result = document.createElement("div");
+        result.classList.add("menu");
+        label = result.appendChild(this.html_label());
+        if (this._click) {
+            result.addEventListener("click", this._click);
+        }
+        result.appendChild(this.html_playlist("Playlist Youtube"));
+        result.appendChild(this.html_itemsList());
+        return result;
+    }
+    /**
+     * Returns the label
+     * @returns {HTMLElement} a or span element
+     */
+    html_label() {
+        if (!(this.url || this.icon || this.label)) {
+            return document.createTextNode("");
+        }
+        var result;
+        if (this.url) {
+            result = document.createElement("a");
+            result.setAttribute("href", this.url);
+            if (this.blank) {
+                result.setAttribute("target", "_blank");
+            }
+            if (location.pathname.endsWith(this.url) || (location.pathname.endsWith("/") && this.url === "index.html")) {
+                result.classList.add("courant");
+            }
+        } else {
+            result = document.createElement("span");
+        }
+        result.innerHTML = this.label;
+        if (this.icon) {
+            result.appendChild(this.html_icon(this.label, this.icon));
+            result.classList.add("with-icon");
+        }
+        return result;
+    }
+    html_nav(id) {
+        var result = document.createElement("nav");
+        if (id) {
+            result.setAttribute("id", id);
+        }
+        result.appendChild(this.html());
+        return result;
+    }
+    html_itemsList() {
         if (!this._items || this._items.length === 0) {
             return document.createTextNode("");
         }
         var result;
         result = document.createElement("ul");
-        this.items.forEach(i => {
-            result.appendChild(i.menuItem());
+        this.items.forEach(item => {
+            let li = result.appendChild(document.createElement("li"));
+            li.appendChild(item.html());
         });
         return result;
     }
@@ -67,60 +123,7 @@ export default class Menu {
         }
         return result;
     }
-    menuItem() {
-        var result, label;
-        if (this.off) {
-            return document.createTextNode("");
-        }
-        result = document.createElement("li");
-        if (this.url) {
-            label = result.appendChild(document.createElement("a"));
-            label.setAttribute("href", this.url);
-            if (this.blank) {
-                label.setAttribute("target", "_blank");
-            }
-            if (location.pathname.endsWith(this.url) || (location.pathname.endsWith("/") && this.url === "index.html")) {
-                result.classList.add("courant");
-            }
-        } else {
-            label = result.appendChild(document.createElement("span"));
-        }
-        label.innerHTML = this.label;
-        if (this.icon) {
-            label.appendChild(this.html_icon(this.label, this.icon));
-            label.classList.add("with-icon");
-        }
-        if (this._click) {
-            result.addEventListener("click", this._click);
-        }
-        result.appendChild(this.playlistHtml("Playlist Youtube"));
-        result.appendChild(this.itemsList());
-        return result;
-    }
-    menuTrigger() {
-        var result;
-        if (typeof this.action === 'function') {
-            result = document.createElement("span");
-            result.addEventListener('click', this.action);
-        } else {
-            result = document.createElement("a");
-            result.setAttribute("href", this.action);
-            if (this.blank) {
-                result.setAttribute("target", "_blank");
-            }
-        }
-        result.innerHTML = this.label;
-        if (location.pathname.endsWith(this.action) || (location.pathname.endsWith("/") && this.action === "index.html")) {
-            result.classList.add("courant");
-        }
-        if (this.icon) {
-            result.appendChild(this.html_icon(this.label, this.icon));
-            result.classList.add("with-icon");
-        }
-        result.appendChild(this.playlistHtml("Playlist Youtube"));
-        return result;
-    }
-    playlistHtml(label) {
+    html_playlist(label) {
         if (!this.playlist) {
             return document.createTextNode("");
         }
@@ -145,32 +148,6 @@ export default class Menu {
         a.innerHTML = "Afficher les vidéos";
         return resultat;
     }
-    /*static menuItemHome() {
-        var resultat, a;
-        resultat = document.createElement("li");
-        resultat.setAttribute("title", "Accueil");
-        if (location.href === this.app_url("index.html")) {
-            resultat.classList.add("courant");
-        }
-        a = resultat.appendChild(document.createElement("a"));
-        a.setAttribute("href", this.app_url("index.html"));
-        a.appendChild(this.html_icon("Accueil", "btn_home.svg"));
-        return resultat;
-    }*/
-    /*static menuItemComplet() {
-        var resultat, a, img;
-        resultat = document.createElement("li");
-        resultat.setAttribute("title", "Tout afficher");
-        if (location.href === this.page_url("index.html")) {
-            resultat.classList.add("courant");
-        }
-        a = resultat.appendChild(document.createElement("a"));
-        a.setAttribute("href", this.page_url("index.html"));
-        img = a.appendChild(document.createElement("img"));
-        img.setAttribute("alt", "Tout afficher");
-        img.setAttribute("src", this.app_url("images/btn_complet.svg"));
-        return resultat;
-    }*/
     static from(obj) {
         var result = Object.assign(new this(), obj);
         return result;
