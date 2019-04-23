@@ -47,6 +47,12 @@ export default class Tuteos {
 		document.getElementById("app").appendChild(this.dom_menu);
 //        this.addMenu();
     }
+    static get stylesheets() {
+        return this._stylesheets;
+    }
+    static set stylesheets(stylesheets) {
+        this.addStyle(stylesheets, true);
+    }
 	/**
 	 * Returns a Promise resolved when given file is loaded
 	 * @param   {string}  file The path to json file
@@ -391,14 +397,20 @@ export default class Tuteos {
      * Adds link element for Tuteos stylesheet
      * @todo Add stylesheets from config file
      */
-    static addStyle() {
-        var style;
-        style = document.head.appendChild(document.createElement("link"));
-        style.setAttribute('rel', 'stylesheet');
-        style.setAttribute('href', this.app_url("tuteos.css"));
-        style = document.head.appendChild(document.createElement("link"));
-        style.setAttribute('rel', 'stylesheet');
-        style.setAttribute('href', this.app_url("menu.css"));
+    static addStyle(stylesheet, page=false) {
+        if (stylesheet instanceof Array) {
+            return Promise.all(stylesheet.map(ss => this.addStyle(ss, page)));
+        }
+        return new Promise(resolve => {
+            var style;
+            console.pin("loading stylesheet '" + stylesheet + "'");
+            style = document.head.appendChild(document.createElement("link"));
+            style.setAttribute('rel', 'stylesheet');
+            style.setAttribute('href', page ? this.page_url(stylesheet) : this.app_url(stylesheet));
+            style.addEventListener('load', (e) => {
+               resolve(e.target);
+            });
+        });
     }
     /**
      * Sets strings for localization.
@@ -406,14 +418,14 @@ export default class Tuteos {
      */
     static setStrings() {
         this.strings = {
-            "fr": {
+            "en": {
                 "youtube": "Youtube",
                 "watch_video_on_youtube": "Watch video on Youtube",
                 "copy_to_clipboard": "Copy to clipboard",
                 "summary": "Summary",
                 "copied": "Copied",
             },
-            "en": {
+            "fr": {
                 "watch_video_on_youtube": "Visionner la vidéo dans Youtube",
                 "copy_to_clipboard": "Copier dans le presse-papier",
                 "summary": "Sommaire",
@@ -450,7 +462,7 @@ export default class Tuteos {
         console.pin = this.debug ? console.log : function() {};
         console.pin("Loading Tuteos");
         this.setPaths();
-        this.addStyle();
+        this.addStyle(["tuteos.css", "menu.css"]);
         this.setStrings();
 		this.load();
 	}

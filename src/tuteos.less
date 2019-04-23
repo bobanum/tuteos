@@ -1,9 +1,12 @@
-@import url('images/fonts/css/mb.css');
+//@import url('images/fonts/css/mb.css');
 @import url('https://fonts.googleapis.com/css?family=Josefin+Sans:400,400i,700,700i');
 @import url('https://fonts.googleapis.com/css?family=Anonymous+Pro:400,700');
 
-@font-global: normal normal normal e('16px/1') "Josefin Sans";
-@font-code: normal normal normal e('.85em/1.2') "Anonymous Pro";
+
+:root {
+    --font-global: normal normal normal e('16px/1') "Josefin Sans";
+    --font-code: normal normal normal e('.85em/1.2') "Anonymous Pro";
+}
 
 .module {
 	display: flex;
@@ -29,13 +32,13 @@
 }
 
 @media all {
-	html {
+    html {
 		height: 100%;
 	}
 	body {
 		margin: 0;
 		height: 100%;
-		font: @font-global;
+		font: var(--font-global);
 	}
 	body.videos #app nav a#mnu_videos::before {
 		content: "☑";
@@ -77,25 +80,13 @@
 			justify-content: center;
 			top: 0;
 			bottom: 0;
-			&.out {
-				transform: scale(0.2);
-			}
-		}
-		.zzztag {
-			background-color: red;
-			border: 1px solid white;
-			border-radius: 100%;
-			color: white;
-			font-weight: bold;
-			//transform: rotate(10deg);
-			box-shadow: 1px 1px black;
-			font-size: .5em;
-		}
-		.tag {
 			background-color: rgba(0,0,0,.5);
 			font-family: arial;
 			font-weight: bold;
 			font-size: .5em;
+			&.out {
+				transform: scale(0.2);
+			}
 		}
 	}
 	div.body {
@@ -137,7 +128,7 @@
 		}
 	}
 	.box {
-		font: @font-code;
+		font: var(--font-code);
 		padding: 0 0.5ch;
 		background-color: hsl(0, 0%, 95%);
 		border: 1px solid hsl(0, 0%, 90%);
@@ -145,23 +136,11 @@
 		display: inline-flex;
 		align-items: center;
 	}
-	.view {
-		.box;
-		background-color: hsl(302, 100%, 95%);
-		border-color: hsl(302, 100%, 90%);
-		color: hsl(302, 100%, 20%);
-	}
-	.controller {
-		.box;
-		background-color: hsl(120, 100%, 95%);
-		border-color: hsl(120, 100%, 90%);
-		color: hsl(120, 100%, 30%);
-	}
-	.file {
-		.box;
-	}
+	.file,
+    .string {
+        .box;
+    }
 	.string {
-		.box;
 		background-color: hsl(34, 100%, 100%);
 		color: hsl(34, 100%, 46%);
 		border-color: hsl(34, 100%, 90%);
@@ -202,7 +181,7 @@
 		position: relative; //	display: inline-block;
 		//padding-right: 0;
 		.label {
-			overflow: hidden;
+//			overflow: hidden;
 		}
 	}
 	h2 {
@@ -216,13 +195,6 @@
 			display: none;
 		}
 	}
-	.command {
-		.box;
-		.copiable;
-		background-color: hsl(240, 59%, 48%);
-		border-color: hsl(240, 0%, 0%);
-		color: hsl(240, 100%, 100%);
-	}
 	a[href^="https://youtu.be/"] {
 		float: right;
 	}
@@ -233,13 +205,10 @@
 		filter: grayscale(100%);
 		pointer-events: none;
 	}
-	.codeblock,
-	.php,
-	.blade {
+	.codeblock {
 		em,
 		samp,
 		del {
-//			opacity: .5;
 			color: rgba(255,255,255,.5);
 			b, em {
 				color: white;
@@ -272,13 +241,11 @@
 	}
 	.codeblock.php.copiable {}
 	.php {
-		.box;
 		background-color: hsl(200, 70%, 40%);
 		border-color: hsl(200, 0%, 0%);
 		color: hsl(200, 100%, 100%);
 	}
 	.blade {
-		.box;
 		background-color: hsl(330, 70%, 40%);
 		border-color: hsl(330, 0%, 0%);
 		color: hsl(330, 100%, 100%);
@@ -302,7 +269,6 @@
 			}
 		}
 	}
-	.codeblock {}
 	[data-definition] {
 		text-decoration: underline wavy;
 		position: relative;
@@ -396,12 +362,7 @@
 		display: none;
 	}
 	.codeblock,
-	.command,
-	.string,
-	.php,
-	.view,
-	.blade,
-	.controller {
+	.string {
 		background-color: transparent;
 		color: black;
 		border-color: hsl(0, 0%, 90%);

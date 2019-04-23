@@ -1,0 +1,66 @@
+@media all {
+    .box {
+		font: var(--font-code);
+		padding: 0 0.5ch;
+		background-color: hsl(0, 0%, 95%);
+		border: 1px solid hsl(0, 0%, 90%);
+		white-space: nowrap;
+		display: inline-flex;
+		align-items: center;
+	}
+	.view,
+	.controller,
+    .command,
+	.php,
+	.blade {
+        .box;
+    }
+	.view {
+		background-color: hsl(302, 100%, 95%);
+		border-color: hsl(302, 100%, 90%);
+		color: hsl(302, 100%, 20%);
+	}
+	.controller {
+		background-color: hsl(120, 100%, 95%);
+		border-color: hsl(120, 100%, 90%);
+		color: hsl(120, 100%, 30%);
+	}
+	.command {
+		background-color: hsl(240, 59%, 48%);
+		border-color: hsl(240, 0%, 0%);
+		color: hsl(240, 100%, 100%);
+	}
+	.php {
+		background-color: hsl(200, 70%, 40%);
+		border-color: hsl(200, 0%, 0%);
+		color: hsl(200, 100%, 100%);
+	}
+	.blade {
+		background-color: hsl(330, 70%, 40%);
+		border-color: hsl(330, 0%, 0%);
+		color: hsl(330, 100%, 100%);
+	}
+	.php,
+	.blade {/*Same as tuteo*/
+		em,
+		samp,
+		del {
+			color: rgba(255,255,255,.5);
+			b, em {
+				color: white;
+			}
+		}
+	}
+}
+
+@media print {
+	.command,
+	.php,
+	.view,
+	.blade,
+	.controller {
+		background-color: transparent;
+		color: black;
+		border-color: hsl(0, 0%, 90%);
+	}
+}
