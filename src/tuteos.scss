@@ -2,10 +2,12 @@
 @import url('https://fonts.googleapis.com/css?family=Josefin+Sans:400,400i,700,700i');
 @import url('https://fonts.googleapis.com/css?family=Anonymous+Pro:400,700');
 
-@font-global: normal normal normal e('16px/1') "Josefin Sans";
-@font-code: normal normal normal e('.85em/1.2') "Anonymous Pro";
+root {
+	--font-global: normal normal normal e('16px/1') "Josefin Sans";
+	--font-code: normal normal normal e('.85em/1.2') "Anonymous Pro";
+}
 
-.module {
+@mixin module {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
@@ -21,11 +23,27 @@
 	}
 }
 
-.center {
+@mixin center {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	text-align: center;
+}
+@mixin box {
+	font: var(--font-code);
+	padding: 0 0.5ch;
+	background-color: hsl(0, 0%, 95%);
+	border: 1px solid hsl(0, 0%, 90%);
+	white-space: nowrap;
+	display: inline-flex;
+	align-items: center;
+}
+@mixin copiable {
+	position: relative; //	display: inline-block;
+	//padding-right: 0;
+	.label {
+		overflow: hidden;
+	}
 }
 
 @media all {
@@ -35,7 +53,7 @@
 	body {
 		margin: 0;
 		height: 100%;
-		font: @font-global;
+		font: var(--font-global);
 	}
 	body.videos #app nav a#mnu_videos::before {
 		content: "☑";
@@ -137,31 +155,25 @@
 		}
 	}
 	.box {
-		font: @font-code;
-		padding: 0 0.5ch;
-		background-color: hsl(0, 0%, 95%);
-		border: 1px solid hsl(0, 0%, 90%);
-		white-space: nowrap;
-		display: inline-flex;
-		align-items: center;
+		@include box;
 	}
 	.view {
-		.box;
+		@include box;
 		background-color: hsl(302, 100%, 95%);
 		border-color: hsl(302, 100%, 90%);
 		color: hsl(302, 100%, 20%);
 	}
 	.controller {
-		.box;
+		@include box;
 		background-color: hsl(120, 100%, 95%);
 		border-color: hsl(120, 100%, 90%);
 		color: hsl(120, 100%, 30%);
 	}
 	.file {
-		.box;
+		@include box;
 	}
 	.string {
-		.box;
+		@include box;
 		background-color: hsl(34, 100%, 100%);
 		color: hsl(34, 100%, 46%);
 		border-color: hsl(34, 100%, 90%);
@@ -199,11 +211,7 @@
 		}
 	}
 	.copiable {
-		position: relative; //	display: inline-block;
-		//padding-right: 0;
-		.label {
-			overflow: hidden;
-		}
+		@include copiable;
 	}
 	h2 {
 		margin: 0; //	cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 48 48' width='24' height='24'><g id='cote'><path d='m4 18h40v4h-40z'/><path d='m20 0-2 8h-6l12 12 12-12h-6l-2-8z'/></g><use xlink:href='#cote' transform='matrix(1,0,0,-1,0,46)'/></svg>"), auto;
@@ -217,8 +225,8 @@
 		}
 	}
 	.command {
-		.box;
-		.copiable;
+		@include box;
+		@include copiable;
 		background-color: hsl(240, 59%, 48%);
 		border-color: hsl(240, 0%, 0%);
 		color: hsl(240, 100%, 100%);
@@ -227,8 +235,8 @@
 		float: right;
 	}
 	a[href="https://youtu.be"],
-	a[href="https://youtu.be/"],
-		{
+	a[href="https://youtu.be/"]
+	{
 		opacity: .2;
 		filter: grayscale(100%);
 		pointer-events: none;
@@ -270,27 +278,20 @@
 	a {
 		color: inherit;
 	}
-	.codeblock.php.copiable {}
 	.php {
-		.box;
+		@include box;
 		background-color: hsl(200, 70%, 40%);
 		border-color: hsl(200, 0%, 0%);
 		color: hsl(200, 100%, 100%);
 	}
 	.blade {
-		.box;
+		@include box;
 		background-color: hsl(330, 70%, 40%);
 		border-color: hsl(330, 0%, 0%);
 		color: hsl(330, 100%, 100%);
 	}
 	.codeblock:hover {
 		[data-definition] {
-			&:before {
-				//			opacity: 1;
-				//			visibility: visible;
-				//			transition-delay: 2s;
-				//			transition-duration: 0s, .1s;
-			}
 			&:hover {
 				&:before {
 					opacity: 1;
@@ -302,7 +303,6 @@
 			}
 		}
 	}
-	.codeblock {}
 	[data-definition] {
 		text-decoration: underline wavy;
 		position: relative;
@@ -353,7 +353,7 @@
 		display: block;
 	}
 	#app {
-		.module;
+		@include module;
 		background-color: white;
 		color: black;
 	}
@@ -363,7 +363,7 @@
 }
 [download] {
 	&::after {
-		contenu: "";
+		content: "";
 		background-image: url(images/icone_download.svg);
 		background-size: contain;
 		width: 1em;

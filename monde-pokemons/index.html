@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+	<script type="module">
+        import Tuteos from "../src/tuteos.js";
+        Tuteos.load().then(() => console.pin("Finished!"));
+    </script>
+    <title>Étapes</title>
+</head>
+
+<body>
+    <div id="app">
+        <header>
+            <h1>Un site Web avec Laravel</h1>
+            <h2>Les étapes</h2>
+        </header>
+        <footer>Les vidéos sont disponibles sur <a href="https://www.youtube.com/channel/UCFWzWuHnqYOlBN2lJhBIGNg">la chaîne Youtube</a></footer>
+        <div class="body">
+            <ol>
+                <li class="ref"><a href="phase1.html">Phase 1</a></li>
+                <li class="ref"><a href="phase2.html">Phase 2</a></li>
+            </ol>
+        </div>
+    </div>
+</body>
+
+</html>

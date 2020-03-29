@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <li>
+        Monde pokemon
+    </li>
+<li>
+    
+</li>
+<li>
+    Exercice formatif d'introduction à une application PHP rudimentaire.
+</li>
+<li>
+    Acquis
+</li>
+<li>
+    
+</li>
+<li>
+    Ce projet est à faire faire et à refaire jusqu'à de que tous ces concepts soient acquis :
+</li>
+<li>
+    Phase I : Le visuel
+</li>
+<li>
+    
+</li>
+    <li>
+        Capable d'installer une application PHP
+    </li>
+    <li>
+        Capable de faire fonctionner une application PHP sur un serveur local.
+    </li>
+    <li>
+        Capable d'afficher dans la page par programmation.
+    </li>
+    <li>
+        Capable d'inclure une fichier externe
+    </li>
+    <li>
+        Capable de composer du HTML sous forme de concaténations de chaînes PHP.
+    </li>
+    <li>
+        Capable de créer une classe PHP
+    </li>
+    <li>
+        Capable de créer une méthode statique
+    </li>
+    <li>
+        Capable de faire l'appel à une méthode statique
+    </li>
+<li>
+    
+</li>
+<li>
+    Phase II : Les données
+</li>
+<li>
+    
+</li>
+    <li>
+        Capable de connecter une base de données
+    </li>
+    <li>
+        Capable d'exécuter une commande SQL
+    </li>
+    <li>
+        Capable de parcourir les enregistrements retournés
+    </li>
+    <li>
+        Capable de récupérer les informations d'un enregistrement
+    </li>
+    <li>
+        Capable re recueillir une donnée se trouvant dans l'adresse
+    </li>
+<li>
+    
+</li>
+<li>
+    Préparation et prérequis
+</li>
+<li>
+    
+</li>
+    <li>
+        Visual Studio Code
+    </li>
+    <li>
+        WampServer ou XAMPP
+    </li>
+    <li>
+        DB Browser for SQLite
+    </li>
+    <li>
+        Compte Github
+    </li>
+<li>
+    
+</li>
+<li>
+    Étapes
+</li>
+<li>
+    
+</li>
+<li>
+    Suivre dans l'ordre les étapes suivantes.
+</li>
+<li>
+    Phase I
+</li>
+<li>
+    
+</li>
+    <li>
+        Cloner ou télécharger le dossier de départ du projet
+    </li>
+<li>
+    
+</li>
+    <li>
+        S'assurer que le projet est bel et bien ouvert dans VSCode.
+    </li>
+<li>
+    
+</li>
+    <li>
+        Renommer les fichiers index.html et details.html qui se trouvent dans le dossier public pour qu'ils aient l'extension .php.
+    </li>
+<li>
+    
+</li>
+    <li>
+        Démarrerr le serveur dans le terminal de VSCode :
+    </li>
+<li>
+    
+</li>
+    <li>
+        php -S localhost:8000 -t public
+    </li>
+<li>
+    
+</li>
+    <li>
+        Tester dans le fureteur l'adresse http://localhost:8000. La page index.php devrait s'afficher.
+    </li>
+<li>
+    
+</li>
+    <li>
+        Créer un fichier Pokemon.php dans le dossier app et y ajouter la classe du même nom.
+    </li>
+<li>
+    
+</li>
+    <li>
+        //Pokemon.php
+    </li>
+    <li>
+        <?php
+    </li>
+    <li>
+        class Pokemon {
+    </li>
+    	<li>
+            
+        </li>
+    <li>
+        }
+    </li>
+<li>
+    
+</li>
+    <li>
+        Dans la classe, créer les méthodes statiques html_index qui n'a pas de paramètres et html_details qui doit recevoir le paramètre $id. Les 2 méthodes retournent une chaîne de caractères.
+    </li>
+<li>
+    
+</li>
+    	<li>
+            static public function html_index() {
+        </li>
+    		<li>
+                $resultat = '';
+            </li>
+    		<li>
+                return $resultat;
+            </li>
+    	<li>
+            }
+        </li>
+    	<li>
+            static public function html_details($id) {
+        </li>
+    		<li>
+                $resultat = '';
+            </li>
+    		<li>
+                return $resultat;
+            </li>
+    	<li>
+            }
+        </li>
+<li>
+    
+</li>
+    <li>
+        Mettre le HTML pertinent (provenant de index.php et details.php) dans chacune des méthodes et le transformer en PHP grâce à des concaténations successives. Exemple partiel :
+    </li>
+<li>
+    
+</li>
+    <li>
+        $resultat = '';
+    </li>
+    <li>
+        $resultat .= '<div class="details">';
+    </li>
+    <li>
+        $resultat .= '<h1>Bulbizarre</h1>';
+    </li>
+    <li>
+        $resultat .= '<div><img src="https://www.pokebip.com/pokedex-images/artworks/1.png" alt="Bulbizarre"></div>';
+    </li>
+    <li>
+        ...
+    </li>
+    <li>
+        return $resultat;
+    </li>
+<li>
+    
+</li>
+    <li>
+        Note : Dans la méthode html_index, se limiter à 3 Pokémons.
+    </li>
+<li>
+    
+</li>
+    <li>
+        Dans les pages index.php et details.php, faire l'inclusion de fichier autoload.php
+    </li>
+<li>
+    
+</li>
+    <li>
+        <?php
+    </li>
+    <li>
+        include("../autoload.php");
+    </li>
+    <li>
+        ?><!DOCTYPE html>
+    </li>
+    <li>
+        ...
+    </li>
+<li>
+    
+</li>
+    <li>
+        Supprimer respectivement les balises (et leur contenu) div.liste et div.details
+    </li>
+<li>
+    
+</li>
+    <li>
+        Tester les pages. Elles devraient être presque vides.
+    </li>
+<li>
+    
+</li>
+    <li>
+        Ajouter les appels aux méthodes statiques crées pour remplacer le HTML enlevé :
+    </li>
+<li>
+    
+</li>
+    <li>
+        //index.php
+    </li>
+    <li>
+        ...
+    </li>
+    <li>
+        <?php echo Pokemon::html_index(); ?>
+    </li>
+    <li>
+        ...
+    </li>
+<li>
+    
+</li>
+    <li>
+        //details.php
+    </li>
+    <li>
+        ...
+    </li>
+    <li>
+        <?php echo Pokemon::html_details(1); ?>
+    </li>
+    <li>
+        ...
+    </li>
+<li>
+    
+</li>
+    <li>
+        Tester. Les pages devraient fonctionner, mais donner toujours le même résultat peu importe le lien cliqué.
+    </li>
+<li>
+    
+</li>
+<li>
+    Étapes de la phase II : les données
+</li>
+<li>
+    
+</li>
+    <li>
+        Ouvrir la base de données dans DB Browser for SQLite et prendre note des noms des champs de la table pokemons.
+    </li>
+<li>
+    
+</li>
+    <li>
+        Au début chaque méthode, ajouter la connexion à la base de données et lexecution d'une requête:
+    </li>
+<li>
+    
+</li>
+    <li>
+        $pdo = new PDO("sqlite:../pokemon.sqlite");
+    </li>
+    <li>
+        $stmt = $pdo->prepare("{SQL}");
+    </li>
+    <li>
+        $stmt->execute();
+    </li>
+<li>
+    
+</li>
+    <li>
+        Remplacer la mention {SQL} par les commandes SQL suivantes :
+    </li>
+        <li>
+            html_index : SELECT id, numero, nom_fr FROM pokemons ORDER BY numero LIMIT 20
+        </li>
+        <li>
+            html_details : SELECT id, numero, nom_fr, nom_en, type1, type2, talents, pv, attaque, defense, attaque_speciale, defense_speciale, vitesse FROM pokemons WHERE id=?
+        </li>
+<li>
+    
+</li>
+    <li>
+        Dans html_details, ajouter [$id] comme paramètre à la méthode execute.
+    </li>
+<li>
+    
+</li>
+    <li>
+        Dans html_index, faire en sorte de ne garder qu'un seul tr dans le tbody.
+    </li>
+<li>
+    
+</li>
+    <li>
+        Envelopper le tr restant dans une boucle while:
+    </li>
+<li>
+    
+</li>
+    <li>
+        while (($objPokemon = $stmt->fetchObject()) !== false) {
+    </li>
+    	<li>
+            ...
+        </li>
+    <li>
+        }
+    </li>
+<li>
+    
+</li>
+    <li>
+        Dans html_details, envlopper tout le contenu du div.details d'un if silimaire:
+    </li>
+<li>
+    
+</li>
+    <li>
+        if (($objPokemon = $stmt->fetchObject()) !== false) {
+    </li>
+    	<li>
+            ...
+        </li>
+    <li>
+        } else {
+    </li>
+    	<li>
+            $resultat .= '<h1>Ce Pokémon n\'existe pas</h1>';
+        </li>
+    <li>
+        }
+    </li>
+<li>
+    
+</li>
+    <li>
+        Dans chaque méthode, remplacer les informations variables par des données de la base de données.
+    </li>
+<li>
+    
+</li>
+    <li>
+        Par exemple :
+    </li>
+<li>
+    
+</li>
+    <li>
+        $resultat .= '<h1>Pikachu</h1>';
+    </li>
+<li>
+    
+</li>
+    <li>
+        deviendra :
+    </li>
+<li>
+    
+</li>
+    <li>
+        $resultat .= '<h1>'.$objPokemon->nom_fr.'</h1>';
+    </li>
+<li>
+    
+</li>
+    <li>
+        À l'occasion, on a besoin d'appliquer la function intval à la donnée numero. On utilisera donc intval($objPokemon->numero) à la place.
+    </li>
+<li>
+    
+</li>
+    <li>
+        Il ne reste qu'à gérer les occasions où il n'y a pas de 2e type. On a alors besoin d'un if.
+    </li>
+<li>
+    
+</li>
+    <li>
+        Tester (souvent)
+    </li>
+<li>
+    
+</li>
+    <li>
+        Dans le fichier details.php ajouter les lignes suivantes juste après le include :
+    </li>
+<li>
+    
+</li>
+    <li>
+        if (!isset($_GET['id'])) {
+    </li>
+    	<li>
+            header("location:index.php");
+        </li>
+    	<li>
+            exit;
+        </li>
+    <li>
+        }
+    </li>
+    <li>
+        $id = $_GET['id'];
+    </li>
+<li>
+    
+</li>
+    <li>
+        Adapter la commande suivante plus bas dans le même fichier :
+    </li>
+<li>
+    
+</li>
+    <li>
+        echo Pokemon::html_details($id); 
+    </li>
+<li>
+    
+</li>
+    <li>
+        Tester en cliquant sur les liens.
+    </li>
+<li>
+    
+</li>
+</body>
+</html>
