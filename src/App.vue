@@ -74,15 +74,15 @@ export default {
                 {
                     href: "https://www.youtube.com/channel/UCFWzWuHnqYOlBN2lJhBIGNg", 
                     title: "Chaîne Youtube", 
-                    icon: "https://bobanum.github.io/tuteos/src/images/logo_youtube_white.svg"
+                    icon: "youtube"
                 }, {
                     href: "http://prof-tim.cstj.qc.ca/cours/web3", 
                     title: "Web3", 
-                    icon: "https://bobanum.github.io/tuteos/example/logo_web3.svg"
+                    icon: "web3"
                 }, {
                     href: "https://github.com/web3cstj", 
                     title: "Github", 
-                    icon: "https://bobanum.github.io/tuteos/src/images/logo_github.svg"
+                    icon: "github"
                 },  
             ]
         }

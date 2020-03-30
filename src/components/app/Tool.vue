@@ -1,7 +1,7 @@
 <template>
     <a class="tool" :href="tool.href" target="_blank" :title="tool.title">
         <span>{{tool.title}}</span>
-        <img :alt="tool.title" :src="tool.icon"/>
+        <svg><use :href="'/images/icons.svg#'+tool.icon" /></svg>
     </a>
 </template>
 
@@ -20,9 +20,10 @@ a.tool {
         color: inherit;
         text-decoration: inherit;
     }
-    img {
+    svg {
+        fill: white;
         height: 1em;
-        max-width: 1em;
+        width: 1em;
     }
 }
 </style>
