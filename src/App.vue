@@ -40,13 +40,14 @@ h1,h2,h3,h4,h5,h6 {
 #app {
   min-height: 100%;
   display: grid;
-  grid-template-rows: auto 1fr auto;
+  grid-template-rows: auto auto 1fr auto;
   & > header, & > footer {
-    background-color: black;
+    background-color: hsl(var(--hue), 100%, 0%);
     color: white;
     padding: .5em;
   }
   & > header {
+    order: -100;
     h1 {
       font-size: 1.5em;
     }
@@ -58,6 +59,15 @@ h1,h2,h3,h4,h5,h6 {
       display: block;
       margin: 0 auto;
     }
+  }
+  &>footer {
+    order: 100;
+  }
+  &>nav {
+    order: -10;
+  }
+  & > .body {
+    padding: 1em;
   }
 }
 

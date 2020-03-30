@@ -1,18 +1,12 @@
 <template>
   <div class="home">
     <h1>
-      <slot>
-        Bienvenue dans Tuteos.
-      </slot>
+      Bienvenue dans Tuteos.
     </h1>
     <h2>
       Le moteur de tutoriaux Web.
     </h2>
-    <p>Choisissez votre tutoriel :
-      <ul>
-        <router-link to="Laravel">Laravel</router-link>
-      </ul>
-    </p>
+    
   </div>
 </template>
 

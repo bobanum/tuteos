@@ -21,9 +21,11 @@ a.tool {
         text-decoration: inherit;
     }
     svg {
-        fill: white;
         height: 1em;
         width: 1em;
+        &:hover, &:active {
+            fill: hsl(300, 50%, 65%);
+        }
     }
 }
 </style>
