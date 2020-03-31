@@ -47,10 +47,10 @@ export default {
     data() {
         return {
             playlists: [
-                {href:"cours1.html", title:"Laravel 1", yt:"sZ8crC_QQKU", list:"PLR5YZQKvy9U2-I1e6m0pNPLQS07p-X0xg"},
-                {href:"cours2.html", title:"Laravel 2", yt:"ZpOq9oimnpM", list:"PLR5YZQKvy9U1hb1uK_tIc_zEhV8PyEFLp"},
-                {href:"cours2.5.html", title:"Laravel 2.5", yt:"iYUwe99a8Xc", list:"PLR5YZQKvy9U2u-AjvxN4sznkBlHxRXjXE"},
-                {href:"cours3.html", title:"Laravel 3", yt:"7EEGVGmQlew", list:"PLR5YZQKvy9U3AHVDbsk1clZwAhMyzS090"},
+                {params:{from:1, to:9}, title:"Laravel 1", yt:"sZ8crC_QQKU", list:"PLR5YZQKvy9U2-I1e6m0pNPLQS07p-X0xg"},
+                {params:{from:10, to:22}, title:"Laravel 2", yt:"ZpOq9oimnpM", list:"PLR5YZQKvy9U1hb1uK_tIc_zEhV8PyEFLp"},
+                {params:{from:23, to:26}, title:"Laravel 2.5", yt:"iYUwe99a8Xc", list:"PLR5YZQKvy9U2u-AjvxN4sznkBlHxRXjXE"},
+                {params:{from:27, to:36}, title:"Laravel 3", yt:"7EEGVGmQlew", list:"PLR5YZQKvy9U3AHVDbsk1clZwAhMyzS090"},
             ]
         }
     },

@@ -1,10 +1,11 @@
 <template>
   <div class="home">
     <h1>Laravel</h1>
-    
+    <navpages max="36" :current="n"/>
     <ol class="sections" :start="n">
       <sec :section="sections[n-1]"/>
     </ol>
+    <navpages max="36" :current="n"/>
   </div>
 </template>
 
@@ -21,6 +22,7 @@ export default {
   },
   components: {
     "sec": require('@/components/app/Section').default,
+    "navpages": require('@/components/app/NavPages').default,
   },
   props: {
   },
