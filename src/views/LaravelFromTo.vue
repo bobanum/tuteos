@@ -1,18 +1,9 @@
 <template>
   <div class="home">
     <h1>Laravel</h1>
-    <div><button>Précédent</button><button>Suivant</button></div>
-    <ol>
-      <li v-for="section in sections" :key="section.id" :id="section.id" :data-video="section.video">
-        <div v-html="section.title"></div>
-        <ol>
-          <li v-for="(instruction,i) in section.instructions" :key="i">
-            <div v-html="instruction"></div>
-          </li>
-        </ol>
-      </li>
+    <ol class="sections">
+      <sec v-for="section in sections.slice(from, to+1)" :key="section.id" :section="section"></sec>
     </ol>
-    <div v-if="n"><router-link :to="n-1">sections[]</router-link></div>
   </div>
 </template>
 
@@ -23,10 +14,13 @@ export default {
   name: 'Laravel',
   data() {
     return {
+      from: 1,
+      to: 1,
       sections: [],
     }
   },
   components: {
+    "sec": require('@/components/app/Section').default,
   },
   props: {
   },
@@ -47,26 +41,18 @@ export default {
         sections.push(...Array.from(doc.querySelector("#app .body > ol").children))
       });
       // sections are 1 indexed
-      if (this.$route.params.n) {
-        this.n = this.$route.params.n;
-        sections = sections.slice(this.n - 1, this.n);
-      } else if (this.$route.params.from) {
-        this.from = this.$route.params.from;
-        this.to = this.$route.params.to;
-        sections = sections.slice(this.from - 1, this.to);
-      } else {
-        this.n = 1;
-        sections = sections.slice(this.n - 1, this.n);
-      }
-      this.sections = {}
-      sections.forEach(section => {
+      this.from = this.$route.params.from;
+      this.to = this.$route.params.to;
+      
+      this.sections = []
+      sections.forEach((section, i) => {
         var obj = {};
         obj.id = section.getAttribute("id");
         obj.video = section.getAttribute("data-video");
         obj.title = section.removeChild(section.firstElementChild).innerHTML;
         var instructions = Array.from(section.firstElementChild.children);
         obj.instructions = instructions.map(instruction => instruction.innerHTML);
-        this.sections[obj.id] = obj
+        this.sections[i] = obj
       })
     }
     );

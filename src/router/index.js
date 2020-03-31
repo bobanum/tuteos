@@ -2,6 +2,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Laravel from '../views/Laravel.vue'
+import LaravelN from '../views/LaravelN.vue'
+import LaravelFromTo from '../views/LaravelFromTo.vue'
 
 Vue.use(VueRouter)
 
@@ -12,9 +14,19 @@ const routes = [
     component: Home
   },
   {
+    path: '/laravel/:from/:to',
+    name: 'LaravelFromTo',
+    component: LaravelFromTo
+  },
+  {
     path: '/laravel',
     name: 'Laravel',
     component: Laravel
+  },
+  {
+    path: '/laravel/:n',
+    name: 'LaravelN',
+    component: LaravelN
   },
   {
     path: '/about',

@@ -42,7 +42,7 @@ h1,h2,h3,h4,h5,h6 {
   display: grid;
   grid-template-rows: auto auto 1fr auto;
   & > header, & > footer {
-    background-color: hsl(var(--hue), 100%, 0%);
+    background-color: hsl(var(--hue), 100%, 20%);
     color: white;
     padding: .5em;
   }

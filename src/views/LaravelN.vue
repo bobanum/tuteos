@@ -1,16 +1,9 @@
 <template>
   <div class="home">
-    <h1>Laravel</h1>
+    <h1>Laraveldsdsdsdss</h1>
     <div><button>Précédent</button><button>Suivant</button></div>
     <ol>
-      <li v-for="section in sections" :key="section.id" :id="section.id" :data-video="section.video">
-        <div v-html="section.title"></div>
-        <ol>
-          <li v-for="(instruction,i) in section.instructions" :key="i">
-            <div v-html="instruction"></div>
-          </li>
-        </ol>
-      </li>
+      <section :section="section"/>
     </ol>
     <div v-if="n"><router-link :to="n-1">sections[]</router-link></div>
   </div>
