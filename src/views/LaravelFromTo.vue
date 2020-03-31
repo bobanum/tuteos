@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <h1>Laravel</h1>
-    <ol class="sections">
+    <ol class="sections" :start="from">
       <sec v-for="section in sections.slice(from, to+1)" :key="section.id" :section="section"></sec>
     </ol>
   </div>
@@ -41,8 +41,8 @@ export default {
         sections.push(...Array.from(doc.querySelector("#app .body > ol").children))
       });
       // sections are 1 indexed
-      this.from = this.$route.params.from;
-      this.to = this.$route.params.to;
+      this.from = parseInt(this.$route.params.from);
+      this.to = parseInt(this.$route.params.to);
       
       this.sections = []
       sections.forEach((section, i) => {

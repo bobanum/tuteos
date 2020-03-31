@@ -1,8 +1,8 @@
 <template>
-  <li :id="id" :data-video="video">
-    <div v-html="title"></div>
+  <li :id="section.id" :data-video="section.video">
+    <div v-html="section.title"></div>
     <ol>
-      <li v-for="(instruction,i) in instructions" :key="i">
+      <li v-for="(instruction,i) in section.instructions" :key="i">
         <div v-html="instruction"></div>
       </li>
     </ol>
@@ -35,9 +35,6 @@ export default {
     section: {}
   },
   created() {
-    for (let prop in this.section) {
-      this[prop] = this.section[prop];
-    }
   },
   computed: {
     
