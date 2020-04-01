@@ -43,13 +43,13 @@ export default class Menu {
      * @returns {HTMLElement} a div.menu
      */
     html() {
-        var result, label;
+        var result;
         if (this.off) {
             return document.createTextNode("");
         }
         result = document.createElement("div");
         result.classList.add("menu");
-        label = result.appendChild(this.html_label());
+        result.appendChild(this.html_label());
         if (this._click) {
             result.addEventListener("click", this._click);
         }

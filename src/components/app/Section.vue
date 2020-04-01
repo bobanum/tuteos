@@ -15,9 +15,17 @@ ol.sections {
   margin: 0;
   padding: 0;
   padding-left: 1.5em;
+  & > li {
+    margin-top: 1em;
+  }
   ol {
     list-style-type: lower-alpha;
     padding-left: 1.25em;
+    li {
+      padding-bottom: .25em;
+      border-bottom: 1px solid #ccc;
+      margin-bottom: .25em;
+    }
   }
 }
 </style>

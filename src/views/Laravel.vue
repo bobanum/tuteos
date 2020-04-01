@@ -1,24 +1,13 @@
 <template>
   <div class="home">
     <h1>Laravel</h1>
-    <div><button>Précédent</button><button>Suivant</button></div>
-    <ol>
-      <li v-for="section in sections" :key="section.id" :id="section.id" :data-video="section.video">
-        <div v-html="section.title"></div>
-        <ol>
-          <li v-for="(instruction,i) in section.instructions" :key="i">
-            <div v-html="instruction"></div>
-          </li>
-        </ol>
-      </li>
-    </ol>
-    <div v-if="n"><router-link :to="n-1">sections[]</router-link></div>
+    <slot></slot>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-
+import Tuteos from "@/tuteos.js"
 export default {
   name: 'Laravel',
   data() {
@@ -33,7 +22,6 @@ export default {
   created() {
   },
   mounted() {
-    console.log(this.debut, this.fin)
     Promise.all([
       this.$axios.get("/example/cours1.html"),
       this.$axios.get("/example/cours2.html"),
@@ -58,18 +46,19 @@ export default {
         this.n = 1;
         sections = sections.slice(this.n - 1, this.n);
       }
-      this.sections = {}
-      sections.forEach(section => {
+      this.sections = [];
+      sections.forEach((section, i) => {
         var obj = {};
         obj.id = section.getAttribute("id");
         obj.video = section.getAttribute("data-video");
         obj.title = section.removeChild(section.firstElementChild).innerHTML;
+        Tuteos.makeCopiable(section);
         var instructions = Array.from(section.firstElementChild.children);
         obj.instructions = instructions.map(instruction => instruction.innerHTML);
-        this.sections[obj.id] = obj
+        this.sections[i] = obj;
       })
-    }
-    );
+      this.$emit("load", this.sections);
+    });
   }
 }
 </script>

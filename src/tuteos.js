@@ -191,23 +191,29 @@ export default class Tuteos {
 	}
 	/**
 	 * Makes copiable items copiable
+	 * Used in VUE version
 	 */
-	static makeCopiable() {
-		var elements = document.querySelectorAll(".copiable");
-		elements.forEach(element => {
+	static makeCopiable(domain) {
+		domain = domain || document;
+		if (domain.classList.contains("copiable")) {
 			var label = document.createElement("div");
 			label.classList.add("label");
-			label.innerHTML = element.innerHTML;
-			element.innerHTML = "";
-
-			element.appendChild(this.html_entityIcon('📋', this._('copy_to_clipboard'), e => {
-                this.copy(e.currentTarget);
-            }));
-            //element.appendChild(this.html_svgIcon('copy', this._('copy_to_clipboard'), (e) => {
-            //    this.copy(e.currentTarget);
-            //}));
-			element.appendChild(label);
-		});
+			label.innerHTML = domain.innerHTML;
+			domain.innerHTML = "";
+	
+			domain.appendChild(this.html_entityIcon('copy', this._('copy_to_clipboard'), e => {
+				this.copy(e.currentTarget);
+			}));
+			//domain.appendChild(this.html_svgIcon('copy', this._('copy_to_clipboard'), (e) => {
+			//    this.copy(e.currentTarget);
+			//}));
+			domain.appendChild(label);
+		} else {
+			var elements = domain.querySelectorAll(".copiable");
+			elements.forEach(element => {
+				this.makeCopiable(element);
+			});
+		}
 	}
 	/**
 	 * Returns a span containing given entity with click event
@@ -216,11 +222,12 @@ export default class Tuteos {
 	 * @param   {function}    evt    Click event function
 	 * @returns {HTMLElement} span.icon element
 	 */
-	static html_entityIcon(entity, alt, evt) {
-		var result = document.createElement("span");
+	static html_entityIcon(icon, alt, evt) {
+		var result = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+		var use = result.appendChild(document.createElementNS("http://www.w3.org/2000/svg", "use"));
+		use.setAttribute("href", "/images/icons.svg#"+icon);
 		result.classList.add("icon");
 		//var entities = {"&#x1f4cb;":"📋", "&#x1f4cc;": "📌", "&#x1f4cd;": "📍", "&#x1f4ce;": "📎"};
-		result.innerHTML = entity;
 		result.setAttribute("title", alt);
 		result.addEventListener("click", evt);
 		return result;
@@ -384,7 +391,7 @@ export default class Tuteos {
 	 * Set paths static properties for urls
 	 */
 	static setPaths() {
-		this._url_app = this.dirname(import.meta.url);
+		//XXXXX this._url_app = this.dirname(import.meta.url);
 		this._url_page = this.dirname(location.href);
 	}
     /**

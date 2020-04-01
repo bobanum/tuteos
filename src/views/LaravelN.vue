@@ -53,7 +53,7 @@ export default {
         var instructions = Array.from(section.firstElementChild.children);
         obj.instructions = instructions.map(instruction => instruction.innerHTML);
         this.sections[i] = obj
-      })
+      });
     }
     );
   }

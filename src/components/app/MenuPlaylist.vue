@@ -10,7 +10,7 @@
 <style lang="scss">
     div.menu-item {
         svg {
-            fill: hsl(var(--hue), 100%, 20%);
+            fill: hsl(var(--hue), var(--sat), 20%);
             width: 1.5em;
             height: 1.5em;
             &>:hover {

@@ -1,4 +1,4 @@
-@import url('images/fonts/css/mb.css');
+@import url('/images/fonts/css/mb.css');
 @import url('https://fonts.googleapis.com/css?family=Josefin+Sans:400,400i,700,700i');
 @import url('https://fonts.googleapis.com/css?family=Anonymous+Pro:400,700');
 
@@ -143,7 +143,6 @@ root {
 		}
 	}
 	#app {
-		width: 70ch;
 		min-height: 100%;
 		margin: 0 auto;
 		& > header,
@@ -352,11 +351,6 @@ root {
 	body.videos div.body iframe {
 		display: block;
 	}
-	#app {
-		@include module;
-		background-color: white;
-		color: black;
-	}
 	.youtube > span {
 		display: none;
 	}
@@ -364,7 +358,7 @@ root {
 [download] {
 	&::after {
 		content: "";
-		background-image: url(images/icone_download.svg);
+		background-image: url(/images/icone_download.svg);
 		background-size: contain;
 		width: 1em;
 		height: 1em;

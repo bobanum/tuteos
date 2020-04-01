@@ -8,17 +8,16 @@
 
 <style lang="scss">
 .toolbar {
-    --bgcolor: hsla(var(--hue),0%,0%, 0);
     font-size: 5mm;
     margin: 0;
     padding: 0;
     list-style-type: none;
     display: grid;
     gap: .25em;
-    fill: hsl(var(--hue), 100%, 100%);
+    fill: hsl(var(--hue), var(--sat), 100%);
     grid-template-columns: repeat(auto-fill, minmax(1.5em,2em));
     & > li {
-        background-color: var(--bgcolor);
+        background-color: hsla(var(--hue), var(--sat), 0%, 0);
         display: grid;
         border-radius: .25em;
     }
