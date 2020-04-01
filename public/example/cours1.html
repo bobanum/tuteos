@@ -94,19 +94,20 @@
                             <p>Placer le code dans le model <span class="file">User.php</span> en créant une fonction statique.</p>
                             <div class="codeblock php copiable">
                                 <div>static public function fake() {</div>
-                                <div> $f = \Faker\Factory::create("fr_CA");</div>
-                                <div> $resultat = new self();</div>
-                                <div> $resultat-&gt;prenom = $f-&gt;firstName();</div>
-                                <div> $resultat-&gt;nom = $f-&gt;lastName();</div>
-                                <div> $resultat-&gt;email = str_slug($resultat-&gt;prenom.$resultat-&gt;nom, '')</div>
-                                <div> .'@'.$f-&gt;domain();</div>
-                                <div> $resultat-&gt;tel = $f-&gt;phoneNumber();</div>
-                                <div> $resultat-&gt;adresse = $f-&gt;streetAddress();</div>
-                                <div> $resultat-&gt;ville = $f-&gt;city();</div>
-                                <div> $resultat-&gt;province = $f-&gt;state();</div>
-                                <div> $resultat-&gt;codepostal = $f-&gt;postcode();</div>
-                                <div> $resultat-&gt;citation = $f-&gt;paragraph();</div>
-                                <div> return $resultat;</div>
+                                <div>
+                                    <div>$f = \Faker\Factory::create("fr_CA");</div>
+                                    <div>$resultat = new self();</div>
+                                    <div>$resultat-&gt;prenom = $f-&gt;firstName();</div>
+                                    <div>$resultat-&gt;nom = $f-&gt;lastName();</div>
+                                    <div>$resultat-&gt;email = str_slug($resultat-&gt;prenom.$resultat-&gt;nom, '').&ZeroWidthSpace;'@'.$f-&gt;domain();</div>
+                                    <div>$resultat-&gt;tel = $f-&gt;phoneNumber();</div>
+                                    <div>$resultat-&gt;adresse = $f-&gt;streetAddress();</div>
+                                    <div>$resultat-&gt;ville = $f-&gt;city();</div>
+                                    <div>$resultat-&gt;province = $f-&gt;state();</div>
+                                    <div>$resultat-&gt;codepostal = $f-&gt;postcode();</div>
+                                    <div>$resultat-&gt;citation = $f-&gt;paragraph();</div>
+                                    <div>return $resultat;</div>
+                                </div>
                                 <div>}</div>
                             </div>
                         </li>

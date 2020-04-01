@@ -2,9 +2,7 @@
   <li :id="section.id" :data-video="section.video">
     <div v-html="section.title"></div>
     <ol>
-      <li v-for="(instruction,i) in section.instructions" :key="i">
-        <div v-html="instruction"></div>
-      </li>
+      <instruction v-for="(instruction,i) in section.instructions" :key="i" :i="i" :instruction="instruction"></instruction>
     </ol>
     <slot></slot>
   </li>
@@ -17,14 +15,9 @@ ol.sections {
   padding-left: 1.5em;
   & > li {
     margin-top: 1em;
-  }
-  ol {
-    list-style-type: lower-alpha;
-    padding-left: 1.25em;
-    li {
-      padding-bottom: .25em;
-      border-bottom: 1px solid #ccc;
-      margin-bottom: .25em;
+    & > ol {
+      list-style-type: lower-alpha;
+      padding-left: 1.25em;
     }
   }
 }
@@ -40,9 +33,12 @@ export default {
     }
   },
   props: {
-    section: {}
+    section: {},
   },
   created() {
+  },
+  components: {
+    'instruction': require('@/components/app/Instruction').default
   },
   computed: {
     

@@ -7,7 +7,7 @@
 
 <script>
 // @ is an alias to /src
-import Tuteos from "@/tuteos.js"
+// import Tuteos from "@/tuteos.js"
 export default {
   name: 'Laravel',
   data() {
@@ -52,7 +52,7 @@ export default {
         obj.id = section.getAttribute("id");
         obj.video = section.getAttribute("data-video");
         obj.title = section.removeChild(section.firstElementChild).innerHTML;
-        Tuteos.makeCopiable(section);
+        // Tuteos.makeCopiable(section);
         var instructions = Array.from(section.firstElementChild.children);
         obj.instructions = instructions.map(instruction => instruction.innerHTML);
         this.sections[i] = obj;
