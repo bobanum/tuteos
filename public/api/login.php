@@ -1,12 +1,15 @@
 <?php
 session_start();
 if (isset($_SESSION['github_token'])) {
-    echo "ok";
+    echo "'{$_SESSION['github_token']}'";
     exit;
 }
-$client_id = '62a90ec591b4dc316cb3';
-$client_secret = 'f2ff134a030563c524d0c60bc87dca1b464be5ef';
-$redirect_uri = 'http://localhost:8000/login.php';
+$redirect_uri = 'http://localhost:8000/api/login.php';
+$client_id = '62a90ec591b4dc316cb3';    //8000
+$client_secret = 'f2ff134a030563c524d0c60bc87dca1b464be5ef'; //8000
+$redirect_uri = 'http://localhost:8080/login';
+$client_id = 'a49b4169cd6217289afb';    //8080
+$client_secret = 'd43ac3fdb71ab1b1d79b830add03e54faa97194e'; //8080
 if (!isset($_GET['code'])) {
     header("location:https://github.com/login/oauth/authorize?client_id={$client_id}");
     die;
@@ -34,7 +37,13 @@ if (!isset($_GET['code'])) {
 
     $data = curl_exec($ch);
     $data = json_decode($data);
+    if (isset($data->error)) {
+        header("content-type: application/json");
+        echo "'{$data->error}'";
+        die;
+    }
     $token = $data->access_token;
+    $_SESSION['github_token'] = strtolower(md5($code.$token));
 
     $ch = curl_init();
 
@@ -45,9 +54,16 @@ if (!isset($_GET['code'])) {
         "user-agent: Some cool app",
     ));
 
-
     $data = curl_exec($ch);
-    var_dump($data);
+    // var_dump($data);
     $data = json_decode($data);
-    var_dump($data);
+    $output['token'] = $_SESSION['github_token'];
+    $output['avatar_url'] = $data->avatar_url;
+    $output['html_url'] = $data->html_url;
+    $output['url'] = $data->url;
+    $output['login'] = $data->login;
+    $output['name'] = $data->name;
+    header("Access-Control-Allow-Origin: *");
+    header("content-type: application/json");
+    echo json_encode($output);
 }

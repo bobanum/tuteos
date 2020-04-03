@@ -126,6 +126,9 @@
 		<symbol id="nothing" viewBox="0 0 32 32">
 			<path d="m 7.5147186,7.5147186 a 12,11.999999 45 0 0 0,16.9705624 12,11.999999 45 0 0 16.9705624,0 12,11.999999 45 0 0 0,-16.9705624 12,11.999999 45 0 0 -16.9705624,0 z M 8.9289322,8.9289322 A 10,10 0 0 1 22.321148,8.2646386 L 8.2577331,22.328053 A 10,10 0 0 1 8.9289322,8.9289322 Z M 9.6788521,23.735361 23.742267,9.6719466 A 10,10 0 0 1 23.071068,23.071068 10,10 0 0 1 9.6788521,23.735361 Z"/>
 		</symbol>
+		<symbol id="exit" viewBox="0 0 32 32">
+			<path d="m 6,28 h 4 l 8,4 V 8 L 14,6 h 6 v 22 h 4 V 2 H 6 Z m 4,-21 6,3 v 18 l -6,-3 z"/>
+		</symbol>
 	</defs>
 	<use transform="translate(0)" width="32" height="32" xlink:href="#alarm"/>
 	<use transform="translate(32)" width="32" height="32" xlink:href="#stopwatch"/>
@@ -164,6 +167,7 @@
 	<use transform="translate(64 64)" width="32" height="32" xlink:href="#next"/>
 	<use transform="translate(96 64)" width="32" height="32" xlink:href="#last"/>
 	<use transform="translate(128 64)" width="32" height="32" xlink:href="#nothing"/>
+	<use transform="translate(150 64)" width="32" height="32" xlink:href="#exit"/>
 	<use transform="translate(0 96)" width="32" height="32" xlink:href="#github"/>
 	<use transform="translate(32 96)" width="32" height="32" xlink:href="#tuteos"/>
 	<use transform="translate(64 96)" width="32" height="32" xlink:href="#youtube"/>
