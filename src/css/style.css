@@ -1,0 +1,543 @@
+@charset "UTF-8";
+@import url("../images/fonts/css/mb.css");
+@import url("https://fonts.googleapis.com/css?family=Josefin+Sans:400,400i,700,700i");
+@import url("https://fonts.googleapis.com/css?family=Anonymous+Pro:400,700");
+:root {
+  --font-size: clamp(16px,1.6vw,28px);
+  --font-global: normal normal normal 1rem/1 "Josefin Sans";
+  --font-code: normal normal normal .85em/1.2 "Anonymous Pro";
+  --hue: 210;
+  --sat: 25%;
+}
+
+@media all {
+  html {
+    height: 100%;
+    font-size: var(--font-size);
+  }
+  body {
+    margin: 0;
+    height: 100%;
+    font: var(--font-global);
+  }
+  body.videos #app nav a#mnu_videos::before {
+    content: "☑";
+  }
+  :target {
+    background-color: #eee;
+  }
+  div.body {
+    padding: 1em;
+  }
+  div.body nav {
+    padding: 1ch;
+  }
+  div.body nav ol {
+    font-size: smaller;
+    -moz-column-count: 2;
+         column-count: 2;
+    padding: 0;
+  }
+  div.body nav ol li {
+    margin: 0;
+    padding: 0;
+    margin-left: 2ch;
+  }
+  a[href="#summary"] {
+    color: rgb(0, 0, 0);
+    opacity: 0.2;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: 0.3s;
+  }
+  :hover > a[href="#summary"] {
+    opacity: 1;
+  }
+  #app {
+    min-width: 30em;
+    max-width: 50em;
+    min-height: 100%;
+    margin: 0 auto;
+  }
+  #app > header, #app > footer {
+    background-color: black;
+    color: white;
+    text-align: center;
+    padding: 1em;
+  }
+  .view {
+    --hue: 302;
+    font: var(--font-code);
+    padding: var(--padding, 1ch);
+    background-color: hsl(var(--hue, 0), var(--sat, 50%), calc(var(--lum, 90%)));
+    border: 1px none;
+    border-radius: 0.2rem;
+    border-color: hsl(var(--hue, 0), var(--sat, 50%), calc(var(--lum, 90%) / 2));
+    white-space: nowrap;
+    align-items: center;
+    color: hsl(var(--hue), 100%, 20%);
+  }
+  span.view, span.file, span.string, span.blade, span.command, span.php, span.controller,
+code.view,
+code.file,
+code.string,
+code.blade,
+code.command,
+code.php,
+code.controller, em.view, em.file, em.string, em.blade, em.command, em.php, em.controller, strong.view, strong.file, strong.string, strong.blade, strong.command, strong.php, strong.controller {
+    --padding: .2em 1ch;
+  }
+  .controller {
+    --hue: 120;
+    --lum: 95%;
+    font: var(--font-code);
+    padding: var(--padding, 1ch);
+    background-color: hsl(var(--hue, 0), var(--sat, 50%), calc(var(--lum, 90%)));
+    border: 1px none;
+    border-radius: 0.2rem;
+    border-color: hsl(var(--hue, 0), var(--sat, 50%), calc(var(--lum, 90%) / 2));
+    white-space: nowrap;
+    align-items: center;
+    color: hsl(var(--hue), 100%, 30%);
+  }
+  .file {
+    --hue: 0;
+    --sat: 0%;
+    --lum: 95%;
+    font: var(--font-code);
+    padding: var(--padding, 1ch);
+    background-color: hsl(var(--hue, 0), var(--sat, 50%), calc(var(--lum, 90%)));
+    border: 1px none;
+    border-radius: 0.2rem;
+    border-color: hsl(var(--hue, 0), var(--sat, 50%), calc(var(--lum, 90%) / 2));
+    white-space: nowrap;
+    align-items: center;
+  }
+  .string {
+    font: var(--font-code);
+    padding: var(--padding, 1ch);
+    background-color: hsl(var(--hue, 0), var(--sat, 50%), calc(var(--lum, 90%)));
+    border: 1px none;
+    border-radius: 0.2rem;
+    border-color: hsl(var(--hue, 0), var(--sat, 50%), calc(var(--lum, 90%) / 2));
+    white-space: nowrap;
+    align-items: center;
+    background-color: hsl(34deg, 100%, 100%);
+    color: hsl(34deg, 100%, 46%);
+    border-color: hsl(34deg, 100%, 90%);
+  }
+  ol,
+ul {
+    margin: 0;
+  }
+  div.body > ol > li {
+    padding: 1ch;
+  }
+  div.body iframe {
+    display: block;
+    margin: 0 auto;
+    display: none;
+  }
+  div.body ol {
+    padding-left: 2ch;
+  }
+  div.body li {
+    padding: 0.5em 0;
+  }
+  div.body li p {
+    margin: 0;
+  }
+  div.body > ol ol {
+    list-style-type: lower-alpha;
+  }
+  div.body ol ol > li {
+    page-break-inside: avoid;
+  }
+  div.body ol ol > li + li {
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+  }
+  h2 {
+    margin: 0;
+  }
+  .folded {
+    opacity: 0.3;
+    border-bottom: 2px dotted rgba(0, 0, 0, 0.3);
+  }
+  .folded ~ * {
+    display: none;
+  }
+  .command {
+    --hue: 240;
+    --lum: 30%;
+    font: var(--font-code);
+    padding: var(--padding, 1ch);
+    background-color: hsl(var(--hue, 0), var(--sat, 50%), calc(var(--lum, 90%)));
+    border: 1px none;
+    border-radius: 0.2rem;
+    border-color: hsl(var(--hue, 0), var(--sat, 50%), calc(var(--lum, 90%) / 2));
+    white-space: nowrap;
+    align-items: center;
+    color: hsl(240deg, 100%, 100%);
+  }
+  a[href^="https://youtu.be/"] {
+    float: right;
+  }
+  a[href="https://youtu.be"],
+a[href="https://youtu.be/"] {
+    opacity: 0.2;
+    filter: grayscale(100%);
+    pointer-events: none;
+  }
+  .codeblock em,
+.codeblock samp,
+.codeblock del,
+.php em,
+.php samp,
+.php del,
+.blade em,
+.blade samp,
+.blade del {
+    color: rgba(255, 255, 255, 0.5);
+  }
+  .codeblock em b,
+.codeblock em em,
+.codeblock samp b,
+.codeblock samp em,
+.codeblock del b,
+.codeblock del em,
+.php em b,
+.php em em,
+.php samp b,
+.php samp em,
+.php del b,
+.php del em,
+.blade em b,
+.blade em em,
+.blade samp b,
+.blade samp em,
+.blade del b,
+.blade del em {
+    color: white;
+  }
+  div.codeblock {
+    --indentation: 3ch;
+  }
+  div.codeblock .label > *,
+div.codeblock .block > * {
+    white-space: pre;
+  }
+  div.codeblock + div.codeblock {
+    margin-top: 0.25em;
+  }
+  div.codeblock .block {
+    margin-left: var(--indentation);
+    white-space: inherit;
+  }
+  a {
+    color: inherit;
+  }
+  .php {
+    font: var(--font-code);
+    padding: var(--padding, 1ch);
+    background-color: hsl(var(--hue, 0), var(--sat, 50%), calc(var(--lum, 90%)));
+    border: 1px none;
+    border-radius: 0.2rem;
+    border-color: hsl(var(--hue, 0), var(--sat, 50%), calc(var(--lum, 90%) / 2));
+    white-space: nowrap;
+    align-items: center;
+    --hue: 200;
+    --lum: 40%;
+    color: hsl(200deg, 100%, 100%);
+  }
+  .blade {
+    font: var(--font-code);
+    padding: var(--padding, 1ch);
+    background-color: hsl(var(--hue, 0), var(--sat, 50%), calc(var(--lum, 90%)));
+    border: 1px none;
+    border-radius: 0.2rem;
+    border-color: hsl(var(--hue, 0), var(--sat, 50%), calc(var(--lum, 90%) / 2));
+    white-space: nowrap;
+    align-items: center;
+    --hue: 330;
+    --lum: 40%;
+    color: hsl(330deg, 100%, 100%);
+  }
+  .codeblock:hover [data-definition]:hover:before {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+    transition-delay: 0.5s;
+    transition-duration: 0s, 0.2s, 0.2s;
+  }
+  [data-definition] {
+    -webkit-text-decoration: underline wavy;
+            text-decoration: underline wavy;
+    position: relative;
+    cursor: help;
+  }
+  [data-definition]:before {
+    visibility: hidden;
+    opacity: 0;
+    transform: scale(0);
+    content: attr(data-definition);
+    background-color: #f0ffff;
+    border: 2px solid hsl(180deg, 50%, 50%);
+    color: black;
+    position: absolute;
+    width: 20ch;
+    font-family: serif;
+    padding: 0.25em 0.4em;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    white-space: normal;
+    bottom: 100%;
+    border-radius: 0.75em 0.75em 0.75em 0;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5), 1px 1px rgba(0, 0, 0, 0.5) inset;
+    transform-origin: left bottom;
+    transition-property: visibility, opacity, transform;
+    transition-delay: 0s;
+    transition-duration: 1s, 1s, 1s;
+  }
+  .youtube {
+    text-decoration: none;
+    font-size: smaller;
+    color: rgba(0, 0, 0, 0.5);
+  }
+  .youtube > span {
+    font-size: 1rem;
+  }
+}
+@media screen {
+  body {
+    background-color: hsl(var(--hue), var(--sat), 27%);
+    color: white;
+  }
+  body.videos div.body iframe {
+    display: block;
+  }
+  #app {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: white;
+    color: black;
+  }
+  #app header {
+    order: -1000;
+  }
+  #app header * {
+    margin: 0;
+    padding: 0;
+  }
+  #app footer {
+    order: 1000;
+  }
+  .youtube > span {
+    display: none;
+  }
+}
+[download]::after {
+  content: "";
+  background-image: url(images/icone_download.svg);
+  background-size: contain;
+  width: 1em;
+  height: 1em;
+}
+
+@media screen and (max-width: 800px) {
+  #app {
+    width: 50ch;
+  }
+  div.codeblock .label > * {
+    white-space: normal !important;
+  }
+}
+@media print {
+  @page {
+    size: 8.5in 11in;
+    margin: 0.5in;
+  }
+  #app > footer {
+    display: none;
+  }
+  nav {
+    display: none;
+  }
+  .youtube > img {
+    display: none;
+  }
+  .codeblock,
+.command,
+.string,
+.php,
+.view,
+.blade,
+.controller {
+    background-color: transparent;
+    color: black;
+    border-color: hsl(0deg, 0%, 90%);
+  }
+  div.codeblock {
+    padding-left: 3ch;
+  }
+  div.body ol ol li {
+    border: none !important;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  div.body .codeblock dfn {
+    text-decoration: none;
+    font-style: normal;
+  }
+}
+.copiable {
+  position: relative;
+}
+.copiable .label {
+  overflow: hidden;
+}
+@media print {
+  .copiable .icon {
+    display: none;
+  }
+}
+.copiable > .icon {
+  float: left;
+  margin-right: 0.5ch;
+}
+.copiable.codeblock .icon {
+  position: absolute;
+  right: 0.3ch;
+  bottom: 0.5ch;
+  transform-origin: right bottom;
+}
+
+code.copiable,
+span.copiable {
+  --padding: .1em 1ch;
+  display: inline-flex;
+}
+
+/*Just for icons look*/
+span.icon {
+  line-height: 1;
+  cursor: pointer;
+  transition-property: transform, color;
+  transition-duration: 0.3s;
+  transform: scale(0.8);
+  z-index: 10000;
+  line-height: 1em;
+  transform-origin: right center;
+  color: hsl(var(--hue), var(--sat), calc(50% + var(--lum) / 10));
+}
+:hover > span.icon {
+  color: hsl(var(--hue), var(--sat), calc(50% + var(--lum) / 2));
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5333333333);
+  transform: scale(1.5);
+}
+span.icon .tag {
+  position: absolute;
+  z-index: 1000;
+  left: -1em;
+  right: -1em;
+  transition-delay: 250ms;
+  transition-timing-function: ease-in;
+  transition-duration: 200ms;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  bottom: 0;
+}
+span.icon .tag.out {
+  transform: scale(0.2);
+}
+span.icon .zzztag {
+  background-color: red;
+  border: 1px solid white;
+  border-radius: 100%;
+  color: white;
+  font-weight: bold;
+  box-shadow: 1px 1px black;
+  font-size: 0.5em;
+}
+span.icon .tag {
+  background-color: rgba(0, 0, 0, 0.5);
+  font-family: arial;
+  font-weight: bold;
+  font-size: 0.5em;
+}
+
+#app > nav {
+  background-color: #666;
+  color: white;
+  font-size: min(0.8em, 20px);
+  order: -1000;
+}
+#app > nav ul {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  list-style-type: none;
+  flex-wrap: wrap;
+}
+#app > nav li {
+  margin: 0.25em;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  display: flex;
+}
+#app > nav li > div {
+  display: flex;
+  align-items: center;
+}
+#app > nav li:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+#app > nav li.courant {
+  background-color: #345;
+}
+#app > nav a {
+  display: flex;
+  flex: 1 0 auto;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: inherit;
+  text-decoration: none;
+  height: 2em;
+  padding: 0 0.25em;
+  white-space: nowrap;
+}
+#app > nav a.with-icon {
+  text-indent: -10000px;
+}
+#app > nav a.with-icon img {
+  height: 1.3em;
+}
+#app > nav a#mnu_videos::before {
+  margin-right: 0.5ch;
+  content: "☐";
+}
+#app > nav a:first-child {
+  padding-left: 1em;
+}
+#app > nav a:last-child {
+  padding-right: 1em;
+}
+#app > nav .playlist {
+  opacity: 0.5;
+}
+#app > nav .playlist:hover {
+  opacity: 1;
+}
+#app > nav .playlist img {
+  height: 1em;
+}
+body.videos #app > nav a#mnu_videos::before {
+  content: "☑";
+}

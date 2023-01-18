@@ -1,111 +1,40 @@
-@import url('images/fonts/css/mb.css');
+@import url('../images/fonts/css/mb.css');
 @import url('https://fonts.googleapis.com/css?family=Josefin+Sans:400,400i,700,700i');
 @import url('https://fonts.googleapis.com/css?family=Anonymous+Pro:400,700');
 
-@font-global: normal normal normal e('16px/1') "Josefin Sans";
-@font-code: normal normal normal e('.85em/1.2') "Anonymous Pro";
 
-.module {
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	header {
-		order: -1000;
-		* {
-			margin: 0;
-			padding: 0;
-		}
-	}
-	footer {
-		order: 1000;
-	}
-}
-
-.center {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	text-align: center;
-}
 
 @media all {
 	html {
 		height: 100%;
+		font-size: var(--font-size);
 	}
+
 	body {
 		margin: 0;
 		height: 100%;
-		font: @font-global;
+		font: var(--font-global);
 	}
+
 	body.videos #app nav a#mnu_videos::before {
 		content: "☑";
 	}
+
 	:target {
 		background-color: #eee;
 	}
-	/*Just for icons look*/
-	span.icon {
-		line-height: 1;
-		cursor: pointer;
-		opacity: .5;
-		transition-property: transform;
-		transition-duration: .3s;
-		transform: scale(1);
-//		text-shadow: 0px 0px 0px rgba(0, 0, 0, .4);
-		z-index: 10000;
-		:hover > & {
-			opacity: 1;
-			transform: scale(1.5);
-//			text-shadow: .25em .25em .25em rgba(0, 0, 0, .4);
-		}
-		span.copiable > & {
-			float: left;
-			margin-right: .5ch;
-			line-height: 1em;
-			transform-origin: right center;
-		}
-		.tag {
-			position: absolute;
-			z-index: 1000;
-			left: -1em;
-			right: -1em;
-			transition-delay: 250ms;
-			transition-timing-function: ease-in;
-			transition-duration: 200ms;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			top: 0;
-			bottom: 0;
-			&.out {
-				transform: scale(0.2);
-			}
-		}
-		.zzztag {
-			background-color: red;
-			border: 1px solid white;
-			border-radius: 100%;
-			color: white;
-			font-weight: bold;
-			//transform: rotate(10deg);
-			box-shadow: 1px 1px black;
-			font-size: .5em;
-		}
-		.tag {
-			background-color: rgba(0,0,0,.5);
-			font-family: arial;
-			font-weight: bold;
-			font-size: .5em;
-		}
-	}
+
 	div.body {
 		padding: 1em;
+
 		& nav {
 			padding: 1ch;
+
 			ol {
 				font-size: smaller;
 				column-count: 2;
 				padding: 0;
+
 				li {
 					margin: 0;
 					padding: 0;
@@ -114,20 +43,25 @@
 			}
 		}
 	}
+
 	a[href="#summary"] {
 		color: rgba(0, 0, 0, 1);
 		opacity: .2;
 		text-decoration: none;
 		font-size: 1rem;
 		transition: .3s;
+
 		:hover > & {
 			opacity: 1;
 		}
 	}
+
 	#app {
-		width: 70ch;
+		min-width: 30em;
+		max-width: 50em;
 		min-height: 100%;
 		margin: 0 auto;
+
 		& > header,
 		& > footer {
 			background-color: black;
@@ -136,161 +70,170 @@
 			padding: 1em;
 		}
 	}
-	.box {
-		font: @font-code;
-		padding: 0 0.5ch;
-		background-color: hsl(0, 0%, 95%);
-		border: 1px solid hsl(0, 0%, 90%);
-		white-space: nowrap;
-		display: inline-flex;
-		align-items: center;
-	}
+
 	.view {
-		.box;
-		background-color: hsl(302, 100%, 95%);
-		border-color: hsl(302, 100%, 90%);
-		color: hsl(302, 100%, 20%);
+		--hue: 302;
+		@include box;
+		color: hsl(var(--hue), 100%, 20%);
 	}
+
+	span,
+	code, em, strong {
+
+		&.view,
+		&.file,
+		&.string,
+		&.blade,
+		&.command,
+		&.php,
+		&.controller {
+			--padding: .2em 1ch;
+		}
+
+	}
+
 	.controller {
-		.box;
-		background-color: hsl(120, 100%, 95%);
-		border-color: hsl(120, 100%, 90%);
-		color: hsl(120, 100%, 30%);
+		--hue: 120;
+		--lum: 95%;
+		@include box;
+		color: hsl(var(--hue), 100%, 30%);
 	}
+
 	.file {
-		.box;
+		--hue: 0;
+		--sat: 0%;
+		--lum: 95%;
+		@include box;
 	}
+
 	.string {
-		.box;
+		@include box;
 		background-color: hsl(34, 100%, 100%);
 		color: hsl(34, 100%, 46%);
 		border-color: hsl(34, 100%, 90%);
 	}
+
 	ol,
 	ul {
 		margin: 0;
 	}
+
 	div.body {
 		& > ol > li {
 			padding: 1ch;
 		}
+
 		iframe {
 			display: block;
 			margin: 0 auto;
 			display: none;
 		}
+
 		ol {
 			padding-left: 2ch;
 		}
+
 		li {
 			padding: .5em 0; //		margin: .5em 0;
+
 			p {
 				margin: 0;
 			}
 		}
+
 		& > ol ol {
 			list-style-type: lower-alpha;
 		}
+
 		ol ol > li {
 			page-break-inside: avoid;
+
 			& + li {
 				border-top: 1px solid rgba(0, 0, 0, 0.1);
 			}
 		}
 	}
-	.copiable {
-		position: relative; //	display: inline-block;
-		//padding-right: 0;
-		.label {
-			overflow: hidden;
-		}
-	}
+
 	h2 {
 		margin: 0; //	cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 48 48' width='24' height='24'><g id='cote'><path d='m4 18h40v4h-40z'/><path d='m20 0-2 8h-6l12 12 12-12h-6l-2-8z'/></g><use xlink:href='#cote' transform='matrix(1,0,0,-1,0,46)'/></svg>"), auto;
 		//	cursor: url("curseur2.svg"), auto;
 	}
+
 	.folded {
 		opacity: .3;
 		border-bottom: 2px dotted rgba(0, 0, 0, .3);
+
 		& ~ * {
 			display: none;
 		}
 	}
+
 	.command {
-		.box;
-		.copiable;
-		background-color: hsl(240, 59%, 48%);
-		border-color: hsl(240, 0%, 0%);
+		--hue: 240;
+		--lum: 30%;
+		@include box;
 		color: hsl(240, 100%, 100%);
 	}
+
 	a[href^="https://youtu.be/"] {
 		float: right;
 	}
+
 	a[href="https://youtu.be"],
-	a[href="https://youtu.be/"],
-		{
+	a[href="https://youtu.be/"] {
 		opacity: .2;
 		filter: grayscale(100%);
 		pointer-events: none;
 	}
+
 	.codeblock,
 	.php,
 	.blade {
+
 		em,
 		samp,
 		del {
-//			opacity: .5;
-			color: rgba(255,255,255,.5);
-			b, em {
+			//			opacity: .5;
+			color: rgba(255, 255, 255, .5);
+
+			b,
+			em {
 				color: white;
 			}
 		}
 	}
 
-	div.codeblock {
-		display: flex;
-		align-items: flex-end;
-		flex-direction: row;
-		justify-content: space-between;
-		padding: 1ch;
-		padding-right: 0ch;
-		.label > * {
-			white-space: pre;
-		}
-		.icon {
-			position: absolute;
-			right: .3ch;
-			bottom: .5ch;
-			transform-origin: right bottom;
-		}
-		& + div.codeblock {
-			margin-top: .25em;
-		}
-	}
+	@import "codeblock";
+
 	a {
 		color: inherit;
 	}
-	.codeblock.php.copiable {}
+
 	.php {
-		.box;
-		background-color: hsl(200, 70%, 40%);
-		border-color: hsl(200, 0%, 0%);
+		@include box;
+		--hue: 200;
+		--lum: 40%;
 		color: hsl(200, 100%, 100%);
 	}
+
 	.blade {
-		.box;
-		background-color: hsl(330, 70%, 40%);
-		border-color: hsl(330, 0%, 0%);
+		@include box;
+		--hue: 330;
+		--lum: 40%;
+		// background-color: hsl(330, 70%, 40%);
+		// border-color: hsl(330, 0%, 0%);
 		color: hsl(330, 100%, 100%);
 	}
+
 	.codeblock:hover {
 		[data-definition] {
-			&:before {
-				//			opacity: 1;
-				//			visibility: visible;
-				//			transition-delay: 2s;
-				//			transition-duration: 0s, .1s;
-			}
+
+			// &:before {
+			//			opacity: 1;
+			//			visibility: visible;
+			//			transition-delay: 2s;
+			//			transition-duration: 0s, .1s;
+			// }
 			&:hover {
 				&:before {
 					opacity: 1;
@@ -302,11 +245,13 @@
 			}
 		}
 	}
-	.codeblock {}
+
+	// .codeblock {}
 	[data-definition] {
 		text-decoration: underline wavy;
 		position: relative;
 		cursor: help;
+
 		&:before {
 			visibility: hidden;
 			opacity: 0;
@@ -333,10 +278,12 @@
 			transition-duration: 1s, 1s, 1s;
 		}
 	}
+
 	.youtube {
 		text-decoration: none;
 		font-size: smaller;
 		color: rgba(0, 0, 0, .5);
+
 		& > span {
 			font-size: 1rem;
 
@@ -346,24 +293,28 @@
 
 @media screen {
 	body {
-		background-color: #345;
+		background-color: hsl(var(--hue), var(--sat), 27%);
 		color: white;
 	}
+
 	body.videos div.body iframe {
 		display: block;
 	}
+
 	#app {
-		.module;
+		@include module;
 		background-color: white;
 		color: black;
 	}
+
 	.youtube > span {
 		display: none;
 	}
 }
+
 [download] {
 	&::after {
-		contenu: "";
+		content: "";
 		background-image: url(images/icone_download.svg);
 		background-size: contain;
 		width: 1em;
@@ -376,6 +327,7 @@
 	#app {
 		width: 50ch;
 	}
+
 	div.codeblock .label > * {
 		white-space: normal !important;
 	}
@@ -386,15 +338,19 @@
 		size: 8.5in 11in;
 		margin: .5in;
 	}
+
 	#app > footer {
 		display: none;
 	}
+
 	nav {
 		display: none;
 	}
+
 	.youtube > img {
 		display: none;
 	}
+
 	.codeblock,
 	.command,
 	.string,
@@ -406,12 +362,14 @@
 		color: black;
 		border-color: hsl(0, 0%, 90%);
 	}
+
 	div.codeblock {
 		padding-left: 3ch;
 	}
-	.copiable .icon {
-		display: none;
-	}
+
+	// .copiable .icon {
+	// 	display: none;
+	// }
 	div.body ol ol li {
 		border: none !important;
 		margin-top: 0;
@@ -419,8 +377,11 @@
 		padding-top: 0;
 		padding-bottom: 0;
 	}
+
 	div.body .codeblock dfn {
 		text-decoration: none;
 		font-style: normal;
 	}
 }
+
+@import "copiable";

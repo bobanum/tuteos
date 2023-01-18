@@ -1,0 +1,19 @@
+div.codeblock {
+    --indentation: 3ch;
+
+    .label,
+    .block {
+        > * {
+            white-space: pre;
+        }
+    }
+
+    & + & {
+        margin-top: .25em;
+    }
+
+    .block {
+        margin-left: var(--indentation);
+        white-space: inherit;
+    }
+}

@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8" />
-    <script src="../src/tuteos.js" type="module"></script>
+    <script src="./tuteos.js" type="module"></script>
     <title>Étapes</title>
 </head>
 
@@ -28,14 +28,16 @@
                             <div class="codeblock php copiable">
                                 <div>&lt;ul&gt;</div>
                                 <div>@foreach($posts as $post)</div>
-                                <div> &lt;li&gt;</div>
-                                <div> &lt;a href="{{action('PostController@show', $post)}}"&gt;</div>
-                                <div> {{$post-&gt;titre}}</div>
-                                <div> &lt;/a&gt;</div>
-                                <div> par &lt;a href="{{action('UserController@show', $post-&gt;<dfn data-definition="Un model lié.">user</dfn>)}}"&gt;</div>
-                                <div> {{$post-&gt;user-&gt;<dfn data-definition="Une donnée virtuelle">nomComplet</dfn>}}</div>
-                                <div> &lt;/a&gt;</div>
-                                <div> &lt;/li&gt;</div>
+                                <div class="block">
+                                    <div>&lt;li&gt;</div>
+                                    <div>&lt;a href="{{action('PostController@show', $post)}}"&gt;</div>
+                                    <div>{{$post-&gt;titre}}</div>
+                                    <div>&lt;/a&gt;</div>
+                                    <div>par &lt;a href="{{action('UserController@show', $post-&gt;<dfn data-definition="Un model lié.">user</dfn>)}}"&gt;</div>
+                                    <div>{{$post-&gt;user-&gt;<dfn data-definition="Une donnée virtuelle">nomComplet</dfn>}}</div>
+                                    <div>&lt;/a&gt;</div>
+                                    <div>&lt;/li&gt;</div>
+                                </div>
                                 <div>@endforeach</div>
                                 <div>&lt;/ul&gt;</div>
                             </div>
@@ -50,14 +52,18 @@
                         <li>Dans <var>Post</var>, ajouter la relation <var>belongsTo</var> pour le user :
                             <div class="codeblock php copiable">
                                 <div>public function user() {</div>
-                                <div> return $this-&gt;belongsTo('<dfn data-definition="Le model qui représente le user (auteur) du post.">App\User</dfn>');</div>
+                                <div class="block">
+                                    <div>return $this-&gt;belongsTo('<dfn data-definition="Le model qui représente le user (auteur) du post.">App\User</dfn>');</div>
+                                </div>
                                 <div>}</div>
                             </div>
                         </li>
                         <li>Dans <var class="model">User</var>, ajouter la relation <var>hasHany</var> pour les posts :
                             <div class="codeblock php copiable">
                                 <div>public function posts() {</div>
-                                <div> return $this-&gt;hasMany('<dfn data-definition="Le model qui représente les posts de l&apos;auteur.">App\Post</dfn>');</div>
+                                <div class="block">
+                                    <div>return $this-&gt;hasMany('<dfn data-definition="Le model qui représente les posts de l&apos;auteur.">App\Post</dfn>');</div>
+                                </div>
                                 <div>}</div>
                             </div>
                             <p>Faire attention au pluriel du mot <var>post<b>s</b></var>.</p>
@@ -65,7 +71,9 @@
                         <li>Encore dans le model <var class="model">User</var> ajouter la donnée virtuelle (calculée) <var>nomAdmin</var> qui génère <span class="string">Raté, Rita</span> :
                             <div class="codeblock php copiable">
                                 <div>public function get<dfn data-definition="Le nom de la donnée avec une majuscule initiale.">NomAdmin</dfn>Attribute() {</div>
-                                <div> return $this-&gt;nom . ", " . $this-&gt;prenom;</div>
+                                <div class="block">
+                                    <div>return $this-&gt;nom . ", " . $this-&gt;prenom;</div>
+                                </div>
                                 <div>}</div>
                             </div>
                         </li>
@@ -73,7 +81,9 @@
                         <li>On peut également ajouter une donnée virtuelle qui retourne le nombre d'articles de cet auteur :
                             <div class="codeblock php copiable">
                                 <div>public function get<var>NbPosts</var>Attribute() {</div>
-                                <div> return $this-&gt;posts-&gt;count();</div>
+                                <div class="block">
+                                    <div>return $this-&gt;posts-&gt;count();</div>
+                                </div>
                                 <div>}</div>
                             </div>
                         </li>
@@ -94,7 +104,9 @@
                         <li>Adapter le lien vers l'auteur :
                             <div class="codeblock blade copiable">
                                 <div>&lt;a href="{{action('UserController@show', $post-&gt;user)}}"&gt;</div>
-                                <div> {{$post-&gt;user-&gt;nomComplet}}</div>
+                                <div class="block">
+                                    <div>{{$post-&gt;user-&gt;nomComplet}}</div>
+                                </div>
                                 <div>&lt;/a&gt;</div>
                             </div>
                         </li>

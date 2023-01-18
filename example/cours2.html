@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8" />
-    <script src="../src/tuteos.js" type="module"></script>
+    <script src="./tuteos.js" type="module"></script>
     <title>Étapes</title>
 </head>
 
@@ -38,12 +38,14 @@
                         <li>
                             <p>Ouvrir le controller <span class="controller">AppController</span> et ajouter la méthode (non statique) <var>reset</var></p>
                             <div class="codeblock blade copiable">
-                                <div>public function reset () {</div>
-                                <div> $db = \DB::connection()-&gt;getDatabaseName();</div>
-                                <div> file_put_contents($db, '');</div>
-                                <div> <em>//Artisan::call("migrate");</em></div>
-                                <div> <em>//Artisan::call("db::seed");</em></div>
-                                <div> return "La base de donnée a été réinitialisée";</div>
+                                <div>public function reset() {</div>
+                                    <div class="block">
+                                        <div>$db = \DB::connection()-&gt;getDatabaseName();</div>
+                                        <div>file_put_contents($db, '');</div>
+                                        <div><em>//Artisan::call("migrate");</em></div>
+                                        <div><em>//Artisan::call("db::seed");</em></div>
+                                        <div>return "La base de donnée a été réinitialisée";</div>
+                                    </div>
                                 <div>}</div>
                             </div>
                         </li>
@@ -188,24 +190,30 @@
                         <li>Ajouter le paramètre <var>$user_id</var> et la donnée correspondante de l'objet.
                             <div class="codeblock php copiable">
                                 <div>static public function fake($user_id) {</div>
-                                <div> $f = \Faker\Factory::create("fr_CA");</div>
-                                <div> $resultat = new self();</div>
-                                <div> $resultat-&gt;user_id = $user_id;</div>
-                                <div> $resultat-&gt;titre = $f-&gt;text();</div>
-                                <div> $resultat-&gt;contenu = $f-&gt;paragraph();</div>
-                                <div> return $resultat;</div>
+                                <div class="block">
+                                    <div>$f = \Faker\Factory::create("fr_CA");</div>
+                                    <div>$resultat = new self();</div>
+                                    <div>$resultat-&gt;user_id = $user_id;</div>
+                                    <div>$resultat-&gt;titre = $f-&gt;text();</div>
+                                    <div>$resultat-&gt;contenu = $f-&gt;paragraph();</div>
+                                    <div>return $resultat;</div>
+                                </div>
                                 <div>}</div>
                             </div>
                         </li>
                         <li>Dans la boucle des users, ajouter une autre boucle qui crée plusieurs posts associés au user.
                             <div class="codeblock php copiable">
                                 <div>for ($i = 0; $i &lt; 10; $i += 1) {</div>
-                                <div> $user = User::fake()</div>
-                                <div> $user-&gt;save()</div>
-                                <div> for ($j = 0; $j &lt; 10; $j += 1) {</div>
-                                <div> $post = Post::fake($user-&gt;id)</div>
-                                <div> $post-&gt;save()</div>
-                                <div> }</div>
+                                <div class="block">
+                                    <div>$user = User::fake()</div>
+                                    <div>$user-&gt;save()</div>
+                                    <div>for ($j = 0; $j &lt; 10; $j += 1) {</div>
+                                    <div class="block">
+                                        <div>$post = Post::fake($user-&gt;id)</div>
+                                        <div>$post-&gt;save()</div>
+                                    </div>
+                                    <div>}</div>
+                                </div>
                                 <div>}</div>
                             </div>
                         </li>
@@ -225,7 +233,9 @@
                             <div class="codeblock php copiable">
                                 <div><del>$users = [];</del></div>
                                 <div><del>for ($i = 0; $i &lt; 10; $i += 1) {</del></div>
-                                <div> <del>$users[] = User::fake();</del></div>
+                                <div class="block">
+                                    <div><del>$users[] = User::fake();</del></div>
+                                </div>
                                 <div><del>}</del></div>
                                 <div>$users = User::all();</div>
                             </div>
@@ -289,11 +299,11 @@
                         <li>Dupliquer la route <span class="string">/</span> et faire pointer la deuxième vers <span class="string">/users</span>. Regarder les adresses résultantes.</li>
                         <li>Dans la view <span class="view">users.index</span> ajouter une lien au titre avec le href <span class="blade">{{action("UserController@show")}}</span>. Tester et constater l'adresse l'erreur.</li>
                         <li>Tester les adresses suivantes et regarder les adresses résultantes
-                            <div class="blade copiable">{{action("UserController@show", ['id'=&gt;$user-&gt;id])}}</div>
-                            <div class="blade copiable">{{action("UserController@show", ['id'=&gt;$user-&gt;id, age=&gt;99])}}</div>
-                            <div class="blade copiable">{{action("UserController@show", [$user-&gt;id])}}</div>
-                            <div class="blade copiable">{{action("UserController@show", [$user])}}</div>
-                            <div class="blade copiable">{{action("UserController@show", $user)}}</div>
+                            <div class="codeblock blade copiable">{{action("UserController@show", ['id'=&gt;$user-&gt;id])}}</div>
+                            <div class="codeblock blade copiable">{{action("UserController@show", ['id'=&gt;$user-&gt;id, age=&gt;99])}}</div>
+                            <div class="codeblock blade copiable">{{action("UserController@show", [$user-&gt;id])}}</div>
+                            <div class="codeblock blade copiable">{{action("UserController@show", [$user])}}</div>
+                            <div class="codeblock blade copiable">{{action("UserController@show", $user)}}</div>
                         </li>
                     </ol>
                 </li>

@@ -1,0 +1,94 @@
+.copiable {
+	position: relative; //	display: inline-block;
+
+	//padding-right: 0;
+	.label {
+		overflow: hidden;
+	}
+
+	.icon {
+		@media print {
+			display: none;
+		}
+	}
+
+	> .icon {
+		float: left;
+		margin-right: .5ch;
+	}
+
+	&.codeblock {
+		.icon {
+			position: absolute;
+			right: .3ch;
+			bottom: .5ch;
+			transform-origin: right bottom;
+		}
+	}
+}
+
+code,
+span {
+	&.copiable {
+		--padding: .1em 1ch;
+		display: inline-flex;
+	}
+}
+
+/*Just for icons look*/
+span.icon {
+	line-height: 1;
+	cursor: pointer;
+	transition-property: transform, color;
+	transition-duration: .3s;
+	transform: scale(.8);
+	//		text-shadow: 0px 0px 0px rgba(0, 0, 0, .4);
+	z-index: 10000;
+	line-height: 1em;
+	transform-origin: right center;
+	color: hsl(var(--hue), var(--sat), calc(50% + var(--lum) / 10));
+	
+	:hover > & {
+		color: hsl(var(--hue), var(--sat), calc(50% + var(--lum) / 2));
+		text-shadow: 1px 1px 1px #0008;
+		transform: scale(1.5);
+		//			text-shadow: .25em .25em .25em rgba(0, 0, 0, .4);
+	}
+
+	.tag {
+		position: absolute;
+		z-index: 1000;
+		left: -1em;
+		right: -1em;
+		transition-delay: 250ms;
+		transition-timing-function: ease-in;
+		transition-duration: 200ms;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		top: 0;
+		bottom: 0;
+
+		&.out {
+			transform: scale(0.2);
+		}
+	}
+
+	.zzztag {
+		background-color: red;
+		border: 1px solid white;
+		border-radius: 100%;
+		color: white;
+		font-weight: bold;
+		//transform: rotate(10deg);
+		box-shadow: 1px 1px black;
+		font-size: .5em;
+	}
+
+	.tag {
+		background-color: rgba(0, 0, 0, .5);
+		font-family: arial;
+		font-weight: bold;
+		font-size: .5em;
+	}
+}

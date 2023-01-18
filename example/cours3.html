@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8" />
-    <script src="../src/tuteos.js" type="module"></script>
+    <script src="./tuteos.js" type="module"></script>
     <title>Étapes</title>
 </head>
 
@@ -66,7 +66,7 @@
                         <li>À la fin de la route <cite>show</cite> ajouter la contrainte de route.
                             <div class="codeblock php copiable">
                                 <div><samp>Route::get('/users/{user}', "UserController@show")</samp></div>
-                                <div> -&gt;where('user', '[0-9]+')<samp>;</samp></div>
+                                <div>-&gt;where('user', '[0-9]+')<samp>;</samp></div>
                             </div>
                         </li>
                         <li>Tester différentes adresses : <span class="file">/users/1</span>, <span class="file">/users/create</span> et <span class="file">/users/patate</span>.</li>
@@ -81,9 +81,11 @@
                             <div class="codeblock php copiable">
                                 <div><samp>public function create()</samp></div>
                                 <div><samp>{</samp></div>
-                                <div> $user = new User();</div>
-                                <div> $user-&gt;province = "Québec";</div>
-                                <div> return view('users.create', ['user'=&gt;$user]);</div>
+                                <div class="block">
+                                    <div>$user = new User();</div>
+                                    <div>$user-&gt;province = "Québec";</div>
+                                    <div>return view('users.create', ['user'=&gt;$user]);</div>
+                                </div>
                                 <div><samp>}</samp></div>
                             </div>
                         </li>
@@ -101,12 +103,18 @@
                         <li>Dans la <cite>view</cite> form, créer le tableau vide avec une rangée, un <code>&lt;th&gt;</code> pour le label et un <code>&lt;td&gt;</code> pour champ de formulaire.
                             <div class="codeblock php copiable">
                                 <div>&lt;table border="1"&gt;</div>
-                                <div> &lt;tbody&gt;</div>
-                                <div> &lt;tr&gt;</div>
-                                <div> &lt;th&gt;&lt;/th&gt;</div>
-                                <div> &lt;td&gt;&lt;/td&gt;</div>
-                                <div> &lt;/tr&gt;</div>
-                                <div> &lt;/tbody&gt;</div>
+                                <div class="block">
+                                    <div>&lt;tbody&gt;</div>
+                                    <div class="block">
+                                        <div>&lt;tr&gt;</div>
+                                        <div class="block">
+                                            <div>&lt;th&gt;&lt;/th&gt;</div>
+                                            <div>&lt;td&gt;&lt;/td&gt;</div>
+                                        </div>
+                                        <div>&lt;/tr&gt;</div>
+                                    </div>
+                                    <div>&lt;/tbody&gt;</div>
+                                </div>
                                 <div>&lt;/table&gt;</div>
                             </div>
                         </li>
@@ -126,48 +134,70 @@
                         <li>Ajouter les autres champs.
                             <div class="codeblock blade copiable">
                                 <div>&lt;tr&gt;</div>
-                                <div> &lt;th&gt;{{Form::label('nom', 'Nom')}}&lt;/th&gt;</div>
-                                <div> &lt;td&gt;{{Form::text('nom')}}&lt;/td&gt;</div>
+                                <div class="block">
+                                    <div>&lt;th&gt;{{Form::label('nom', 'Nom')}}&lt;/th&gt;</div>
+                                    <div>&lt;td&gt;{{Form::text('nom')}}&lt;/td&gt;</div>
+                                </div>
                                 <div>&lt;/tr&gt;</div>
                                 <div>&lt;tr&gt;</div>
-                                <div> &lt;th&gt;{{Form::label('prenom', 'Prénom')}}&lt;/th&gt;</div>
-                                <div> &lt;td&gt;{{Form::text('prenom')}}&lt;/td&gt;</div>
+                                <div class="block">
+                                    <div>&lt;th&gt;{{Form::label('prenom', 'Prénom')}}&lt;/th&gt;</div>
+                                    <div>&lt;td&gt;{{Form::text('prenom')}}&lt;/td&gt;</div>
+                                </div>
                                 <div>&lt;/tr&gt;</div>
                                 <div>&lt;tr&gt;</div>
-                                <div> &lt;th&gt;{{Form::label('name', 'Nom d\'usager')}}&lt;/th&gt;</div>
-                                <div> &lt;td&gt;{{Form::text('name')}}&lt;/td&gt;</div>
+                                <div class="block">
+                                    <div>&lt;th&gt;{{Form::label('name', 'Nom d\'usager')}}&lt;/th&gt;</div>
+                                    <div>&lt;td&gt;{{Form::text('name')}}&lt;/td&gt;</div>
+                                </div>
                                 <div>&lt;/tr&gt;</div>
                                 <div>&lt;tr&gt;</div>
-                                <div> &lt;th&gt;{{Form::label('password', 'Mot de passe')}}&lt;/th&gt;</div>
-                                <div> &lt;td&gt;{{Form::password('password')}}&lt;/td&gt;</div>
+                                <div class="block">
+                                    <div>&lt;th&gt;{{Form::label('password', 'Mot de passe')}}&lt;/th&gt;</div>
+                                    <div>&lt;td&gt;{{Form::password('password')}}&lt;/td&gt;</div>
+                                </div>
                                 <div>&lt;/tr&gt;</div>
                                 <div>&lt;tr&gt;</div>
-                                <div> &lt;th&gt;{{Form::label('email', 'Courriel')}}&lt;/th&gt;</div>
-                                <div> &lt;td&gt;{{Form::email('email')}}&lt;/td&gt;</div>
+                                <div class="block">
+                                    <div>&lt;th&gt;{{Form::label('email', 'Courriel')}}&lt;/th&gt;</div>
+                                    <div>&lt;td&gt;{{Form::email('email')}}&lt;/td&gt;</div>
+                                </div>
                                 <div>&lt;/tr&gt;</div>
                                 <div>&lt;tr&gt;</div>
-                                <div> &lt;th&gt;{{Form::label('tel', 'Téléphone')}}&lt;/th&gt;</div>
-                                <div> &lt;td&gt;{{Form::text('tel')}}&lt;/td&gt;</div>
+                                <div class="block">
+                                    <div>&lt;th&gt;{{Form::label('tel', 'Téléphone')}}&lt;/th&gt;</div>
+                                    <div>&lt;td&gt;{{Form::text('tel')}}&lt;/td&gt;</div>
+                                </div>
                                 <div>&lt;/tr&gt;</div>
                                 <div>&lt;tr&gt;</div>
-                                <div> &lt;th&gt;{{Form::label('adresse', 'Adresse')}}&lt;/th&gt;</div>
-                                <div> &lt;td&gt;{{Form::text('adresse')}}&lt;/td&gt;</div>
+                                <div class="block">
+                                    <div>&lt;th&gt;{{Form::label('adresse', 'Adresse')}}&lt;/th&gt;</div>
+                                    <div>&lt;td&gt;{{Form::text('adresse')}}&lt;/td&gt;</div>
+                                </div>
                                 <div>&lt;/tr&gt;</div>
                                 <div>&lt;tr&gt;</div>
-                                <div> &lt;th&gt;{{Form::label('ville', 'Ville')}}&lt;/th&gt;</div>
-                                <div> &lt;td&gt;{{Form::text('ville')}}&lt;/td&gt;</div>
+                                <div class="block">
+                                    <div>&lt;th&gt;{{Form::label('ville', 'Ville')}}&lt;/th&gt;</div>
+                                    <div>&lt;td&gt;{{Form::text('ville')}}&lt;/td&gt;</div>
+                                </div>
                                 <div>&lt;/tr&gt;</div>
                                 <div>&lt;tr&gt;</div>
-                                <div> &lt;th&gt;{{Form::label('province', 'Province')}}&lt;/th&gt;</div>
-                                <div> &lt;td&gt;{{Form::text('province')}}&lt;/td&gt;</div>
+                                <div class="block">
+                                    <div>&lt;th&gt;{{Form::label('province', 'Province')}}&lt;/th&gt;</div>
+                                    <div>&lt;td&gt;{{Form::text('province')}}&lt;/td&gt;</div>
+                                </div>
                                 <div>&lt;/tr&gt;</div>
                                 <div>&lt;tr&gt;</div>
-                                <div> &lt;th&gt;{{Form::label('codepostal', 'Code Postal')}}&lt;/th&gt;</div>
-                                <div> &lt;td&gt;{{Form::text('codepostal')}}&lt;/td&gt;</div>
+                                <div class="block">
+                                    <div>&lt;th&gt;{{Form::label('codepostal', 'Code Postal')}}&lt;/th&gt;</div>
+                                    <div>&lt;td&gt;{{Form::text('codepostal')}}&lt;/td&gt;</div>
+                                </div>
                                 <div>&lt;/tr&gt;</div>
                                 <div>&lt;tr&gt;</div>
-                                <div> &lt;th&gt;{{Form::label('citation', 'Citation')}}&lt;/th&gt;</div>
-                                <div> &lt;td&gt;{{Form::textarea('citation')}}&lt;/td&gt;</div>
+                                <div class="block">
+                                    <div>&lt;th&gt;{{Form::label('citation', 'Citation')}}&lt;/th&gt;</div>
+                                    <div>&lt;td&gt;{{Form::textarea('citation')}}&lt;/td&gt;</div>
+                                </div>
                                 <div>&lt;/tr&gt;</div>
                             </div>
                         </li>
@@ -187,7 +217,7 @@
                         <li>Créer un nouveau <code>user</code>, y mettre le nom et le retourner.
                             <div class="codeblock php copiable">
                                 <div>$user = new User();</div>
-                                <div> $user-&gt;nom = $request-&gt;get('nom');</div>
+                                <div>$user-&gt;nom = $request-&gt;get('nom');</div>
                                 <div>return $user;</div>
                             </div>
                         </li>
@@ -202,17 +232,19 @@
                         <li>Dans le <cite>model</cite> <code class="file">User.php</code>, ajouter les noms des champs dans la propriété <code>fillable</code>.
                             <div class="codeblock php copiable">
                                 <div><samp>protected $fillable = [</samp></div>
-                                <div> 'nom',</div>
-                                <div> 'prenom',</div>
-                                <div> 'name',</div>
-                                <div> 'password',</div>
-                                <div> 'email',</div>
-                                <div> 'tel',</div>
-                                <div> 'adresse',</div>
-                                <div> 'ville',</div>
-                                <div> 'province',</div>
-                                <div> 'codepostal',</div>
-                                <div> 'citation',</div>
+                                <div class="block">
+                                    <div>'nom',</div>
+                                    <div>'prenom',</div>
+                                    <div>'name',</div>
+                                    <div>'password',</div>
+                                    <div>'email',</div>
+                                    <div>'tel',</div>
+                                    <div>'adresse',</div>
+                                    <div>'ville',</div>
+                                    <div>'province',</div>
+                                    <div>'codepostal',</div>
+                                    <div>'citation',</div>
+                                </div>
                                 <div><samp>];</samp></div>
                             </div>
                         </li>
@@ -236,61 +268,83 @@
                         <li>Regarder la <cite>view</cite> <span class="view">users.show</span>. Deux liens ont été ajoutés.
                             <div class="codeblock blade copiable">
                                 <div>&lt;p&gt;</div>
-                                <div> &lt;a href="{{action('UserController@edit', $user)}}"&gt;</div>
-                                <div> Modifier</div>
-                                <div> &lt;/a&gt;</div>
-                                <div> |</div>
-                                <div> &lt;a</div>
-                                <div> href="{{action('UserController@destroy', $user)}}"</div>
-                                <div> onclick="return confirm('Voulez-vous vraiment supprimer cet usager?')"</div>
-                                <div> &gt;</div>
-                                <div> Supprimer</div>
-                                <div> &lt;/a&gt;</div>
+                                <div class="block">
+                                    <div>&lt;a href="{{action('UserController@edit', $user)}}"&gt;</div>
+                                    <div class="block">
+                                        <div>Modifier</div>
+                                    </div>
+                                    <div>&lt;/a&gt;</div>
+                                    <div>|</div>
+                                    <div>&lt;a</div>
+                                    <div class="block">
+                                        <div>href="{{action('UserController@destroy', $user)}}"</div>
+                                    </div>
+                                    <div class="block">
+                                        <div>onclick="return confirm('Voulez-vous vraiment supprimer cet usager?')"</div>
+                                    </div>
+                                    <div>&gt;</div>
+                                    <div class="block">
+                                        <div>Supprimer</div>
+                                    </div>
+                                    <div>&lt;/a&gt;</div>
+                                </div>
                                 <div>&lt;/p&gt;</div>
                             </div>
                         </li>
                         <li>Analyser les 3 routes ajoutées.
                             <div class="codeblock php copiable">
                                 <div>Route::get('/users/{user}/edit', "UserController@edit")</div>
-                                <div> -&gt;where('user', '[0-9]+');</div>
+                                <div class="block">
+                                    <div>-&gt;where('user', '[0-9]+');</div>
+                                </div>
                                 <div>Route::post('/users/{user}/edit', "UserController@update")</div>
-                                <div> -&gt;where('user', '[0-9]+');</div>
+                                <div class="block">
+                                    <div>-&gt;where('user', '[0-9]+');</div>
+                                </div>
                                 <div>Route::get('/users/{user}/destroy', "UserController@destroy")</div>
-                                <div> -&gt;where('user', '[0-9]+');</div>
+                                <div class="block">
+                                    <div>-&gt;where('user', '[0-9]+');</div>
+                                </div>
                             </div>
                         </li>
                         <li>Examiner les 3 méthodes correspondantes du controller <span class="controller">UserController</span>.
                             <div class="codeblock php copiable">
                                 <div><samp>public function edit(<b>User $user</b>)</samp></div>
                                 <div><samp>{</samp></div>
-                                <div>return view("users.edit", ['user'=&gt;$user]);</div>
+                                <div class="block">
+                                    <div>return view("users.edit", ['user'=&gt;$user]);</div>
+                                </div>
                                 <div><samp>}</samp></div>
                             </div>
                             <div class="codeblock php copiable">
                                 <div><samp>public function update(Request $request, <b>User $user</b>)</samp></div>
                                 <div><samp>{</samp></div>
-                                <div> $donnees = $request-&gt;except(['password']);</div>
-                                <div> if ($request-&gt;get('password')) {</div>
-                                <div> $user-&gt;password = $request-&gt;get('password');</div>
-                                <div> }</div>
-                                <div> $user-&gt;fill($donnees);</div>
-                                <div> $user-&gt;save();</div>
-                                <div> return redirect()</div>
-                                <div> -&gt;action('UserController@show', $user);</div>
+                                <div class="block">
+                                    <div>$donnees = $request-&gt;except(['password']);</div>
+                                    <div>if ($request-&gt;get('password')) {</div>
+                                    <div class="block">
+                                        <div>$user-&gt;password = $request-&gt;get('password');</div>
+                                    </div>
+                                    <div>}</div>
+                                    <div>$user-&gt;fill($donnees);</div>
+                                    <div>$user-&gt;save();</div>
+                                    <div>return redirect()-&gt;action('UserController@show', $user);</div>
+                                </div>
                                 <div><samp>}</samp></div>
                             </div>
                             <div class="codeblock php copiable">
                                 <div><samp>public function destroy(<b>User $user</b>)</samp></div>
                                 <div><samp>{</samp></div>
-                                <div> // Temporaire : si on n'a pas fait les liaisons entre les tables</div>
-                                <div> \App\Post::where('user_id', $user-&gt;id)-&gt;delete();</div>
-                                <div> </div>
-                                <div> // Quand les liaisons sont faites</div>
-                                <div> // $user-&gt;posts()-&gt;delete();</div>
-                                <div> </div>
-                                <div> $user-&gt;delete();</div>
-                                <div> return redirect()</div>
-                                <div> -&gt;action('UserController@index');</div>
+                                <div class="block">
+                                    <div>// Temporaire : si on n'a pas fait les liaisons entre les tables</div>
+                                    <div>\App\Post::where('user_id', $user-&gt;id)-&gt;delete();</div>
+                                    <div></div>
+                                    <div>// Quand les liaisons sont faites</div>
+                                    <div>// $user-&gt;posts()-&gt;delete();</div>
+                                    <div></div>
+                                    <div>$user-&gt;delete();</div>
+                                    <div>return redirect()-&gt;action('UserController@index');</div>
+                                </div>
                                 <div><samp>}</samp></div>
                             </div>
                         </li>
@@ -298,8 +352,10 @@
                             <div class="codeblock blade copiable">
                                 <div>@extends('interface.index')</div>
                                 <div>@section('contenu')</div>
-                                <div> &lt;h2&gt;Modifier un usager&lt;/h2&gt;</div>
-                                <div> @include('users.form')</div>
+                                <div class="block">
+                                    <div>&lt;h2&gt;Modifier un usager&lt;/h2&gt;</div>
+                                    <div>@include('users.form')</div>
+                                </div>
                                 <div>@endsection</div>
                             </div>
                         </li>

@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8" />
-    <script src="../src/tuteos.js" type="module"></script>
+    <script src="./tuteos.js" type="module"></script>
     <title>Étapes</title>
 </head>
 
@@ -94,19 +94,20 @@
                             <p>Placer le code dans le model <span class="file">User.php</span> en créant une fonction statique.</p>
                             <div class="codeblock php copiable">
                                 <div>static public function fake() {</div>
-                                <div> $f = \Faker\Factory::create("fr_CA");</div>
-                                <div> $resultat = new self();</div>
-                                <div> $resultat-&gt;prenom = $f-&gt;firstName();</div>
-                                <div> $resultat-&gt;nom = $f-&gt;lastName();</div>
-                                <div> $resultat-&gt;email = str_slug($resultat-&gt;prenom.$resultat-&gt;nom, '')</div>
-                                <div> .'@'.$f-&gt;domain();</div>
-                                <div> $resultat-&gt;tel = $f-&gt;phoneNumber();</div>
-                                <div> $resultat-&gt;adresse = $f-&gt;streetAddress();</div>
-                                <div> $resultat-&gt;ville = $f-&gt;city();</div>
-                                <div> $resultat-&gt;province = $f-&gt;state();</div>
-                                <div> $resultat-&gt;codepostal = $f-&gt;postcode();</div>
-                                <div> $resultat-&gt;citation = $f-&gt;paragraph();</div>
-                                <div> return $resultat;</div>
+                                <div class="block">
+                                    <div>$f = \Faker\Factory::create("fr_CA");</div>
+                                    <div>$resultat = new self();</div>
+                                    <div>$resultat-&gt;prenom = $f-&gt;firstName();</div>
+                                    <div>$resultat-&gt;nom = $f-&gt;lastName();</div>
+                                    <div>$resultat-&gt;email = str_slug($resultat-&gt;prenom.$resultat-&gt;nom, '').'@'.$f-&gt;domain();</div>
+                                    <div>$resultat-&gt;tel = $f-&gt;phoneNumber();</div>
+                                    <div>$resultat-&gt;adresse = $f-&gt;streetAddress();</div>
+                                    <div>$resultat-&gt;ville = $f-&gt;city();</div>
+                                    <div>$resultat-&gt;province = $f-&gt;state();</div>
+                                    <div>$resultat-&gt;codepostal = $f-&gt;postcode();</div>
+                                    <div>$resultat-&gt;citation = $f-&gt;paragraph();</div>
+                                    <div>return $resultat;</div>
+                                </div>
                                 <div>}</div>
                             </div>
                         </li>
@@ -171,7 +172,9 @@
                             <p>Pour chacune des variables du component (donc, de la view) créer une slot</p>
                             <div class="codeblock blade copiable">
                                 <div>@slot("nom_de_la_variable")</div>
-                                <div> &lt;h2&gt;{{$bidule}}&lt;/h2&gt;</div>
+                                <div class="block">
+                                    <div>&lt;h2&gt;{{$bidule}}&lt;/h2&gt;</div>
+                                </div>
                                 <div>@endslot</div>
                             </div>
                         </li>
@@ -185,7 +188,9 @@
                             <div class="codeblock php copiable">
                                 <div>$users = [];</div>
                                 <div>for ($i = 0; $i &lt; 10; $i += 1) {</div>
-                                <div> $users[] = User::fake();</div>
+                                <div class="block">
+                                    <div>$users[] = User::fake();</div>
+                                </div>
                                 <div>}</div>
                                 <div>return view("users.index", ['user<strong>s</strong>'=&gt;$user<strong>s</strong>]);</div>
                             </div>

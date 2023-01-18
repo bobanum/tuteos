@@ -1,5 +1,5 @@
 /*jslint browser:true, esnext:true*/
-import Tuteos from "./tuteos.js";
+import Tuteos from "./Tuteos.js";
 
 /**
  * @todo Complete click actions and submenus
@@ -137,16 +137,16 @@ export default class Menu {
         return result;
     }
     static menuItemFrames() {
-        var resultat, a;
-        resultat = document.createElement("li");
-        a = resultat.appendChild(document.createElement("a"));
+        var result, a;
+        result = document.createElement("li");
+        a = result.appendChild(document.createElement("a"));
         a.setAttribute("href", "#");
         a.setAttribute("id", "mnu_videos");
         a.addEventListener("click", function () {
             document.body.classList.toggle('videos');
         });
         a.innerHTML = "Afficher les vidéos";
-        return resultat;
+        return result;
     }
     static from(obj) {
         var result = Object.assign(new this(), obj);

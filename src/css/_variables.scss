@@ -1,0 +1,44 @@
+:root {
+    --font-size: clamp(16px,1.6vw,28px);
+    --font-global: normal normal normal 1rem/1 "Josefin Sans";
+    --font-code: normal normal normal .85em/1.2 "Anonymous Pro";
+    --hue: 210;
+    --sat: 25%;
+}
+
+@mixin module {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    header {
+        order: -1000;
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+    }
+
+    footer {
+        order: 1000;
+    }
+}
+@mixin center {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+}
+
+@mixin box {
+    font: var(--font-code);
+    padding: var(--padding, 1ch);
+    background-color: hsl(var(--hue, 0), var(--sat, 50%), calc(var(--lum, 90%)));
+    border: 1px none;
+    border-radius: .2rem;
+    border-color: hsl(var(--hue, 0), var(--sat, 50%), calc(var(--lum, 90%) / 2));
+    white-space: nowrap;
+    // display: inline-flex;
+    align-items: center;
+}
