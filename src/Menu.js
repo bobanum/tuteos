@@ -1,4 +1,3 @@
-/*jslint browser:true, esnext:true*/
 import Tuteos from "./Tuteos.js";
 
 /**

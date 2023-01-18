@@ -30,7 +30,7 @@
             "etiquette": "Web3",
             "url": "http://prof-tim.cstj.qc.ca/cours/web3",
             "blank": true,
-            "icone": "./logo_web3.svg"
+            "icone": "./img/logo_web3.svg"
         },
         {
             "etiquette": "Github",

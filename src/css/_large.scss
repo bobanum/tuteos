@@ -1,0 +1,7 @@
+@media screen and (min-width: $large-breakpoint) {
+    body {
+        --width-summary: 250px;
+        grid-template-columns: var(--width-summary) auto;
+        grid-template-areas: "summary app";
+    }
+}

@@ -1,10 +1,11 @@
-/*jslint browser:true, esnext:true*/
 import Menu from './Menu.js';
 
 export default class Tuteos {
-	static debug = true;
+	static debug = false;
 	static useAppFavicon = false;
 	static indentation = "    ";
+	static menu = [];	// Should be overridden
+	static menuContainer = "#app";
 	/**
 	 * Loading the app called on window load event
 	 */
@@ -21,17 +22,11 @@ export default class Tuteos {
 					return resolve();
 				});
 			}),
-			this.loadJson("config.json").then(data => {
-				console.pin("config.json loaded");
-				for (let prop in data) {
-					this[prop] = data[prop];
-				}
-				return data;
-			}),
 		])
 			.then(() => this.processReferences())
 			.then(() => {
 				console.pin("References processed");
+				this.addMenu();
 				this.addSummary();
 				this.makeCopiable();
 				// this.makeFoldable();
@@ -40,15 +35,6 @@ export default class Tuteos {
 			})
 			.then(() => console.pin("Tuteos loaded"));
 		return this.loadPromise;
-	}
-	static get menu() {
-		return this._menu;
-	}
-	static set menu(menu) {
-		this._menu = new Menu("", menu);
-		this.dom_menu = this._menu.html_nav("main");
-		document.getElementById("app").appendChild(this.dom_menu);
-		//        this.addMenu();
 	}
 	/**
 	 * Returns a Promise resolved when given file is loaded
@@ -71,10 +57,10 @@ export default class Tuteos {
 	 * Adds the menu to the app according to config file
 	 */
 	static addMenu() {
-		var menu = this._menu.itemsList();
-		var nav = document.querySelector("#app>nav");
-		nav = nav || document.getElementById("app").appendChild(document.createElement("nav"));
-		nav.appendChild(menu);
+		var objMenu = new Menu("", this.menu);
+		var nav = objMenu.html_nav();
+		var container = document.querySelector(this.menuContainer);
+		container.appendChild(nav);
 	}
 	/**
 	 * Returns a Promise resolved when all references has been processed

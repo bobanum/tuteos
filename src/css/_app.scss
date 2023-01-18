@@ -1,0 +1,31 @@
+#app {
+    min-width: 30em;
+    max-width: 45em;
+    min-height: 100%;
+    justify-self: center;
+    grid-area: app;
+    & > header,
+    & > footer {
+        background-color: black;
+        color: white;
+        text-align: center;
+        padding: 1em;
+    }
+
+    @media screen {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        header {
+            order: -1000;
+        }
+
+        footer {
+            order: 1000;
+        }
+
+        background-color: white;
+        color: var(--text-color);
+    }
+}

@@ -1,0 +1,51 @@
+div.body {
+	padding: 1em;
+
+	> ol > li {
+		padding: 1ch;
+	}
+
+	iframe {
+		display: block;
+		margin: 0 auto;
+		display: none;
+	}
+
+	ol {
+		padding-left: 2ch;
+	}
+
+	li {
+		padding: .5em 0;
+
+		p {
+			margin: 0;
+		}
+	}
+
+	> ol ol {
+		list-style-type: lower-alpha;
+	}
+
+	ol ol > li {
+		page-break-inside: avoid;
+
+		+ li {
+			border-top: 1px solid rgba(0, 0, 0, 0.1);
+		}
+	}
+	@media print {
+		ol ol li {
+			border: none !important;
+			margin-top: 0;
+			margin-bottom: 0;
+			padding-top: 0;
+			padding-bottom: 0;
+		}
+	
+		.codeblock dfn {
+			text-decoration: none;
+			font-style: normal;
+		}
+	}
+}
