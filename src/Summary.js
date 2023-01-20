@@ -46,8 +46,7 @@ export default class Summary {
 	html_item(element) {
 		var result, a, id;
 		var label = element.textContent;
-		var container = element.closest("[id]") || element.parentNode;
-		var id = container.getAttribute("id");
+		var id = element.getAttribute("id");
 		if (!id) {
 			id = element.id = this.slug(label);
 		}
