@@ -1,6 +1,14 @@
 div.body {
-	padding: 1em;
-
+	padding: 1em 3em;
+	h1 {
+		color: hsl(var(--hue), var(--sat), 30%);
+		&:first-of-type {
+			margin-top: 0;
+		}
+	}
+	article {
+		margin: 1em 0;
+	}
 	> ol > li {
 		padding: 1ch;
 	}
@@ -27,7 +35,7 @@ div.body {
 		list-style-type: lower-alpha;
 	}
 
-	ol ol > li {
+	ol > li {
 		page-break-inside: avoid;
 
 		+ li {

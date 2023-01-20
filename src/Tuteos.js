@@ -1,11 +1,29 @@
 import Menu from './Menu.js';
+import Copying from './Copying.js';
+import Summary from './Summary.js';
+import References from './References.js';
 
 export default class Tuteos {
 	static debug = false;
 	static useAppFavicon = false;
 	static indentation = "    ";
 	static menu = [];	// Should be overridden
-	static menuContainer = "#app";
+	static menuSelector = "#app";
+	static summarySelector = "#app>div.body";
+	static summaryItemsSelector = "article>:first-child";
+	static stylesheets = [];
+	/**
+	 * Initializes the app. Sets static properties.
+	 * Called on class load.
+	 */
+	static init() {
+		console.pin = this.debug ? console.log : function () { };
+		console.pin("Loading Tuteos");
+		this.setPaths();
+		this.setStrings();
+		this.wrapContent();
+		// this.load();
+	}
 	/**
 	 * Loading the app called on window load event
 	 */
@@ -14,6 +32,8 @@ export default class Tuteos {
 			console.pin("load in progress");
 			return this.loadPromise;
 		}
+		console.pin("Adding headers");
+		this.addHeadElements();
 		console.pin("Starting Tuteos.load");
 		this.loadPromise = Promise.all([
 			new Promise(resolve => {
@@ -23,12 +43,12 @@ export default class Tuteos {
 				});
 			}),
 		])
-			.then(() => this.processReferences())
+			.then(() => References.processAll())
 			.then(() => {
 				console.pin("References processed");
 				this.addMenu();
 				this.addSummary();
-				this.makeCopiable();
+				Copying.process();
 				// this.makeFoldable();
 				this.addYoutubeIcons();
 				// this.addYoutubeFrames();
@@ -53,59 +73,44 @@ export default class Tuteos {
 			xhr.send(null);
 		});
 	}
+	static wrapContent() {
+		var container = document.body.insertBefore(document.createElement("div"), document.body.firstChild);
+		container.classList.add("interface");
+		container.id = "app";
+		container.appendChild(this.html_header());
+		var body = container.appendChild(document.createElement("div"));
+		body.classList.add("body");
+		while (container.nextSibling) {
+			body.appendChild(container.nextSibling);
+		}
+		container.appendChild(this.html_footer());
+	}
+	static html_header() {
+		// 	<header>
+		// 	<h1>Un site Web avec Laravel</h1>
+		// 	<h2>Les étapes</h2>
+		// </header>
+		var result = document.createElement("header");
+		var h1 = result.appendChild(document.createElement("h1"));
+		h1.innerHTML = 'Un site Web avec Laravel';
+		var h2 = result.appendChild(document.createElement("h2"));
+		h2.innerHTML = 'Les étapes';
+		return result;
+	}
+	static html_footer() {
+		// <footer>Les vidéos sont disponibles sur <a href="https://www.youtube.com/channel/UCFWzWuHnqYOlBN2lJhBIGNg">la chaîne Youtube</a></footer>
+		var result = document.createElement("footer");
+		result.innerHTML = 'Les vidéos sont disponibles sur <a href="https://www.youtube.com/channel/UCFWzWuHnqYOlBN2lJhBIGNg">la chaîne Youtube</a>';
+		return result;
+	}
 	/**
 	 * Adds the menu to the app according to config file
 	 */
 	static addMenu() {
-		var objMenu = new Menu("", this.menu);
+		var objMenu = new Menu(this.menu, "");
 		var nav = objMenu.html_nav();
-		var container = document.querySelector(this.menuContainer);
+		var container = document.querySelector(this.menuSelector);
 		container.appendChild(nav);
-	}
-	/**
-	 * Returns a Promise resolved when all references has been processed
-	 * @returns {[[Type]]} [[Description]]
-	 */
-	static processReferences() {
-		console.pin("Processing references");
-		var refs = Array.from(document.querySelectorAll("li.ref"));
-		var promises = refs.map(this.processRef, this);
-		return Promise.all(promises);
-	}
-	/**
-	 * Returns a Promise that loads given reference and processes it.
-	 * @param   {HTMLElement} ref The element containing an url to reference
-	 * @returns {Promise}     Promise returning removed ref after treatment
-	 */
-	static processRef(ref) {
-		console.log(ref, ref.parentNode);
-		var url = ref.querySelector("a").getAttribute("href");
-		return this.loadReference(url).then(data => {
-			console.pin("Processing ", url);
-			var elements = Array.from(data.querySelectorAll("div.body>ol>li"));
-			console.log(ref, ref.innerText, ref.parentNode);
-			elements.forEach(element => ref.parentNode.insertBefore(element, ref));
-			ref.parentNode.removeChild(ref);
-			return ref;
-		});
-	}
-	/**
-	 * Returns a promise loading html file
-	 * @param   {string}  url The url to file
-	 * @returns {Promise} Promises giving loaded HTMLElement
-	 */
-	static loadReference(url) {
-		return new Promise(resolve => {
-			console.pin("Loading reference '" + url + "'");
-			var xhr = new XMLHttpRequest();
-			xhr.open("get", url);
-			xhr.responseType = "document";
-			xhr.addEventListener("load", (e) => {
-				console.pin("Reference '" + url + "' loaded");
-				resolve(e.target.response);
-			});
-			xhr.send();
-		});
 	}
 	/**
 	 * Finds every reference to video and adds Youtube icon
@@ -181,26 +186,6 @@ export default class Tuteos {
 		});
 	}
 	/**
-	 * Makes copiable items copiable
-	 */
-	static makeCopiable() {
-		var elements = document.querySelectorAll(".copiable");
-		elements.forEach(element => {
-			var label = document.createElement("div");
-			label.classList.add("label");
-			label.innerHTML = element.innerHTML;
-			element.innerHTML = "";
-
-			element.appendChild(this.html_entityIcon('&#x1f4cb;&#xfe0e;', this._('copy_to_clipboard'), e => {
-				this.copy(e.currentTarget);
-			}));
-			//element.appendChild(this.html_svgIcon('copy', this._('copy_to_clipboard'), (e) => {
-			//    this.copy(e.currentTarget);
-			//}));
-			element.appendChild(label);
-		});
-	}
-	/**
 	 * Returns a span containing given entity with click event
 	 * @param   {string}      entity Entity
 	 * @param   {string}      alt    Label for title and alt attributes
@@ -235,138 +220,9 @@ export default class Tuteos {
 	 * Adds summary to app
 	 */
 	static addSummary() {
-		var body = document.body.querySelector("#app>div.body");
-		body.insertBefore(this.createSummary("li[id]>h2"), body.firstChild);
-	}
-	/**
-	 * Creates and returns summary of elements matching given selector
-	 * @param   {string}      selecteur The selector for matching elements
-	 * @returns {HTMLElement} A nav#summary element
-	 */
-	static createSummary(selector) {
-		var result, elements, title, list;
-		result = document.createElement("nav");
-		result.setAttribute("id", "summary");
-		title = result.appendChild(document.createElement("h2"));
-		title.innerHTML = this._("summary");
-		list = result.appendChild(document.createElement("ol"));
-		elements = document.body.querySelectorAll(selector);
-		elements.forEach(element => {
-			list.appendChild(this.createSummaryItem(element));
-			element.appendChild(this.upIcon());
-		});
-		return result;
-	}
-	/**
-	 * Returns li HTMLElement for summary
-	 * @param   {HTMLElement} element Element to analyse for label
-	 * @returns {HTMLElement} li element with link
-	 */
-	static createSummaryItem(element) {
-		var result, a, id;
-		id = element.closest("[id]").getAttribute("id");
-		result = document.createElement("li");
-		a = result.appendChild(document.createElement("a"));
-		a.innerHTML = element.textContent;
-		a.setAttribute("href", "#" + id);
-		return result;
-	}
-	/**
-	 * Returns the link leading to summary
-	 * @returns {HTMLElement} a element
-	 */
-	static upIcon() {
-		var result;
-		result = document.createElement("a");
-		result.setAttribute("href", "#summary");
-		result.innerHTML = "⮵";
-		return result;
-	}
-	/**
-	 * Copies innerText of given element to the clipboard
-	 * @param {HTMLElement} element The element from which to take the text
-	 */
-	static copy(element) {
-		var copiable, text, input;
-		copiable = element.parentNode;
-		text = this.grabText(copiable);
-		input = document.body.appendChild(document.createElement("textarea"));
-		if (copiable.classList.contains("codeblock")) {
-			text = text + "\r\n";
-		}
-		input.value = text;
-		input.select();
-		document.execCommand("Copy");
-		input.parentNode.removeChild(input);
-		this.copiedTag(copiable);
-	}
-	/**
-	 * Activate tag displaying "copied" briefly.
-	 * @returns {Promise} [[Description]]
-	 */
-	static copiedTag(copiable) {
-		return new Promise(resolve => {
-			var tag = copiable.firstChild.appendChild(document.createElement("span"));
-			tag.classList.add("tag");
-			tag.innerHTML = this._("copied");
-			tag.addEventListener("transitionend", function (e) {
-				e.currentTarget.parentNode.removeChild(this);
-				resolve(e.currentTarget);
-			});
-			window.setTimeout(function () {
-				tag.classList.add('out');
-			}, 10);
-		});
-	}
-	/**
-	 * Return the copiable innerText of given element
-	 * @param   {HTMLElement} copiable HTMLElement containing text
-	 * @returns {string}      The resulting text
-	 */
-	static grabText(copiable, join = true) {
-		copiable = copiable.querySelector(".label").cloneNode(true);
-		var samps = Array.from(copiable.querySelectorAll("samp, del"));
-		samps.forEach(function (d) {
-			d.parentNode.removeChild(d);
-		});
-		var elements = this.grabBlockText(copiable);
-
-		var result = elements;
-		if (join) {
-			result = elements.join("\r\n");
-		}
-		return result;
-	}
-	/**
-	 * Return the copiable innerText of given element
-	 * @param   {HTMLElement} block HTMLElement containing text
-	 * @returns {string}      The resulting text
-	 */
-	static grabBlockText(block) {
-		block = block.cloneNode(true);
-		var samps = Array.from(block.querySelectorAll("samp, del"));
-		samps.forEach((samp) => {
-			samp.remove();
-		});
-		var elements = Array.from(block.childNodes);
-		elements = elements.filter(element => {
-			return (!(element instanceof Text && /^[ \r\n\t]*$/.test(element.data)));
-		}).reduce((array, element) => {
-			console.log(element);
-			if (element.classList.contains("block")) {
-				let texts = this.grabBlockText(element);
-				console.log(texts);
-				array.push(...texts.filter(text => text !== "").map(text => this.indentation + text));
-			} else {
-				let text = element.data || element.textContent;
-				console.log(text);
-				if (text) {
-					array.push(text);
-				}
-			}
-			return array;
-		}, []);
-		return elements;
+		var body = document.querySelector(this.summarySelector);
+		var summary = new Summary(body, this.summaryItemsSelector);
+		body.insertBefore(summary.html(), body.firstChild);
 	}
 	/**
 	 * Returns absolute url of url relative to content page
@@ -421,28 +277,27 @@ export default class Tuteos {
 		}
 		return result;
 	}
-	/**
-	 * Adds link element for Tuteos stylesheet
-	 * @todo Add stylesheets from config file
-	 */
-	static html_style(add = true) {
-		var result = this.html_link(this.app_url("css/style.css"));
-		if (add) {
-			document.head.appendChild(result);
-		}
-		return result;
+	static addHeadElements() {
+		document.head.appendChild(this.html_style());
+		document.head.appendChild(this.html_favicon());
+		this.stylesheets.forEach(stylesheet => {
+			document.head.appendChild(this.html_link(stylesheet));
+		});
 	}
 	/**
 	 * Adds link element for Tuteos stylesheet
 	 * @todo Add stylesheets from config file
 	 */
-	static html_favicon(add = true) {
+	static html_style() {
+		return this.html_link(this.app_url("css/style.css"));
+	}
+	/**
+	 * Adds link element for Tuteos stylesheet
+	 * @todo Add stylesheets from config file
+	 */
+	static html_favicon() {
 		var href = this.useAppFavicon ? 'favicon.ico' : this.app_url('../favicon.ico');
-		var result = this.html_link(href, 'shortcut icon', { type: 'image/x-icon' });
-		if (add) {
-			document.head.appendChild(result);
-		}
-		return result;
+		return this.html_link(href, 'shortcut icon', { type: 'image/x-icon' });
 	}
 	/**
 	 * Sets strings for localization.
@@ -484,19 +339,6 @@ export default class Tuteos {
 			return dflt;
 		}
 		return name;
-	}
-	/**
-	 * Initializes the app. Sets static properties.
-	 * Called on class load.
-	 */
-	static init() {
-		console.pin = this.debug ? console.log : function () { };
-		console.pin("Loading Tuteos");
-		this.setPaths();
-		this.html_style();
-		this.html_favicon();
-		this.setStrings();
-		// this.load();
 	}
 }
 Tuteos.init();

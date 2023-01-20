@@ -4,7 +4,7 @@ import Tuteos from "./Tuteos.js";
  * @todo Complete click actions and submenus
  */
 export default class Menu {
-    constructor(label = '', items = []) {
+    constructor(items = [],label = '', ) {
         this.label = label;
         this._url = null;
         this._click = null;

@@ -1,20 +1,13 @@
 @charset "UTF-8";
-@import url("https://fonts.googleapis.com/css2?family=Tinos:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Sofia+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Sofia+Sans+Condensed:ital,wght@0,400;0,700;1,400;1,700&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Anonymous+Pro:400,700");
-@import url("https://fonts.googleapis.com/css2?family=Londrina+Solid:wght@100;300;400;900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Coda:wght@400;800&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Goldman:wght@400;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Rowdies:wght@400;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Ruda:wght@400;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&display=swap");
 @import url("../images/fonts/css/mb.css");
 :root {
   --font-size: clamp(16px,1.6vw,28px);
-  --font-global: normal normal normal 1rem/1 "Tinos";
-  --font-title: Rowdies, sans-serif;
-  --font-title: Goldman, sans-serif;
-  --font-title: Unbounded, sans-serif;
-  --font-title: Ruda, sans-serif;
+  --font-global: "Sofia Sans", sans-serif;
+  --font-title: "Orbitron", sans-serif;
   --font-code: normal normal normal .85em/1.2 "Anonymous Pro";
   --text-color: #333;
   --hue: 210;
@@ -24,12 +17,13 @@
 html {
   height: 100%;
   font-size: var(--font-size);
+  scroll-behavior: smooth;
 }
 
 body {
   margin: 0;
   min-height: 100%;
-  font: var(--font-global);
+  font-family: var(--font-global);
   display: grid;
   grid-template-columns: auto;
   grid-template-areas: "app";
@@ -76,19 +70,10 @@ body {
   }
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-title);
+    margin-top: 0.5em;
   }
   :target {
     background-color: #eee;
-  }
-  a[href="#summary"] {
-    color: rgb(0, 0, 0);
-    opacity: 0.2;
-    text-decoration: none;
-    font-size: 1rem;
-    transition: 0.3s;
-  }
-  :hover > a[href="#summary"] {
-    opacity: 1;
   }
   .view {
     --hue: 302;
@@ -154,9 +139,6 @@ code.controller, em.view, em.file, em.string, em.blade, em.command, em.php, em.c
   }
   ol,
 ul {
-    margin: 0;
-  }
-  h2 {
     margin: 0;
   }
   .folded {
@@ -310,7 +292,16 @@ div.codeblock .block > * {
   }
 }
 div.body {
-  padding: 1em;
+  padding: 1em 3em;
+}
+div.body h1 {
+  color: hsl(var(--hue), var(--sat), 30%);
+}
+div.body h1:first-of-type {
+  margin-top: 0;
+}
+div.body article {
+  margin: 1em 0;
 }
 div.body > ol > li {
   padding: 1ch;
@@ -332,10 +323,10 @@ div.body li p {
 div.body > ol ol {
   list-style-type: lower-alpha;
 }
-div.body ol ol > li {
+div.body ol > li {
   page-break-inside: avoid;
 }
-div.body ol ol > li + li {
+div.body ol > li + li {
   border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 @media print {
@@ -409,30 +400,30 @@ div.body ol ol > li + li {
     padding-left: 3ch;
   }
 }
-.copiable {
+.copyable {
   position: relative;
 }
-.copiable .label {
+.copyable .label {
   overflow: hidden;
 }
 @media print {
-  .copiable .icon {
+  .copyable .icon {
     display: none;
   }
 }
-.copiable > .icon {
+.copyable > .icon {
   float: left;
   margin-right: 0.5ch;
 }
-.copiable.codeblock .icon {
+.copyable.codeblock .icon {
   position: absolute;
   right: 0.3ch;
   bottom: 0.5ch;
   transform-origin: right bottom;
 }
 
-code.copiable,
-span.copiable {
+code.copyable,
+span.copyable {
   --padding: .1em 1ch;
   display: inline-flex;
 }
@@ -490,8 +481,11 @@ span.icon .tag {
 #summary {
   padding: 0.5em;
 }
-#summary h2 {
+#summary header {
   font-size: 1.2em;
+}
+#summary header h2 {
+  font-size: inherit;
 }
 #summary ol {
   font-size: 1em;
@@ -524,27 +518,48 @@ span.icon .tag {
          columns: unset;
     list-style-type: none;
     overflow-y: auto;
+    font-family: "Sofia Sans Extra Condensed", "Sofia Sans Semi Condensed", "Sofia Sans Condensed", "Sofia Sans";
   }
-  #summary li {
+  #summary ol li {
     margin: 0;
     padding: 0;
     border-radius: 0.2em;
   }
-  #summary li:hover {
+  #summary ol li:hover {
     background-color: hsl(var(--hue), var(--sat), 25%);
     color: hsl(var(--hue), var(--sat), 95%);
   }
-  #summary a {
+  #summary ol a {
     display: flex;
     padding: 0.25em 0.5em;
   }
-  #summary h2 {
+  #summary header {
     background-color: hsl(var(--hue), var(--sat), 20%);
     padding: 0.5em 1em;
+    display: grid;
+    grid-template-columns: 1fr auto;
+  }
+  #summary h2 {
+    margin: 0;
   }
   #summary > * {
     padding: 0.5em;
   }
+}
+
+a.icon-top {
+  color: rgb(0, 0, 0);
+  display: inline-flex;
+  font-size: min(1em, 20px);
+  opacity: 0.1;
+  padding: 0em 0em;
+  text-decoration: none;
+  transition: 0.3s;
+  line-height: 1;
+  vertical-align: middle;
+}
+:hover > a.icon-top {
+  opacity: 1;
 }
 
 #app > nav {

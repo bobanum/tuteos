@@ -1,4 +1,4 @@
-.copiable {
+.copyable {
 	position: relative; //	display: inline-block;
 
 	//padding-right: 0;
@@ -29,7 +29,7 @@
 
 code,
 span {
-	&.copiable {
+	&.copyable {
 		--padding: .1em 1ch;
 		display: inline-flex;
 	}

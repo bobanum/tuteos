@@ -1,7 +1,11 @@
 #summary {
     padding: .5em;
-    h2 {
+
+    header {
         font-size: 1.2em;
+        h2 {
+            font-size: inherit;
+        }
     }
 
     ol {
@@ -9,13 +13,16 @@
         column-width: 28ch;
 
     }
+
     li {
         margin-left: 2ch;
     }
+
     a {
         color: inherit;
         text-decoration: none;
     }
+
     @media screen and (min-width: $large-breakpoint) {
         background-color: hsl(var(--hue), var(--sat), 15%);
         color: hsl(var(--hue), var(--sat), 75%);
@@ -33,30 +40,53 @@
             columns: unset;
             list-style-type: none;
             overflow-y: auto;
-        }
-
-        li {
-            margin: 0;
-            padding: 0;
-            border-radius: .2em;
-
-            &:hover {
-                background-color: hsl(var(--hue), var(--sat), 25%);
-                color: hsl(var(--hue), var(--sat), 95%);
+            font-family: "Sofia Sans Extra Condensed","Sofia Sans Semi Condensed","Sofia Sans Condensed","Sofia Sans";
+            li {
+                margin: 0;
+                padding: 0;
+                border-radius: .2em;
+    
+                &:hover {
+                    background-color: hsl(var(--hue), var(--sat), 25%);
+                    color: hsl(var(--hue), var(--sat), 95%);
+                }
+            }
+    
+            a {
+                display: flex;
+                padding: 0.25em 0.5em;
             }
         }
 
-        a {
-            display: flex;
-            padding: 0.25em 0.5em;
+
+        header {
+            background-color: hsl(var(--hue), var(--sat), 20%);
+            padding: .5em 1em;
+            display: grid;
+            grid-template-columns: 1fr auto;
         }
 
         h2 {
-            background-color: hsl(var(--hue), var(--sat), 20%);
-            padding: .5em 1em;
+            margin: 0;
         }
 
         > * {
             padding: .5em;
         }
-    }}
+    }
+}
+a.icon-top {
+    color: rgba(0, 0, 0, 1);
+    display: inline-flex;
+    font-size: min(1em, 20px);
+    opacity: .1;
+    padding: 0em 0em;
+    text-decoration: none;
+    transition: .3s;
+    line-height: 1;
+    vertical-align: middle;
+
+    :hover > & {
+        opacity: 1;
+    }
+}

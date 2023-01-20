@@ -3,26 +3,37 @@
 
 <head>
     <meta charset="UTF-8" />
-	<script src="./tuteos.js" type="module"></script>
+    <script src="./tuteos.js" type="module"></script>
     <title>Étapes</title>
 </head>
 
 <body>
-    <div id="app">
-        <header>
-            <h1>Un site Web avec Laravel</h1>
-            <h2>Les étapes</h2>
-        </header>
-        <footer>Les vidéos sont disponibles sur <a href="https://www.youtube.com/channel/UCFWzWuHnqYOlBN2lJhBIGNg">la chaîne Youtube</a></footer>
-        <div class="body">
-            <ol>
-                <li class="ref"><a href="cours1.html">Laravel 1</a></li>
-                <li class="ref"><a href="cours2.html">Laravel 2</a></li>
-                <li class="ref"><a href="cours2.5.html">Laravel 2.5</a></li>
-                <li class="ref"><a href="cours3.html">Laravel 3</a></li>
-            </ol>
-        </div>
-    </div>
+	<h1>My Tutorial</h1>
+	<article id="my_article">
+		<h2>My Article</h2>
+		<ol>
+			<li>An instruction</li>
+			<li>An instruction with inline code : <span class="command copyable">put this in the terminal</span></li>
+			<li>
+				<p>An instruction with block code :</p>
+				<div class="codeblock php copyable">
+					<div>static public function my_function() {</div>
+					<div class="block">
+						<div>// this will be indented</div>
+						<div><samp>This will not be copied</samp></div>
+						<div>another(instruction);</div>
+					</div>
+					<div>}</div>
+				</div>
+			</li>
+		</ol>
+	</article>
+    <article class="ref" id="references">
+        <h2>References</h2>
+        <ol>
+            <li><a href="cours1.html">Laravel 1</a></li>
+        </ol>
+    </article>
 </body>
 
 </html>
