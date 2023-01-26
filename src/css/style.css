@@ -42,8 +42,9 @@ body {
   justify-self: center;
   grid-area: app;
 }
-#app > header, #app > footer {
-  background-color: black;
+#app > header,
+#app > footer {
+  background-color: hsl(var(--hue), var(--sat), 15%);
   color: white;
   text-align: center;
   padding: 1em;
@@ -70,7 +71,6 @@ body {
   }
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-title);
-    margin-top: 0.5em;
   }
   .view {
     --hue: 302;
@@ -291,11 +291,18 @@ div.codeblock .block > * {
 div.body {
   padding: 1em 3em;
 }
+div.body h1, div.body h2, div.body h3, div.body h4, div.body h5, div.body h6 {
+  margin-top: 0.5em;
+}
 div.body h1 {
   color: hsl(var(--hue), var(--sat), 30%);
+  font-size: 1.5em;
 }
 div.body h1:first-of-type {
   margin-top: 0;
+}
+div.body h2 {
+  font-size: 1.2em;
 }
 div.body article {
   margin: 1em 0;
@@ -506,7 +513,7 @@ span.icon .tag {
     padding: 0;
     position: fixed;
     top: 0;
-    width: var(--width-summary);
+    width: var(--summary-width);
     display: grid;
     grid-template-rows: auto 1fr;
   }
@@ -560,8 +567,8 @@ a.icon-top {
 }
 
 #app > nav {
-  background-color: #666;
-  color: white;
+  background-color: hsl(var(--hue), var(--sat), 30%);
+  color: hsl(var(--hue), var(--sat), 100%);
   font-size: min(0.8em, 20px);
   order: -1000;
 }
@@ -574,7 +581,7 @@ a.icon-top {
 }
 #app > nav li {
   margin: 0.25em;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: hsl(var(--hue), var(--sat), 30%);
   border-radius: 4px;
   display: flex;
 }
@@ -583,7 +590,7 @@ a.icon-top {
   align-items: center;
 }
 #app > nav li:hover {
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: hsl(var(--hue), var(--sat), 15%);
 }
 #app > nav li.courant {
   background-color: #345;
@@ -630,9 +637,11 @@ body.videos #app > nav a#mnu_videos::before {
 }
 
 @media screen and (min-width: 1200px) {
+  :root {
+    --summary-width: 220px;
+  }
   body {
-    --width-summary: 250px;
-    grid-template-columns: var(--width-summary) auto;
+    grid-template-columns: var(--summary-width) auto;
     grid-template-areas: "summary app";
   }
 }

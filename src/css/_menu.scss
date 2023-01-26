@@ -1,6 +1,6 @@
 #app > nav {
-    background-color: #666;
-    color: white;
+    background-color: hsl(var(--hue), var(--sat), 30%);
+    color: hsl(var(--hue), var(--sat), 100%);
     font-size: min(.8em, 20px);
     order: -1000;
 
@@ -13,7 +13,7 @@
     }
     li {
         margin: .25em;
-        background-color: rgba(0, 0, 0, .2);
+        background-color: hsl(var(--hue), var(--sat), 30%);
         border-radius: 4px;
         display: flex;
         & > div {
@@ -21,7 +21,7 @@
             align-items: center;
         }
         &:hover {
-            background-color: rgba(0, 0, 0, .5);
+            background-color: hsl(var(--hue), var(--sat), 15%);
         }
         &.courant {
             background-color: #345;

@@ -18,11 +18,11 @@
 
 <body>
 	<h1>My Tutorial</h1>
-	<article id="my_article">
+	<article>
 		<h2>My Article</h2>
 		<ol>
-			<li>An instruction</li>
-			<li>An instruction with inline code : <span class="command copyable">put this in the terminal</span></li>
+			<li><p>An instruction</p></li>
+			<li><p>An instruction with inline code : <span class="command copyable">put this in the terminal</span></p></li>
 			<li>
 				<p>An instruction with block code :</p>
 				<div class="codeblock php copyable">
@@ -40,6 +40,10 @@
 </body>
 
 </html>
+```
+### Emmet of an article
+```emmet
+article>h2+ol>li*3>p
 ```
 ### Javascript Stub
 - Create the JS file `tuteos.js`
@@ -131,4 +135,6 @@ These tags are to be user in a `.copyable` element.
 |Tuteos.menuSelector|Selector of where to put the menu|Will be appended (for now) to corresponding element. Default: `"#app"`;
 |Tuteos.menu|Array of the menu elements. |Default: `[]` (empty array);
 |Tuteos.summarySelector|Array of the menu elements. |Default: `"article>:first-child"` (empty array);
-|Tuteos.summaryItemsSelector|Selector to designate what element enters in the summary (the label)|Default: `"article>:first-child"` (empty array)
+|Tuteos.summaryItemsSelector|Selector to designate what element enters in the summary (the label)|Default: `"article>:first-child"`
+|Tuteos.title|The title of the site/tutorial|Will be displayed in an `<h1>`. Default: `"Tuteos"`
+|Tuteos.subtitle|The subtitle of the site/tutorial|Optional. Will be displayed in an `<h2>`. Default: `""` (empty array)

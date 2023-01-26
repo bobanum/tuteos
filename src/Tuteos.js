@@ -12,6 +12,8 @@ export default class Tuteos {
 	static summarySelector = "#app>div.body";
 	static summaryItemsSelector = "article>:first-child";
 	static stylesheets = [];
+	static title = "Tuteos";
+	static subtitle = "";
 	/**
 	 * Initializes the app. Sets static properties.
 	 * Called on class load.
@@ -21,18 +23,18 @@ export default class Tuteos {
 		console.pin("Loading Tuteos");
 		this.setPaths();
 		this.setStrings();
-		this.wrapContent();
 		// this.load();
 	}
 	/**
 	 * Loading the app called on window load event
-	 */
+	*/
 	static load() {
+		this.wrapContent();
 		if (this.loadPromise) {
 			console.pin("load in progress");
 			return this.loadPromise;
 		}
-		console.pin("Adding headers");
+		console.pin("Adding head elements");
 		this.addHeadElements();
 		console.pin("Starting Tuteos.load");
 		this.loadPromise = Promise.all([
@@ -86,15 +88,13 @@ export default class Tuteos {
 		container.appendChild(this.html_footer());
 	}
 	static html_header() {
-		// 	<header>
-		// 	<h1>Un site Web avec Laravel</h1>
-		// 	<h2>Les étapes</h2>
-		// </header>
 		var result = document.createElement("header");
 		var h1 = result.appendChild(document.createElement("h1"));
-		h1.innerHTML = 'Un site Web avec Laravel';
-		var h2 = result.appendChild(document.createElement("h2"));
-		h2.innerHTML = 'Les étapes';
+		h1.innerHTML = this.title;
+		if (this.subtitle) {
+			var h2 = result.appendChild(document.createElement("h2"));
+			h2.innerHTML = this.subtitle;
+		}
 		return result;
 	}
 	static html_footer() {
