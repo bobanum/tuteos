@@ -29,8 +29,8 @@ $large-breakpoint: 1200px;
     background-color: hsl(var(--hue, 0), var(--sat, 50%), calc(var(--lum, 90%)));
     border: 1px none;
     border-radius: .2rem;
-    border-color: hsl(var(--hue, 0), var(--sat, 50%), calc(var(--lum, 90%) / 2));
     white-space: nowrap;
     // display: inline-flex;
     align-items: center;
+    color:hsl(var(--hue, 0), var(--sat, 50%), calc(100% - var(--lum)))
 }

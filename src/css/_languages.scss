@@ -1,0 +1,88 @@
+.view {
+	--hue: 302;
+	@include box;
+}
+
+.controller {
+	--hue: 120;
+	--lum: 95%;
+	@include box;
+}
+
+.file {
+	--hue: 0;
+	--sat: 0%;
+	--lum: 95%;
+	@include box;
+}
+
+.string {
+	--hue: 34;
+	--sat: 50%;
+	--lum: 90%;
+	@include box;
+}
+
+.command {
+	--hue: 240;
+	--lum: 30%;
+	@include box;
+}
+
+.php {
+	@include box;
+	--hue: 200;
+	--lum: 25%;
+}
+.javascript {
+	@include box;
+	--hue: 60;
+	--sat: 80%;
+	--lum: 80%;
+}
+.vue {
+	@include box;
+	--hue: 30;
+	--sat: 100%;
+	--lum: 80%;
+}
+
+.blade {
+	@include box;
+	--hue: 330;
+	--lum: 40%;
+	color: hsl(330, 100%, 100%);
+}
+
+.codeblock,
+.php,
+.blade,
+.javascript {
+
+	em,
+	samp,
+	del {
+		color: rgba(255, 255, 255, .5);
+
+		b,
+		em {
+			color: white;
+		}
+	}
+}
+
+@media print {
+
+	.codeblock,
+	.command,
+	.string,
+	.php,
+	.javascript
+	.view,
+	.blade,
+	.controller {
+		background-color: transparent;
+		color: black;
+		border-color: hsl(0, 0%, 90%);
+	}
+}

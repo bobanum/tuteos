@@ -79,20 +79,9 @@ body {
     background-color: hsl(var(--hue, 0), var(--sat, 50%), calc(var(--lum, 90%)));
     border: 1px none;
     border-radius: 0.2rem;
-    border-color: hsl(var(--hue, 0), var(--sat, 50%), calc(var(--lum, 90%) / 2));
     white-space: nowrap;
     align-items: center;
-    color: hsl(var(--hue), 100%, 20%);
-  }
-  span.view, span.file, span.string, span.blade, span.command, span.php, span.controller,
-code.view,
-code.file,
-code.string,
-code.blade,
-code.command,
-code.php,
-code.controller, em.view, em.file, em.string, em.blade, em.command, em.php, em.controller, strong.view, strong.file, strong.string, strong.blade, strong.command, strong.php, strong.controller {
-    --padding: .2em 1ch;
+    color: hsl(var(--hue, 0), var(--sat, 50%), calc(100% - var(--lum)));
   }
   .controller {
     --hue: 120;
@@ -102,10 +91,9 @@ code.controller, em.view, em.file, em.string, em.blade, em.command, em.php, em.c
     background-color: hsl(var(--hue, 0), var(--sat, 50%), calc(var(--lum, 90%)));
     border: 1px none;
     border-radius: 0.2rem;
-    border-color: hsl(var(--hue, 0), var(--sat, 50%), calc(var(--lum, 90%) / 2));
     white-space: nowrap;
     align-items: center;
-    color: hsl(var(--hue), 100%, 30%);
+    color: hsl(var(--hue, 0), var(--sat, 50%), calc(100% - var(--lum)));
   }
   .file {
     --hue: 0;
@@ -116,9 +104,9 @@ code.controller, em.view, em.file, em.string, em.blade, em.command, em.php, em.c
     background-color: hsl(var(--hue, 0), var(--sat, 50%), calc(var(--lum, 90%)));
     border: 1px none;
     border-radius: 0.2rem;
-    border-color: hsl(var(--hue, 0), var(--sat, 50%), calc(var(--lum, 90%) / 2));
     white-space: nowrap;
     align-items: center;
+    color: hsl(var(--hue, 0), var(--sat, 50%), calc(100% - var(--lum)));
   }
   .string {
     --hue: 34;
@@ -129,21 +117,9 @@ code.controller, em.view, em.file, em.string, em.blade, em.command, em.php, em.c
     background-color: hsl(var(--hue, 0), var(--sat, 50%), calc(var(--lum, 90%)));
     border: 1px none;
     border-radius: 0.2rem;
-    border-color: hsl(var(--hue, 0), var(--sat, 50%), calc(var(--lum, 90%) / 2));
     white-space: nowrap;
     align-items: center;
-    color: hsl(var(--hue), 100%, 20%);
-  }
-  ol,
-ul {
-    margin: 0;
-  }
-  .folded {
-    opacity: 0.3;
-    border-bottom: 2px dotted rgba(0, 0, 0, 0.3);
-  }
-  .folded ~ * {
-    display: none;
+    color: hsl(var(--hue, 0), var(--sat, 50%), calc(100% - var(--lum)));
   }
   .command {
     --hue: 240;
@@ -153,67 +129,9 @@ ul {
     background-color: hsl(var(--hue, 0), var(--sat, 50%), calc(var(--lum, 90%)));
     border: 1px none;
     border-radius: 0.2rem;
-    border-color: hsl(var(--hue, 0), var(--sat, 50%), calc(var(--lum, 90%) / 2));
     white-space: nowrap;
     align-items: center;
-    color: hsl(240deg, 100%, 100%);
-  }
-  a[href^="https://youtu.be/"] {
-    float: right;
-  }
-  a[href="https://youtu.be"],
-a[href="https://youtu.be/"] {
-    opacity: 0.2;
-    filter: grayscale(100%);
-    pointer-events: none;
-  }
-  .codeblock em,
-.codeblock samp,
-.codeblock del,
-.php em,
-.php samp,
-.php del,
-.blade em,
-.blade samp,
-.blade del {
-    color: rgba(255, 255, 255, 0.5);
-  }
-  .codeblock em b,
-.codeblock em em,
-.codeblock samp b,
-.codeblock samp em,
-.codeblock del b,
-.codeblock del em,
-.php em b,
-.php em em,
-.php samp b,
-.php samp em,
-.php del b,
-.php del em,
-.blade em b,
-.blade em em,
-.blade samp b,
-.blade samp em,
-.blade del b,
-.blade del em {
-    color: white;
-  }
-  div.codeblock {
-    --indentation: 3ch;
-  }
-  div.codeblock .label > *,
-div.codeblock .block > * {
-    white-space: pre;
-  }
-  div.codeblock + div.codeblock {
-    margin-top: 0.25em;
-  }
-  div.codeblock .block {
-    margin-left: var(--indentation);
-    white-space: inherit;
-  }
-  a {
-    color: inherit;
+    color: hsl(var(--hue, 0), var(--sat, 50%), calc(100% - var(--lum)));
   }
   .php {
     font: var(--font-code);
@@ -221,12 +139,37 @@ div.codeblock .block > * {
     background-color: hsl(var(--hue, 0), var(--sat, 50%), calc(var(--lum, 90%)));
     border: 1px none;
     border-radius: 0.2rem;
-    border-color: hsl(var(--hue, 0), var(--sat, 50%), calc(var(--lum, 90%) / 2));
     white-space: nowrap;
     align-items: center;
+    color: hsl(var(--hue, 0), var(--sat, 50%), calc(100% - var(--lum)));
     --hue: 200;
-    --lum: 40%;
-    color: hsl(200deg, 100%, 100%);
+    --lum: 25%;
+  }
+  .javascript {
+    font: var(--font-code);
+    padding: var(--padding, 1ch);
+    background-color: hsl(var(--hue, 0), var(--sat, 50%), calc(var(--lum, 90%)));
+    border: 1px none;
+    border-radius: 0.2rem;
+    white-space: nowrap;
+    align-items: center;
+    color: hsl(var(--hue, 0), var(--sat, 50%), calc(100% - var(--lum)));
+    --hue: 60;
+    --sat: 80%;
+    --lum: 80%;
+  }
+  .vue {
+    font: var(--font-code);
+    padding: var(--padding, 1ch);
+    background-color: hsl(var(--hue, 0), var(--sat, 50%), calc(var(--lum, 90%)));
+    border: 1px none;
+    border-radius: 0.2rem;
+    white-space: nowrap;
+    align-items: center;
+    color: hsl(var(--hue, 0), var(--sat, 50%), calc(100% - var(--lum)));
+    --hue: 30;
+    --sat: 100%;
+    --lum: 80%;
   }
   .blade {
     font: var(--font-code);
@@ -234,31 +177,157 @@ div.codeblock .block > * {
     background-color: hsl(var(--hue, 0), var(--sat, 50%), calc(var(--lum, 90%)));
     border: 1px none;
     border-radius: 0.2rem;
-    border-color: hsl(var(--hue, 0), var(--sat, 50%), calc(var(--lum, 90%) / 2));
     white-space: nowrap;
     align-items: center;
+    color: hsl(var(--hue, 0), var(--sat, 50%), calc(100% - var(--lum)));
     --hue: 330;
     --lum: 40%;
     color: hsl(330deg, 100%, 100%);
   }
-  .codeblock:hover [data-definition]:hover:before {
+  .codeblock em,
+  .codeblock samp,
+  .codeblock del,
+  .php em,
+  .php samp,
+  .php del,
+  .blade em,
+  .blade samp,
+  .blade del,
+  .javascript em,
+  .javascript samp,
+  .javascript del {
+    color: rgba(255, 255, 255, 0.5);
+  }
+  .codeblock em b,
+  .codeblock em em,
+  .codeblock samp b,
+  .codeblock samp em,
+  .codeblock del b,
+  .codeblock del em,
+  .php em b,
+  .php em em,
+  .php samp b,
+  .php samp em,
+  .php del b,
+  .php del em,
+  .blade em b,
+  .blade em em,
+  .blade samp b,
+  .blade samp em,
+  .blade del b,
+  .blade del em,
+  .javascript em b,
+  .javascript em em,
+  .javascript samp b,
+  .javascript samp em,
+  .javascript del b,
+  .javascript del em {
+    color: white;
+  }
+}
+@media print {
+  .codeblock,
+  .command,
+  .string,
+  .php,
+  .javascript .view,
+  .blade,
+  .controller {
+    background-color: transparent;
+    color: black;
+    border-color: hsl(0deg, 0%, 90%);
+  }
+}
+@media all {
+  span.view, span.file, span.string, span.blade, span.command, span.php, span.controller,
+  code.view,
+  code.file,
+  code.string,
+  code.blade,
+  code.command,
+  code.php,
+  code.controller, em.view, em.file, em.string, em.blade, em.command, em.php, em.controller, strong.view, strong.file, strong.string, strong.blade, strong.command, strong.php, strong.controller {
+    --padding: .2em 1ch;
+  }
+}
+@media all {
+  ol,
+  ul {
+    margin: 0;
+  }
+}
+@media all {
+  .folded {
+    opacity: 0.3;
+    border-bottom: 2px dotted rgba(0, 0, 0, 0.3);
+  }
+  .folded ~ * {
+    display: none;
+  }
+}
+@media all {
+  a[href^="https://youtu.be/"] {
+    float: right;
+  }
+}
+@media all {
+  a[href="https://youtu.be"],
+  a[href="https://youtu.be/"] {
+    opacity: 0.2;
+    filter: grayscale(100%);
+    pointer-events: none;
+  }
+}
+@media all {
+  .codeblock {
+    --indentation: 3ch;
+  }
+  .codeblock .label > *,
+  .codeblock .block > * {
+    white-space: pre;
+  }
+  .codeblock + .codeblock {
+    margin-top: 0.25em;
+  }
+  .codeblock .block {
+    margin-left: var(--indentation);
+    white-space: inherit;
+  }
+  .codeblock:hover [data-definition]:hover::before {
     opacity: 1;
     visibility: visible;
     transform: scale(1);
     transition-delay: 0.5s;
     transition-duration: 0s, 0.2s, 0.2s;
   }
+}
+@media screen and (max-width: 800px) {
+  .codeblock .label > * {
+    white-space: normal !important;
+  }
+}
+@media print {
+  .codeblock {
+    padding-left: 3ch;
+  }
+}
+@media all {
+  a {
+    color: inherit;
+  }
+}
+@media all {
   [data-definition] {
     -webkit-text-decoration: underline wavy;
             text-decoration: underline wavy;
     position: relative;
     cursor: help;
   }
-  [data-definition]:before {
+  [data-definition]::before {
+    content: attr(data-definition);
     visibility: hidden;
     opacity: 0;
     transform: scale(0);
-    content: attr(data-definition);
     background-color: #f0ffff;
     border: 2px solid hsl(180deg, 50%, 50%);
     color: black;
@@ -279,6 +348,8 @@ div.codeblock .block > * {
     transition-delay: 0s;
     transition-duration: 1s, 1s, 1s;
   }
+}
+@media all {
   .youtube {
     text-decoration: none;
     font-size: smaller;
@@ -371,9 +442,6 @@ div.body ol > li + li {
   #app {
     width: 50ch;
   }
-  div.codeblock .label > * {
-    white-space: normal !important;
-  }
 }
 @media print {
   @page {
@@ -390,12 +458,12 @@ div.body ol > li + li {
     display: none;
   }
   .codeblock,
-.command,
-.string,
-.php,
-.view,
-.blade,
-.controller {
+  .command,
+  .string,
+  .php,
+  .view,
+  .blade,
+  .controller {
     background-color: transparent;
     color: black;
     border-color: hsl(0deg, 0%, 90%);

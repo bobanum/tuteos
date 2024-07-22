@@ -34,7 +34,6 @@ export default class References {
             return this.loadReference(href).then(data => {
                 console.pin("Processing ", href);
                 var elements = Array.from(data.body.childNodes);
-                console.log(this.el, this.el.innerText, this.el.parentNode);
                 elements.forEach(element => {
                     this.el.before(element);
                 });

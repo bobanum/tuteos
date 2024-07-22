@@ -2,7 +2,7 @@ import Menu from './Menu.js';
 import Copying from './Copying.js';
 import Summary from './Summary.js';
 import References from './References.js';
-
+import Markdown from './Markdown.js';
 export default class Tuteos {
 	static debug = false;
 	static useAppFavicon = false;
@@ -29,6 +29,7 @@ export default class Tuteos {
 	 * Loading the app called on window load event
 	*/
 	static load() {
+		Markdown.process(document);
 		this.wrapContent();
 		if (this.loadPromise) {
 			console.pin("load in progress");
@@ -74,6 +75,9 @@ export default class Tuteos {
 			});
 			xhr.send(null);
 		});
+	}
+	static processMarkdown() {
+		console.log(marked);
 	}
 	static wrapContent() {
 		var container = document.body.insertBefore(document.createElement("div"), document.body.firstChild);

@@ -30,11 +30,7 @@ body {
 		font-family: var(--font-title);
 	}
 
-	.view {
-		--hue: 302;
-		@include box;
-		color: hsl(var(--hue), 100%, 20%);
-	}
+	@import "languages";
 
 	span,
 	code, em, strong {
@@ -51,28 +47,6 @@ body {
 
 	}
 
-	.controller {
-		--hue: 120;
-		--lum: 95%;
-		@include box;
-		color: hsl(var(--hue), 100%, 30%);
-	}
-
-	.file {
-		--hue: 0;
-		--sat: 0%;
-		--lum: 95%;
-		@include box;
-	}
-
-	.string {
-		--hue: 34;
-		--sat: 50%;
-		--lum: 90%;
-		@include box;
-		color: hsl(var(--hue), 100%, 20%);
-	}
-
 	ol,
 	ul {
 		margin: 0;
@@ -87,13 +61,6 @@ body {
 		}
 	}
 
-	.command {
-		--hue: 240;
-		--lum: 30%;
-		@include box;
-		color: hsl(240, 100%, 100%);
-	}
-
 	a[href^="https://youtu.be/"] {
 		float: right;
 	}
@@ -105,77 +72,22 @@ body {
 		pointer-events: none;
 	}
 
-	.codeblock,
-	.php,
-	.blade {
-
-		em,
-		samp,
-		del {
-			//			opacity: .5;
-			color: rgba(255, 255, 255, .5);
-
-			b,
-			em {
-				color: white;
-			}
-		}
-	}
-
 	@import "codeblock";
 
 	a {
 		color: inherit;
 	}
 
-	.php {
-		@include box;
-		--hue: 200;
-		--lum: 40%;
-		color: hsl(200, 100%, 100%);
-	}
-
-	.blade {
-		@include box;
-		--hue: 330;
-		--lum: 40%;
-		// background-color: hsl(330, 70%, 40%);
-		// border-color: hsl(330, 0%, 0%);
-		color: hsl(330, 100%, 100%);
-	}
-
-	.codeblock:hover {
-		[data-definition] {
-
-			// &:before {
-			//			opacity: 1;
-			//			visibility: visible;
-			//			transition-delay: 2s;
-			//			transition-duration: 0s, .1s;
-			// }
-			&:hover {
-				&:before {
-					opacity: 1;
-					visibility: visible;
-					transform: scale(1);
-					transition-delay: .5s;
-					transition-duration: 0s, .2s, .2s;
-				}
-			}
-		}
-	}
-
-	// .codeblock {}
 	[data-definition] {
 		text-decoration: underline wavy;
 		position: relative;
 		cursor: help;
 
-		&:before {
+		&::before {
+			content: attr(data-definition);
 			visibility: hidden;
 			opacity: 0;
 			transform: scale(0);
-			content: attr(data-definition);
 			background-color: #f0ffff;
 			border: 2px solid hsl(180, 50%, 50%);
 			color: black;
@@ -239,10 +151,6 @@ body {
 @media screen and (max-width: 800px) {
 	#app {
 		width: 50ch;
-	}
-
-	div.codeblock .label > * {
-		white-space: normal !important;
 	}
 }
 
